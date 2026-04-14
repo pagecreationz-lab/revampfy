@@ -1,7 +1,6 @@
 ﻿import { Header } from "@/components/Header";
 import { Topbar } from "@/components/Topbar";
 import { CountUpStat } from "@/components/CountUpStat";
-import { CommerceStatusPanel } from "@/components/CommerceStatusPanel";
 import {
   getCollections,
   getProducts,
@@ -253,7 +252,6 @@ export default async function Home() {
             </div>
           </div>
         </section>
-        <CommerceStatusPanel />
 
         <section id="categories" className="section">
           <div className="container">
