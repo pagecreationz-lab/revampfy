@@ -1,0 +1,8 @@
+{
+  "enableEmailPasswordLogin": false,
+  "enableEmailCodeLogin": false,
+  "enableGoogleLogin": true,
+  "googleClientId": "",
+  "googleClientSecret": "",
+  "googleRedirectUri": ""
+}

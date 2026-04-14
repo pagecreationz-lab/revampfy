@@ -1,0 +1,32 @@
+{
+  "categoryCollectionHandles": [
+    "laptops",
+    "desktops",
+    "mini-pc",
+    "monitors",
+    "gaming",
+    "macbook",
+    "frontpage",
+    "trending-laptops"
+  ],
+  "featuredBrands": [
+    "Laptops",
+    "Lenovo",
+    "Asus",
+    "HP",
+    "Dell"
+  ],
+  "featuredVendors": [
+    "Revamp"
+  ],
+  "studentsProductIds": [
+    9506585280743,
+    9506618245351
+  ],
+  "topSellingProductIds": [
+    9506585280743,
+    9506618245351,
+    9506620178663,
+    9508855447783
+  ]
+}

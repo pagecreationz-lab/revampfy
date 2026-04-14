@@ -1,0 +1,22 @@
+[
+  {
+    "email": "user@revampfy.in",
+    "passwordHash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+    "name": "Revampfy User",
+    "mobile": "8248003564",
+    "address": "",
+    "paymentMode": "UPI",
+    "createdAt": "1970-01-01T00:00:00.000Z",
+    "updatedAt": "2026-04-14T11:06:59.503Z"
+  },
+  {
+    "email": "test@pcgs.in",
+    "passwordHash": "ff96673205dc722320598ebf8f88325b2ac56922d5a2164b5765868274bc0d73",
+    "name": "PAGECREATIONZ GLOBAL",
+    "mobile": "23344657",
+    "address": "",
+    "paymentMode": "UPI",
+    "createdAt": "2026-04-14T09:26:09.580Z",
+    "updatedAt": "2026-04-14T09:26:17.172Z"
+  }
+]

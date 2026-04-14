@@ -1,0 +1,253 @@
+{
+  "syncedAt": "2026-04-14T14:31:03.155Z",
+  "payload": {
+    "categories": [
+      {
+        "id": 464955900135,
+        "handle": "mini-pc",
+        "title": "Brand New Laptops",
+        "body_html": "",
+        "collection_type": "custom"
+      },
+      {
+        "id": 464955867367,
+        "handle": "desktops",
+        "title": "Custom Build Gaming Desktops",
+        "body_html": "",
+        "collection_type": "custom"
+      },
+      {
+        "id": 464921592039,
+        "handle": "frontpage",
+        "title": "Featured Laptops",
+        "body_html": "",
+        "collection_type": "custom"
+      },
+      {
+        "id": 464955932903,
+        "handle": "monitors",
+        "title": "Gaming Laptops",
+        "body_html": "",
+        "collection_type": "custom"
+      },
+      {
+        "id": 464955834599,
+        "handle": "trending-laptops",
+        "title": "Trending Laptops",
+        "body_html": "",
+        "collection_type": "custom"
+      }
+    ],
+    "brands": [
+      "Asus",
+      "Dell",
+      "HP",
+      "Lenovo"
+    ],
+    "vendors": [
+      "Revamp"
+    ],
+    "products": [
+      {
+        "id": 9506585280743,
+        "title": "HP Laptop",
+        "handle": "hp-laptop",
+        "description": "HP laptop is a portable, battery-powered personal computer designed for mobile use, integrating a screen, keyboard, pointing device (touchpad), and speakers into a single, foldable unit. These compact devices are optimized for travel, work, and personal entertainment, offering similar functionality to desktops while utilizing power-efficient components and rechargeable batteries",
+        "status": "active",
+        "tags": "Laptops",
+        "vendor": "Revamp",
+        "product_type": "HP",
+        "category": "Laptops",
+        "collection_handles": [
+          "frontpage"
+        ],
+        "collection_titles": [
+          "Featured Laptops"
+        ],
+        "images": [
+          {
+            "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/HPLaptop-1_bda15619-3e87-495a-b5df-182cfb00e6c2.webp?v=1775759022"
+          }
+        ],
+        "variants": [
+          {
+            "id": 51953743397095,
+            "title": "Default Title",
+            "price": "18000.00",
+            "compare_at_price": null,
+            "inventory_quantity": 2,
+            "requires_shipping": false
+          }
+        ]
+      },
+      {
+        "id": 9506618245351,
+        "title": "Dell Laptop",
+        "handle": "dell-laptop",
+        "description": "",
+        "status": "active",
+        "tags": "",
+        "vendor": "Revamp",
+        "product_type": "Dell",
+        "category": "Laptops",
+        "collection_handles": [
+          "frontpage"
+        ],
+        "collection_titles": [
+          "Featured Laptops"
+        ],
+        "images": [
+          {
+            "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/Delllaptop-1.webp?v=1775758950"
+          }
+        ],
+        "variants": [
+          {
+            "id": 51953837310183,
+            "title": "Default Title",
+            "price": "20000.00",
+            "compare_at_price": null,
+            "inventory_quantity": 1,
+            "requires_shipping": false
+          }
+        ]
+      },
+      {
+        "id": 9506620178663,
+        "title": "Lenovo Laptop",
+        "handle": "lenovo-laptop",
+        "description": "",
+        "status": "active",
+        "tags": "",
+        "vendor": "Revamp",
+        "product_type": "Lenovo",
+        "category": "Laptops",
+        "collection_handles": [
+          "frontpage"
+        ],
+        "collection_titles": [
+          "Featured Laptops"
+        ],
+        "images": [
+          {
+            "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/Lenovolaptop-1.webp?v=1775758735"
+          }
+        ],
+        "variants": [
+          {
+            "id": 51965308829927,
+            "title": "Blue",
+            "price": "21000.00",
+            "compare_at_price": null,
+            "inventory_quantity": 1,
+            "requires_shipping": false
+          },
+          {
+            "id": 51965357359335,
+            "title": "White",
+            "price": "22000.00",
+            "compare_at_price": null,
+            "inventory_quantity": 1,
+            "requires_shipping": false
+          }
+        ]
+      },
+      {
+        "id": 9508855447783,
+        "title": "Asus Laptop",
+        "handle": "asus-laptop",
+        "description": "",
+        "status": "active",
+        "tags": "",
+        "vendor": "Revamp",
+        "product_type": "Asus",
+        "category": "Laptops",
+        "collection_handles": [
+          "trending-laptops"
+        ],
+        "collection_titles": [
+          "Trending Laptops"
+        ],
+        "images": [],
+        "variants": [
+          {
+            "id": 51969679556839,
+            "title": "Black / DDR4",
+            "price": "50000.00",
+            "compare_at_price": null,
+            "inventory_quantity": 1,
+            "requires_shipping": false
+          }
+        ]
+      },
+      {
+        "id": 9508962271463,
+        "title": "HP Desktop",
+        "handle": "hp-desktop",
+        "description": "",
+        "status": "active",
+        "tags": "Desktops",
+        "vendor": "Revamp",
+        "product_type": "HP",
+        "category": "Desktop Computers",
+        "collection_handles": [
+          "desktops"
+        ],
+        "collection_titles": [
+          "Custom Build Gaming Desktops"
+        ],
+        "images": [],
+        "variants": [
+          {
+            "id": 51969819738343,
+            "title": "Default Title",
+            "price": "0.00",
+            "compare_at_price": null,
+            "inventory_quantity": 0,
+            "requires_shipping": false
+          }
+        ]
+      },
+      {
+        "id": 9512258633959,
+        "title": "Lenovo Laptop I5 10th",
+        "handle": "lenovo-laptop-i5-10th",
+        "description": "",
+        "status": "active",
+        "tags": "",
+        "vendor": "Revamp",
+        "product_type": "Lenovo",
+        "category": "Laptops",
+        "collection_handles": [
+          "frontpage"
+        ],
+        "collection_titles": [
+          "Featured Laptops"
+        ],
+        "images": [
+          {
+            "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/Lenovolaptop-1.webp?v=1775758735"
+          }
+        ],
+        "variants": [
+          {
+            "id": 51977430368487,
+            "title": "Blue",
+            "price": "21000.00",
+            "compare_at_price": null,
+            "inventory_quantity": 1,
+            "requires_shipping": false
+          },
+          {
+            "id": 51977430401255,
+            "title": "White",
+            "price": "22000.00",
+            "compare_at_price": null,
+            "inventory_quantity": 1,
+            "requires_shipping": false
+          }
+        ]
+      }
+    ]
+  }
+}
