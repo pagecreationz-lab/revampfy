@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Header } from "@/components/Header";
 import { Topbar } from "@/components/Topbar";
 import { StoreClient } from "@/components/StoreClient";
-import { CommerceStatusPanel } from "@/components/CommerceStatusPanel";
 import { getEffectiveShopifySyncStore } from "@/lib/shopifySyncRuntime";
 import type { ShopifyCollection, ShopifyProduct } from "@/lib/shopify";
 
@@ -23,7 +22,6 @@ export default async function StorePage() {
             </Suspense>
           </div>
         </section>
-        <CommerceStatusPanel />
       </main>
     </>
   );
