@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { createPortal } from "react-dom";
 
 type HeaderConfig = {
   categoryCollectionHandles: string[];
@@ -116,9 +117,6 @@ export function Header() {
     }, 220);
   };
 
-  const isMobileViewport = () =>
-    typeof window !== "undefined" && window.matchMedia("(max-width: 900px)").matches;
-
   const openMegaAtTrigger = (
     type: "categories" | "students" | "company",
     trigger: HTMLElement
@@ -171,7 +169,7 @@ export function Header() {
 
   useEffect(() => {
     if (typeof document === "undefined") return;
-    if (open && isMobileViewport()) {
+    if (open) {
       document.body.style.overflow = "hidden";
       document.body.classList.add("mobile-menu-open");
       return;
@@ -354,6 +352,16 @@ export function Header() {
   );
 
   const isCompanyActive = companyPaths.has(pathname);
+  const accountHref = authenticated
+    ? sessionRole === "admin"
+      ? "/admin"
+      : "/user-dashboard"
+    : "/login";
+  const accountLabel = authenticated
+    ? sessionRole === "admin"
+      ? "Admin"
+      : "My Account"
+    : "Login";
   const productSuggestions = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
     if (!query) return [];
@@ -386,6 +394,159 @@ export function Header() {
       // Keep local switch even if browser storage is unavailable.
     }
   };
+
+  const mobileMenuOverlay = (
+    <div className={`mobile-nav-drawer ${open ? "active" : ""}`.trim()}>
+      <div className="mobile-nav-sheet">
+        <div className="mobile-nav-top">
+          <button
+            type="button"
+            className="nav__toggle mobile-nav-close-toggle is-close"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          <span className="mobile-nav-title">Menu</span>
+        </div>
+
+        <div className="mobile-nav-content">
+          <div className="mobile-nav-list">
+            <a href="/" onClick={() => setOpen(false)}>Home</a>
+            <div className="mobile-nav-item">
+              <button
+                type="button"
+                className="mobile-nav-trigger"
+                onClick={() =>
+                  setMobileDropdowns((prev) => ({
+                    ...prev,
+                    categories: !prev.categories,
+                  }))
+                }
+              >
+                <span>All Categories</span>
+                <span className={`mobile-nav-caret ${mobileDropdowns.categories ? "is-open" : ""}`} />
+              </button>
+              {mobileDropdowns.categories ? (
+                <div className="mobile-nav-submenu">
+                  <a href="/store" onClick={() => setOpen(false)}>View all categories</a>
+                  {categoryMenuLinks.length ? (
+                    categoryMenuLinks.map((group) => (
+                      <a
+                        key={`mobile-category-${group.category}`}
+                        href={`/store?category=${encodeURIComponent(group.category)}`}
+                        onClick={() => setOpen(false)}
+                      >
+                        {group.category}
+                      </a>
+                    ))
+                  ) : (
+                    <span className="mobile-nav-empty">No synced categories yet.</span>
+                  )}
+                </div>
+              ) : null}
+            </div>
+            <div className="mobile-nav-item">
+              <button
+                type="button"
+                className="mobile-nav-trigger"
+                onClick={() =>
+                  setMobileDropdowns((prev) => ({
+                    ...prev,
+                    collections: !prev.collections,
+                  }))
+                }
+              >
+                <span>Collections</span>
+                <span className={`mobile-nav-caret ${mobileDropdowns.collections ? "is-open" : ""}`} />
+              </button>
+              {mobileDropdowns.collections ? (
+                <div className="mobile-nav-submenu">
+                  <a href="/store" onClick={() => setOpen(false)}>View all collections</a>
+                  {collectionMegaGroups.length ? (
+                    collectionMegaGroups.map((group) => (
+                      <a
+                        key={`mobile-collection-${group.id}`}
+                        href={group.href}
+                        onClick={() => setOpen(false)}
+                      >
+                        {group.title}
+                      </a>
+                    ))
+                  ) : (
+                    <span className="mobile-nav-empty">No collections synced yet.</span>
+                  )}
+                </div>
+              ) : null}
+            </div>
+            <a href={accountHref} onClick={() => setOpen(false)}>{accountLabel}</a>
+            <a href="/contact-us" onClick={() => setOpen(false)}>Businesses</a>
+            <a href="/bulk-orders-enquiry" onClick={() => setOpen(false)}>Bulk Orders</a>
+            <a href="/company" onClick={() => setOpen(false)}>Company</a>
+            <a href="/about-us" onClick={() => setOpen(false)}>About Us</a>
+            <a href="/partners" onClick={() => setOpen(false)}>Partners</a>
+            <a href="/stores" onClick={() => setOpen(false)}>Stores</a>
+            <a href="/policies" onClick={() => setOpen(false)}>Policies</a>
+            <div className="mobile-nav-item">
+              <button
+                type="button"
+                className="mobile-nav-trigger"
+                onClick={() =>
+                  setMobileDropdowns((prev) => ({
+                    ...prev,
+                    company: !prev.company,
+                  }))
+                }
+              >
+                <span>Company</span>
+                <span className={`mobile-nav-caret ${mobileDropdowns.company ? "is-open" : ""}`} />
+              </button>
+              {mobileDropdowns.company ? (
+                <div className="mobile-nav-submenu">
+                  {companyMegaGroups[0]?.products.map((item) => (
+                    <a key={`mobile-company-${item.id}`} href={item.href} onClick={() => setOpen(false)}>
+                      {item.title}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="mobile-nav-categories">
+            <p className="mobile-nav-section-label">All Categories</p>
+            {categoryMenuLinks.length ? (
+              categoryMenuLinks.map((group) => (
+                <div key={group.category} className="mobile-nav-group">
+                  <a
+                    href={`/store?category=${encodeURIComponent(group.category)}`}
+                    className="mobile-nav-group-title"
+                    onClick={() => setOpen(false)}
+                  >
+                    {group.category}
+                  </a>
+                  {group.items.slice(0, 4).map((item) => (
+                    <a
+                      key={`${group.category}-${item.id}`}
+                      href={item.href}
+                      className="mobile-nav-group-item"
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.title}
+                    </a>
+                  ))}
+                </div>
+              ))
+            ) : (
+              <p className="mobile-nav-empty">No synced categories yet.</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <header className="site-header site-header--enhanced">
@@ -540,149 +701,6 @@ export function Header() {
               </li>
             </ul>
 
-            <div className={`mobile-nav-drawer ${open ? "active" : ""}`.trim()}>
-              <div className="mobile-nav-sheet">
-                <div className="mobile-nav-top">
-                  <button
-                    type="button"
-                    className="nav__toggle mobile-nav-close-toggle is-close"
-                    aria-label="Close menu"
-                    onClick={() => setOpen(false)}
-                  >
-                    <span />
-                    <span />
-                    <span />
-                  </button>
-                  <span className="mobile-nav-title">Menu</span>
-                </div>
-
-                <div className="mobile-nav-content">
-                  <div className="mobile-nav-list">
-                    <a href="/" onClick={() => setOpen(false)}>Home</a>
-                    <div className="mobile-nav-item">
-                      <button
-                        type="button"
-                        className="mobile-nav-trigger"
-                        onClick={() =>
-                          setMobileDropdowns((prev) => ({
-                            ...prev,
-                            categories: !prev.categories,
-                          }))
-                        }
-                      >
-                        <span>All Categories</span>
-                        <span className={`mobile-nav-caret ${mobileDropdowns.categories ? "is-open" : ""}`} />
-                      </button>
-                      {mobileDropdowns.categories ? (
-                        <div className="mobile-nav-submenu">
-                          {categoryMenuLinks.length ? (
-                            categoryMenuLinks.map((group) => (
-                              <a
-                                key={`mobile-category-${group.category}`}
-                                href={`/store?category=${encodeURIComponent(group.category)}`}
-                                onClick={() => setOpen(false)}
-                              >
-                                {group.category}
-                              </a>
-                            ))
-                          ) : (
-                            <span className="mobile-nav-empty">No synced categories yet.</span>
-                          )}
-                        </div>
-                      ) : null}
-                    </div>
-                    <div className="mobile-nav-item">
-                      <button
-                        type="button"
-                        className="mobile-nav-trigger"
-                        onClick={() =>
-                          setMobileDropdowns((prev) => ({
-                            ...prev,
-                            collections: !prev.collections,
-                          }))
-                        }
-                      >
-                        <span>Collections</span>
-                        <span className={`mobile-nav-caret ${mobileDropdowns.collections ? "is-open" : ""}`} />
-                      </button>
-                      {mobileDropdowns.collections ? (
-                        <div className="mobile-nav-submenu">
-                          {collectionMegaGroups.length ? (
-                            collectionMegaGroups.map((group) => (
-                              <a
-                                key={`mobile-collection-${group.id}`}
-                                href={group.href}
-                                onClick={() => setOpen(false)}
-                              >
-                                {group.title}
-                              </a>
-                            ))
-                          ) : (
-                            <span className="mobile-nav-empty">No collections synced yet.</span>
-                          )}
-                        </div>
-                      ) : null}
-                    </div>
-                    <a href="/contact-us" onClick={() => setOpen(false)}>Businesses</a>
-                    <a href="/bulk-orders-enquiry" onClick={() => setOpen(false)}>Bulk Orders</a>
-                    <div className="mobile-nav-item">
-                      <button
-                        type="button"
-                        className="mobile-nav-trigger"
-                        onClick={() =>
-                          setMobileDropdowns((prev) => ({
-                            ...prev,
-                            company: !prev.company,
-                          }))
-                        }
-                      >
-                        <span>Company</span>
-                        <span className={`mobile-nav-caret ${mobileDropdowns.company ? "is-open" : ""}`} />
-                      </button>
-                      {mobileDropdowns.company ? (
-                        <div className="mobile-nav-submenu">
-                          {companyMegaGroups[0]?.products.map((item) => (
-                            <a key={`mobile-company-${item.id}`} href={item.href} onClick={() => setOpen(false)}>
-                              {item.title}
-                            </a>
-                          ))}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="mobile-nav-categories">
-                    <p className="mobile-nav-section-label">All Categories</p>
-                    {categoryMenuLinks.length ? (
-                      categoryMenuLinks.map((group) => (
-                        <div key={group.category} className="mobile-nav-group">
-                          <a
-                            href={`/store?category=${encodeURIComponent(group.category)}`}
-                            className="mobile-nav-group-title"
-                            onClick={() => setOpen(false)}
-                          >
-                            {group.category}
-                          </a>
-                          {group.items.slice(0, 4).map((item) => (
-                            <a
-                              key={`${group.category}-${item.id}`}
-                              href={item.href}
-                              className="mobile-nav-group-item"
-                              onClick={() => setOpen(false)}
-                            >
-                              {item.title}
-                            </a>
-                          ))}
-                        </div>
-                      ))
-                    ) : (
-                      <p className="mobile-nav-empty">No synced categories yet.</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {activeMega === "categories" && (
               <div
                 className="mega-menu mega-menu--catalog"
@@ -797,13 +815,7 @@ export function Header() {
               <button className="primary top-selling-btn">Store</button>
             </a>
             <a
-              href={
-                authenticated
-                  ? sessionRole === "admin"
-                    ? "/admin"
-                    : "/user-dashboard"
-                  : "/login"
-              }
+              href={accountHref}
             >
               <button className="ghost header-user-btn" aria-label="User">
                 <svg className="header-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
@@ -837,6 +849,7 @@ export function Header() {
           </div>
         </div>
       </div>
+      {typeof document !== "undefined" ? createPortal(mobileMenuOverlay, document.body) : null}
     </header>
   );
 }

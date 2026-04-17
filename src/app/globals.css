@@ -3183,33 +3183,51 @@ body.theme-dark .section:not(.section--alt) .trust-grid article {
   }
 
   .mobile-nav-drawer {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
     position: fixed;
-    inset: 0;
-    background: var(--mobile-menu-bg) !important;
-    transform: translateX(-100%);
-    transition: transform 0.28s ease;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(3, 6, 16, 0.46);
+    transition: opacity 0.24s ease, visibility 0.24s ease;
     z-index: 9999;
     pointer-events: none;
     opacity: 0;
-    height: 100dvh;
-    width: 100vw;
+    visibility: hidden;
+    inset: 0;
+    height: auto;
+    min-height: 0;
+    width: auto;
+    overflow: hidden;
   }
 
   .mobile-nav-drawer.active {
-    transform: translateX(0);
     pointer-events: auto;
     opacity: 1;
+    visibility: visible;
   }
 
   .mobile-nav-sheet {
-    height: 100dvh;
-    width: 100%;
+    position: absolute;
+    inset: 0;
+    height: auto;
+    min-height: 0;
+    width: auto;
     padding: 1rem;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
     color: var(--mobile-menu-text);
     display: flex;
     flex-direction: column;
     background: var(--mobile-menu-bg) !important;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    box-sizing: border-box;
+  }
+
+  .mobile-nav-drawer.active .mobile-nav-sheet {
+    transform: translateX(0);
   }
 
   .mobile-nav-top {
@@ -3261,21 +3279,34 @@ body.theme-dark .section:not(.section--alt) .trust-grid article {
   .mobile-nav-content {
     flex: 1;
     min-height: 0;
+    height: auto;
+    max-height: none;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     padding-right: 0.1rem;
-  }
-
-  .mobile-nav-list,
-  .mobile-nav-categories {
-    display: grid;
-    gap: 0.28rem;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.9rem);
   }
 
   .mobile-nav-list {
     margin-bottom: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    min-height: auto;
+  }
+
+  .mobile-nav-list > * {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .mobile-nav-categories {
     display: grid;
     gap: 0.28rem;
   }
