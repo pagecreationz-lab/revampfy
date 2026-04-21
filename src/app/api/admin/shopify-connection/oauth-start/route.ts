@@ -6,6 +6,13 @@ const DEFAULT_SCOPES = [
   "write_products",
   "read_content",
   "write_content",
+  "read_metaobjects",
+  "read_inventory",
+  "read_orders",
+  "read_customers",
+  "write_customers",
+  "read_draft_orders",
+  "write_draft_orders",
 ].join(",");
 
 export async function POST(request: Request) {

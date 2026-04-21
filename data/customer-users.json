@@ -6,6 +6,7 @@
     "mobile": "8248003564",
     "address": "",
     "paymentMode": "UPI",
+    "needsProfileCompletion": false,
     "createdAt": "1970-01-01T00:00:00.000Z",
     "updatedAt": "2026-04-14T11:06:59.503Z"
   },
@@ -16,7 +17,19 @@
     "mobile": "23344657",
     "address": "",
     "paymentMode": "UPI",
+    "needsProfileCompletion": false,
     "createdAt": "2026-04-14T09:26:09.580Z",
     "updatedAt": "2026-04-14T09:26:17.172Z"
+  },
+  {
+    "email": "mobile917708870658@pcgs.local",
+    "passwordHash": "35fa634cb72415a9c15fc882c46a6b222c8c7b8146751a5e261f6866d24074a5",
+    "name": "Mohan Raj",
+    "mobile": "",
+    "address": "",
+    "paymentMode": "UPI",
+    "needsProfileCompletion": false,
+    "createdAt": "2026-04-18T12:33:41.320Z",
+    "updatedAt": "2026-04-18T13:25:40.943Z"
   }
 ]

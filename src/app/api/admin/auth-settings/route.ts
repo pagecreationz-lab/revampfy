@@ -6,10 +6,14 @@ export async function GET() {
     settings: {
       enableEmailPasswordLogin: settings.enableEmailPasswordLogin,
       enableEmailCodeLogin: settings.enableEmailCodeLogin,
+      enableMobileOtpLogin: settings.enableMobileOtpLogin,
       enableGoogleLogin: settings.enableGoogleLogin,
       googleClientId: settings.googleClientId,
       googleRedirectUri: settings.googleRedirectUri,
       maskedGoogleClientSecret: maskSecret(settings.googleClientSecret),
+      twilioAccountSid: settings.twilioAccountSid,
+      twilioVerifyServiceSid: settings.twilioVerifyServiceSid,
+      maskedTwilioAuthToken: maskSecret(settings.twilioAuthToken),
     },
   });
 }
@@ -25,23 +29,40 @@ export async function POST(request: Request) {
       typeof payload?.enableEmailCodeLogin === "boolean"
         ? payload.enableEmailCodeLogin
         : undefined,
+    enableMobileOtpLogin:
+      typeof payload?.enableMobileOtpLogin === "boolean"
+        ? payload.enableMobileOtpLogin
+        : undefined,
     enableGoogleLogin:
       typeof payload?.enableGoogleLogin === "boolean" ? payload.enableGoogleLogin : undefined,
-    googleClientId: typeof payload?.googleClientId === "string" ? payload.googleClientId : "",
+    googleClientId:
+      typeof payload?.googleClientId === "string" ? payload.googleClientId : undefined,
     googleClientSecret:
       typeof payload?.googleClientSecret === "string" ? payload.googleClientSecret : undefined,
     googleRedirectUri:
-      typeof payload?.googleRedirectUri === "string" ? payload.googleRedirectUri : "",
+      typeof payload?.googleRedirectUri === "string" ? payload.googleRedirectUri : undefined,
+    twilioAccountSid:
+      typeof payload?.twilioAccountSid === "string" ? payload.twilioAccountSid : undefined,
+    twilioAuthToken:
+      typeof payload?.twilioAuthToken === "string" ? payload.twilioAuthToken : undefined,
+    twilioVerifyServiceSid:
+      typeof payload?.twilioVerifyServiceSid === "string"
+        ? payload.twilioVerifyServiceSid
+        : undefined,
   });
 
   return Response.json({
     settings: {
       enableEmailPasswordLogin: settings.enableEmailPasswordLogin,
       enableEmailCodeLogin: settings.enableEmailCodeLogin,
+      enableMobileOtpLogin: settings.enableMobileOtpLogin,
       enableGoogleLogin: settings.enableGoogleLogin,
       googleClientId: settings.googleClientId,
       googleRedirectUri: settings.googleRedirectUri,
       maskedGoogleClientSecret: maskSecret(settings.googleClientSecret),
+      twilioAccountSid: settings.twilioAccountSid,
+      twilioVerifyServiceSid: settings.twilioVerifyServiceSid,
+      maskedTwilioAuthToken: maskSecret(settings.twilioAuthToken),
     },
   });
 }

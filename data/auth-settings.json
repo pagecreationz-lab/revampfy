@@ -1,8 +1,12 @@
 {
   "enableEmailPasswordLogin": false,
   "enableEmailCodeLogin": false,
-  "enableGoogleLogin": true,
+  "enableMobileOtpLogin": true,
+  "enableGoogleLogin": false,
   "googleClientId": "",
   "googleClientSecret": "",
-  "googleRedirectUri": ""
+  "googleRedirectUri": "",
+  "twilioAccountSid": "ACa16dc585c9f640b5524092a3d4e1ae9e",
+  "twilioAuthToken": "736c27fb289c6a2ff8e127e28d2b2a00",
+  "twilioVerifyServiceSid": "VA5f3394b87af8ba0c21e0f62305943259"
 }

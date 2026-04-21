@@ -70,9 +70,19 @@ export async function POST(request: Request) {
     return Response.json({ ok: true, draftOrder });
   } catch (error) {
     const message =
-      error instanceof Error
-        ? error.message
-        : "Unable to place order. Check write_draft_orders scope.";
-    return Response.json({ error: message }, { status: 500 });
+      error instanceof Error ? error.message : "Unable to place order.";
+    const normalized = message.toLowerCase();
+    const scopeIssue =
+      normalized.includes("merchant approval") ||
+      normalized.includes("write_draft_orders") ||
+      normalized.includes("(403)");
+    return Response.json(
+      {
+        error: scopeIssue
+          ? "Checkout is blocked: Shopify token is missing write_draft_orders approval. Reconnect Shopify in CMS and approve updated scopes."
+          : message,
+      },
+      { status: scopeIssue ? 403 : 500 }
+    );
   }
 }

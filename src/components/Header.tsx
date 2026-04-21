@@ -79,6 +79,7 @@ function ThemeIcon({ mode }: { mode: "dark" | "light" }) {
 
 export function Header() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobileDropdowns, setMobileDropdowns] = useState({
     categories: false,
@@ -177,6 +178,10 @@ export function Header() {
     document.body.style.overflow = "";
     document.body.classList.remove("mobile-menu-open");
   }, [open]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -849,7 +854,7 @@ export function Header() {
           </div>
         </div>
       </div>
-      {typeof document !== "undefined" ? createPortal(mobileMenuOverlay, document.body) : null}
+      {mounted ? createPortal(mobileMenuOverlay, document.body) : null}
     </header>
   );
 }

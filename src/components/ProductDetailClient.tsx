@@ -10,6 +10,12 @@ import {
   type ResolvedVariant,
 } from "@/lib/product";
 
+type SpecTab = "performance" | "software" | "moreInfo";
+type SpecEntry = {
+  label: string;
+  value: string;
+};
+
 function formatPrice(value?: string) {
   if (!value) return "";
   const numberValue = Number(value);
@@ -19,6 +25,137 @@ function formatPrice(value?: string) {
     currency: "INR",
     maximumFractionDigits: 0,
   }).format(numberValue);
+}
+
+function normalizeLabel(raw: string) {
+  return raw
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function resolveDisplayBrand(product: ShopifyProduct): string {
+  const type = (product.product_type || "").trim();
+  const category = (product.category || "").trim().toLowerCase();
+  const normalizedType = type.toLowerCase();
+  if (type && normalizedType !== category && normalizedType !== "laptops" && normalizedType !== "desktop computers") {
+    return type;
+  }
+  return (product.vendor || "").trim();
+}
+
+function parseTagSpecs(tagsRaw?: string): SpecEntry[] {
+  if (!tagsRaw) return [];
+  const tags = tagsRaw
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+  return tags
+    .map((tag) => {
+      const sep = tag.includes(":") ? ":" : tag.includes("=") ? "=" : "";
+      if (!sep) return null;
+      const [left, ...rest] = tag.split(sep);
+      const label = normalizeLabel(left || "");
+      const value = rest.join(sep).trim();
+      if (!label || !value) return null;
+      return { label, value };
+    })
+    .filter((entry): entry is SpecEntry => Boolean(entry));
+}
+
+function parseDescriptionSpecs(descriptionHtml?: string, description?: string): SpecEntry[] {
+  const source = (descriptionHtml || description || "").replace(/<[^>]*>/g, "\n");
+  const lines = source
+    .split(/\r?\n/)
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  return lines
+    .map((line) => {
+      const match = line.match(/^([^:]{2,40}):\s*(.+)$/);
+      if (!match) return null;
+      const label = normalizeLabel(match[1]);
+      const value = match[2].trim();
+      if (!label || !value) return null;
+      return { label, value };
+    })
+    .filter((entry): entry is SpecEntry => Boolean(entry));
+}
+
+function parseMetafieldSpecs(
+  metafields?: Array<{ namespace: string; key: string; value: string; type?: string }>
+): SpecEntry[] {
+  if (!metafields?.length) return [];
+  const entries: SpecEntry[] = [];
+
+  metafields.forEach((metafield) => {
+    const rawValue = (metafield.value || "").trim();
+    if (!rawValue) return;
+
+    if ((metafield.type || "").includes("json")) {
+      try {
+        const parsed = JSON.parse(rawValue) as Record<string, unknown>;
+        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+          Object.entries(parsed).forEach(([key, value]) => {
+            if (value === null || value === undefined) return;
+            const label = normalizeLabel(key);
+            const valueText = String(value).trim();
+            if (!label || !valueText) return;
+            entries.push({ label, value: valueText });
+          });
+          return;
+        }
+      } catch {
+        // fallback to plain string handling below
+      }
+    }
+
+    const keyLabel = normalizeLabel(metafield.key || "");
+    if (!keyLabel) return;
+    entries.push({ label: keyLabel, value: rawValue });
+  });
+
+  return entries;
+}
+
+function splitSpecTabs(entries: SpecEntry[]) {
+  const performanceHints = [
+    "processor",
+    "cpu",
+    "core",
+    "ram",
+    "memory",
+    "storage",
+    "ssd",
+    "hdd",
+    "gpu",
+    "graphics",
+    "display",
+    "screen",
+    "battery",
+    "clock",
+    "speed",
+  ];
+  const softwareHints = ["os", "software", "windows", "office", "bios", "firmware", "secure boot"];
+
+  const performance: SpecEntry[] = [];
+  const software: SpecEntry[] = [];
+  const moreInfo: SpecEntry[] = [];
+
+  entries.forEach((entry) => {
+    const key = entry.label.toLowerCase();
+    if (performanceHints.some((hint) => key.includes(hint))) {
+      performance.push(entry);
+      return;
+    }
+    if (softwareHints.some((hint) => key.includes(hint))) {
+      software.push(entry);
+      return;
+    }
+    moreInfo.push(entry);
+  });
+
+  return { performance, software, moreInfo };
 }
 
 export function ProductDetailClient({
@@ -35,6 +172,7 @@ export function ProductDetailClient({
   const [compared, setCompared] = useState(false);
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
+  const [activeSpecTab, setActiveSpecTab] = useState<SpecTab>("performance");
 
   const gallery = useMemo(() => {
     const images = product?.images?.filter((item) => item?.src) || [];
@@ -56,6 +194,39 @@ export function ProductDetailClient({
     if (!selectedVariantId) return variants[0];
     return variants.find((variant) => variant.id === selectedVariantId) || variants[0];
   }, [variants, selectedVariantId]);
+
+  const specEntries = useMemo(() => {
+    if (!product) return [];
+
+    const fromMeta = parseMetafieldSpecs(product.metafields);
+    const fromTags = parseTagSpecs(product.tags);
+    const fromDescription = parseDescriptionSpecs(product.description_html, product.description);
+    const displayBrand = resolveDisplayBrand(product);
+
+    const builtIn: SpecEntry[] = [
+      displayBrand ? { label: "Brand", value: displayBrand } : null,
+      { label: "Model", value: product.title },
+      product.category || product.product_type
+        ? { label: "Category", value: product.category || product.product_type || "" }
+        : null,
+    ].filter((entry): entry is SpecEntry => Boolean(entry));
+
+    const ordered = [...fromMeta, ...fromTags, ...fromDescription, ...builtIn];
+    const seen = new Set<string>();
+    return ordered.filter((entry) => {
+      const key = entry.label.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return Boolean(entry.value.trim());
+    });
+  }, [product]);
+
+  const specTabs = useMemo(() => splitSpecTabs(specEntries), [specEntries]);
+  const activeSpecEntries = useMemo(() => {
+    if (activeSpecTab === "performance") return specTabs.performance;
+    if (activeSpecTab === "software") return specTabs.software;
+    return specTabs.moreInfo;
+  }, [activeSpecTab, specTabs]);
 
   useEffect(() => {
     if (!product || typeof window === "undefined") return;
@@ -208,6 +379,46 @@ export function ProductDetailClient({
             <h1>{product.title}</h1>
             <p>{product.category || product.product_type || "General"}</p>
             {product.description ? <p className="product__desc">{product.description}</p> : null}
+            {specEntries.length ? (
+              <section className="product-specs">
+                <h2>Technical Specification</h2>
+                <div className="product-specs__tabs">
+                  <button
+                    type="button"
+                    className={activeSpecTab === "performance" ? "is-active" : ""}
+                    onClick={() => setActiveSpecTab("performance")}
+                  >
+                    Performance
+                  </button>
+                  <button
+                    type="button"
+                    className={activeSpecTab === "software" ? "is-active" : ""}
+                    onClick={() => setActiveSpecTab("software")}
+                  >
+                    Software
+                  </button>
+                  <button
+                    type="button"
+                    className={activeSpecTab === "moreInfo" ? "is-active" : ""}
+                    onClick={() => setActiveSpecTab("moreInfo")}
+                  >
+                    More Info
+                  </button>
+                </div>
+                <div className="product-specs__grid">
+                  {activeSpecEntries.length ? (
+                    activeSpecEntries.map((entry) => (
+                      <div className="product-specs__row" key={`${activeSpecTab}-${entry.label}`}>
+                        <span>{entry.label}</span>
+                        <strong>{entry.value}</strong>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="product-specs__empty">No {activeSpecTab} data available for this product.</p>
+                  )}
+                </div>
+              </section>
+            ) : null}
             <p>Inventory: {getProductStockQty(product)}</p>
             <p>Variants: {variants.length}</p>
             {variants.length ? (

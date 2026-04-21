@@ -5,10 +5,14 @@ import path from "path";
 export type AuthSettings = {
   enableEmailPasswordLogin: boolean;
   enableEmailCodeLogin: boolean;
+  enableMobileOtpLogin: boolean;
   enableGoogleLogin: boolean;
   googleClientId: string;
   googleClientSecret: string;
   googleRedirectUri: string;
+  twilioAccountSid: string;
+  twilioAuthToken: string;
+  twilioVerifyServiceSid: string;
 };
 
 const settingsPath = path.join(process.cwd(), "data", "auth-settings.json");
@@ -17,10 +21,14 @@ function fromEnv(): AuthSettings {
   return {
     enableEmailPasswordLogin: false,
     enableEmailCodeLogin: true,
+    enableMobileOtpLogin: false,
     enableGoogleLogin: true,
     googleClientId: process.env.GOOGLE_CLIENT_ID || "",
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     googleRedirectUri: process.env.GOOGLE_REDIRECT_URI || "",
+    twilioAccountSid: process.env.TWILIO_ACCOUNT_SID || "",
+    twilioAuthToken: process.env.TWILIO_AUTH_TOKEN || "",
+    twilioVerifyServiceSid: process.env.TWILIO_VERIFY_SERVICE_SID || "",
   };
 }
 
@@ -38,6 +46,10 @@ export async function getAuthSettings(): Promise<AuthSettings> {
         typeof parsed.enableEmailCodeLogin === "boolean"
           ? parsed.enableEmailCodeLogin
           : defaults.enableEmailCodeLogin,
+      enableMobileOtpLogin:
+        typeof parsed.enableMobileOtpLogin === "boolean"
+          ? parsed.enableMobileOtpLogin
+          : defaults.enableMobileOtpLogin,
       enableGoogleLogin:
         typeof parsed.enableGoogleLogin === "boolean"
           ? parsed.enableGoogleLogin
@@ -45,6 +57,10 @@ export async function getAuthSettings(): Promise<AuthSettings> {
       googleClientId: parsed.googleClientId || defaults.googleClientId,
       googleClientSecret: parsed.googleClientSecret || defaults.googleClientSecret,
       googleRedirectUri: parsed.googleRedirectUri || defaults.googleRedirectUri,
+      twilioAccountSid: parsed.twilioAccountSid || defaults.twilioAccountSid,
+      twilioAuthToken: parsed.twilioAuthToken || defaults.twilioAuthToken,
+      twilioVerifyServiceSid:
+        parsed.twilioVerifyServiceSid || defaults.twilioVerifyServiceSid,
     };
   } catch {
     return defaults;
@@ -53,6 +69,13 @@ export async function getAuthSettings(): Promise<AuthSettings> {
 
 export async function saveAuthSettings(next: Partial<AuthSettings>): Promise<AuthSettings> {
   const current = await getAuthSettings();
+  const keepIfBlank = (incoming: unknown, existing: string) => {
+    if (typeof incoming !== "string") return existing;
+    const trimmed = incoming.trim();
+    if (!trimmed && existing) return existing;
+    return trimmed;
+  };
+
   const merged: AuthSettings = {
     ...current,
     ...next,
@@ -64,20 +87,26 @@ export async function saveAuthSettings(next: Partial<AuthSettings>): Promise<Aut
       typeof next.enableEmailCodeLogin === "boolean"
         ? next.enableEmailCodeLogin
         : current.enableEmailCodeLogin,
+    enableMobileOtpLogin:
+      typeof next.enableMobileOtpLogin === "boolean"
+        ? next.enableMobileOtpLogin
+        : current.enableMobileOtpLogin,
     enableGoogleLogin:
       typeof next.enableGoogleLogin === "boolean"
         ? next.enableGoogleLogin
         : current.enableGoogleLogin,
     googleClientId:
-      typeof next.googleClientId === "string" ? next.googleClientId.trim() : current.googleClientId,
+      keepIfBlank(next.googleClientId, current.googleClientId),
     googleClientSecret:
-      typeof next.googleClientSecret === "string"
-        ? next.googleClientSecret.trim()
-        : current.googleClientSecret,
+      keepIfBlank(next.googleClientSecret, current.googleClientSecret),
     googleRedirectUri:
-      typeof next.googleRedirectUri === "string"
-        ? next.googleRedirectUri.trim()
-        : current.googleRedirectUri,
+      keepIfBlank(next.googleRedirectUri, current.googleRedirectUri),
+    twilioAccountSid:
+      keepIfBlank(next.twilioAccountSid, current.twilioAccountSid),
+    twilioAuthToken:
+      keepIfBlank(next.twilioAuthToken, current.twilioAuthToken),
+    twilioVerifyServiceSid:
+      keepIfBlank(next.twilioVerifyServiceSid, current.twilioVerifyServiceSid),
   };
 
   await fs.mkdir(path.dirname(settingsPath), { recursive: true });

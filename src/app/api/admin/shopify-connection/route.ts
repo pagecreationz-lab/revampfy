@@ -12,6 +12,7 @@ type ProbeResult = {
   ok: boolean;
   shopName?: string;
   grantedScopes?: string[];
+  missingRequiredScopes?: string[];
   scopeError?: string;
   error?: string;
   resolvedAccessToken?: string;
@@ -32,7 +33,7 @@ function connectionHint(errorText: string): string {
     return "Check store domain format: yourstore.myshopify.com (no https, no trailing slash).";
   }
   if (text.includes("forbidden") || text.includes("(403)")) {
-    return "Credentials are valid but scopes are missing. Add read_products/write_products/read_content and reinstall app.";
+    return "Credentials are valid but scopes are missing. Add read_products, read_content, read_metaobjects, write_draft_orders, read_customers, write_customers and reinstall/reconnect the app.";
   }
   return "Verify mode, domain, API version, credentials, and app scopes.";
 }
@@ -139,6 +140,30 @@ async function testConnection(settings: ShopifyConnectionSettings): Promise<Prob
               .map((item: { handle?: string }) => item?.handle || "")
               .filter(Boolean)
           : [];
+        const requiredScopes = [
+          "read_products",
+          "read_content",
+          "read_metaobjects",
+          "write_draft_orders",
+          "read_customers",
+          "write_customers",
+        ];
+        const missingRequiredScopes = requiredScopes.filter(
+          (scope) => !grantedScopes.includes(scope)
+        );
+        if (missingRequiredScopes.length > 0) {
+          scopeError = `Missing required scopes: ${missingRequiredScopes.join(
+            ", "
+          )}. Reconnect Shopify and approve updated permissions.`;
+          return {
+            ok: true,
+            shopName: json?.shop?.name || "Connected",
+            resolvedAccessToken: accessToken,
+            grantedScopes,
+            missingRequiredScopes,
+            scopeError,
+          };
+        }
       } else {
         scopeError = `Unable to read granted scopes (${scopesRes.status}).`;
       }
@@ -151,6 +176,7 @@ async function testConnection(settings: ShopifyConnectionSettings): Promise<Prob
       shopName: json?.shop?.name || "Connected",
       resolvedAccessToken: accessToken,
       grantedScopes,
+      missingRequiredScopes: [],
       scopeError,
     };
   } catch (error) {
@@ -178,6 +204,7 @@ export async function GET() {
     },
     error: probe.error || "",
     grantedScopes: probe.grantedScopes || [],
+    missingRequiredScopes: probe.missingRequiredScopes || [],
     scopeError: probe.scopeError || "",
     hint: probe.error ? connectionHint(probe.error) : "",
   });
@@ -253,6 +280,7 @@ export async function POST(request: Request) {
     connected: true,
     shopName: probe.shopName || "",
     grantedScopes: probe.grantedScopes || [],
+    missingRequiredScopes: probe.missingRequiredScopes || [],
     scopeError: probe.scopeError || "",
     settings: {
       mode: settings.mode,

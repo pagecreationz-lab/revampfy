@@ -48,11 +48,16 @@ type EnquirySettingsState = {
 type AuthSettingsState = {
   enableEmailPasswordLogin: boolean;
   enableEmailCodeLogin: boolean;
+  enableMobileOtpLogin: boolean;
   enableGoogleLogin: boolean;
   googleClientId: string;
   googleClientSecret: string;
   googleRedirectUri: string;
   maskedGoogleClientSecret: string;
+  twilioAccountSid: string;
+  twilioAuthToken: string;
+  twilioVerifyServiceSid: string;
+  maskedTwilioAuthToken: string;
 };
 
 type CommerceConfigState = {
@@ -114,11 +119,16 @@ const emptyEnquirySettings: EnquirySettingsState = {
 const emptyAuthSettings: AuthSettingsState = {
   enableEmailPasswordLogin: false,
   enableEmailCodeLogin: true,
+  enableMobileOtpLogin: false,
   enableGoogleLogin: true,
   googleClientId: "",
   googleClientSecret: "",
   googleRedirectUri: "",
   maskedGoogleClientSecret: "",
+  twilioAccountSid: "",
+  twilioAuthToken: "",
+  twilioVerifyServiceSid: "",
+  maskedTwilioAuthToken: "",
 };
 
 const emptyCommerceConfig: CommerceConfigState = {
@@ -269,11 +279,16 @@ export default function AdminClient({
           setAuthSettings({
             enableEmailPasswordLogin: Boolean(authSettingsJson.settings?.enableEmailPasswordLogin),
             enableEmailCodeLogin: Boolean(authSettingsJson.settings?.enableEmailCodeLogin),
+            enableMobileOtpLogin: Boolean(authSettingsJson.settings?.enableMobileOtpLogin),
             enableGoogleLogin: Boolean(authSettingsJson.settings?.enableGoogleLogin),
             googleClientId: authSettingsJson.settings?.googleClientId || "",
             googleClientSecret: "",
             googleRedirectUri: authSettingsJson.settings?.googleRedirectUri || "",
             maskedGoogleClientSecret: authSettingsJson.settings?.maskedGoogleClientSecret || "",
+            twilioAccountSid: authSettingsJson.settings?.twilioAccountSid || "",
+            twilioAuthToken: "",
+            twilioVerifyServiceSid: authSettingsJson.settings?.twilioVerifyServiceSid || "",
+            maskedTwilioAuthToken: authSettingsJson.settings?.maskedTwilioAuthToken || "",
           });
         }
 
@@ -560,10 +575,14 @@ export default function AdminClient({
         body: JSON.stringify({
           enableEmailPasswordLogin: authSettings.enableEmailPasswordLogin,
           enableEmailCodeLogin: authSettings.enableEmailCodeLogin,
+          enableMobileOtpLogin: authSettings.enableMobileOtpLogin,
           enableGoogleLogin: authSettings.enableGoogleLogin,
           googleClientId: authSettings.googleClientId,
           googleClientSecret: authSettings.googleClientSecret,
           googleRedirectUri: authSettings.googleRedirectUri,
+          twilioAccountSid: authSettings.twilioAccountSid,
+          twilioAuthToken: authSettings.twilioAuthToken,
+          twilioVerifyServiceSid: authSettings.twilioVerifyServiceSid,
         }),
       });
       const json = await res.json();
@@ -574,11 +593,16 @@ export default function AdminClient({
         ...prev,
         enableEmailPasswordLogin: Boolean(json.settings?.enableEmailPasswordLogin),
         enableEmailCodeLogin: Boolean(json.settings?.enableEmailCodeLogin),
+        enableMobileOtpLogin: Boolean(json.settings?.enableMobileOtpLogin),
         enableGoogleLogin: Boolean(json.settings?.enableGoogleLogin),
         googleClientId: json.settings?.googleClientId || "",
         googleClientSecret: "",
         googleRedirectUri: json.settings?.googleRedirectUri || "",
         maskedGoogleClientSecret: json.settings?.maskedGoogleClientSecret || "",
+        twilioAccountSid: json.settings?.twilioAccountSid || "",
+        twilioAuthToken: "",
+        twilioVerifyServiceSid: json.settings?.twilioVerifyServiceSid || "",
+        maskedTwilioAuthToken: json.settings?.maskedTwilioAuthToken || "",
       }));
       setMessage("Login methods settings saved.");
     } catch (err) {
@@ -964,7 +988,7 @@ export default function AdminClient({
     setLoggingOut(true);
     try {
       await fetch("/api/auth/logout", { method: "POST" });
-      window.location.href = "/login";
+      window.location.href = "/admin-login";
     } finally {
       setLoggingOut(false);
     }
@@ -1502,6 +1526,16 @@ export default function AdminClient({
               />
               Enable Google Sign-In
             </label>
+            <label style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+              <input
+                type="checkbox"
+                checked={authSettings.enableMobileOtpLogin}
+                onChange={(e) =>
+                  setAuthSettings((prev) => ({ ...prev, enableMobileOtpLogin: e.target.checked }))
+                }
+              />
+              Enable Mobile OTP login (Twilio Verify)
+            </label>
             <input
               value={authSettings.googleClientId}
               onChange={(e) =>
@@ -1528,12 +1562,39 @@ export default function AdminClient({
               }
               placeholder="Google Redirect URI (optional)"
             />
+            <input
+              value={authSettings.twilioAccountSid}
+              onChange={(e) =>
+                setAuthSettings((prev) => ({ ...prev, twilioAccountSid: e.target.value }))
+              }
+              placeholder="Twilio Account SID"
+            />
+            <input
+              type="password"
+              value={authSettings.twilioAuthToken}
+              onChange={(e) =>
+                setAuthSettings((prev) => ({ ...prev, twilioAuthToken: e.target.value }))
+              }
+              placeholder={
+                authSettings.maskedTwilioAuthToken
+                  ? `Twilio Auth Token (${authSettings.maskedTwilioAuthToken})`
+                  : "Twilio Auth Token"
+              }
+            />
+            <input
+              value={authSettings.twilioVerifyServiceSid}
+              onChange={(e) =>
+                setAuthSettings((prev) => ({ ...prev, twilioVerifyServiceSid: e.target.value }))
+              }
+              placeholder="Twilio Verify Service SID"
+            />
             <button className="secondary" onClick={saveAuthSettings}>
               Save Login Methods
             </button>
             <small>
               Email code login uses the SMTP settings above. Leave redirect URI blank to use
-              /api/auth/google/callback on current domain.
+              /api/auth/google/callback on current domain. Mobile OTP uses Twilio Verify service
+              credentials above.
             </small>
           </div>
 

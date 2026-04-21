@@ -2,20 +2,23 @@
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const isAdminRoute = pathname.startsWith("/admin");
   const isProtected =
-    request.nextUrl.pathname.startsWith("/admin") ||
-    request.nextUrl.pathname.startsWith("/user-dashboard") ||
-    request.nextUrl.pathname.startsWith("/customer-portal") ||
-    request.nextUrl.pathname.startsWith("/checkout");
+    isAdminRoute ||
+    pathname.startsWith("/user-dashboard") ||
+    pathname.startsWith("/customer-portal") ||
+    pathname.startsWith("/checkout") ||
+    pathname.startsWith("/payment");
 
   if (isProtected) {
     const token = request.cookies.get("pcgs_admin_session")?.value;
     if (!token) {
-      const loginUrl = new URL("/login", request.url);
+      const loginUrl = new URL(isAdminRoute ? "/admin-login" : "/login", request.url);
       loginUrl.searchParams.set("expired", "1");
       loginUrl.searchParams.set(
         "next",
-        `${request.nextUrl.pathname}${request.nextUrl.search}`
+        `${pathname}${request.nextUrl.search}`
       );
       return NextResponse.redirect(loginUrl);
     }
@@ -30,5 +33,6 @@ export const config = {
     "/user-dashboard/:path*",
     "/customer-portal/:path*",
     "/checkout/:path*",
+    "/payment/:path*",
   ],
 };

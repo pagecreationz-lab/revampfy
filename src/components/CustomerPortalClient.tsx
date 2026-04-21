@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type CustomerProfile = {
   email: string;
@@ -8,6 +9,7 @@ type CustomerProfile = {
   mobile: string;
   address: string;
   paymentMode: "UPI" | "Card" | "NetBanking" | "COD";
+  requiresProfileCompletion?: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -73,6 +75,14 @@ export function CustomerPortalClient({ email }: { email: string }) {
 
   const updateProfile = async () => {
     if (!profile) return;
+    if (profile.requiresProfileCompletion) {
+      const nameOk = Boolean(profile.name?.trim());
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.email?.trim() || "");
+      if (!nameOk || !emailOk) {
+        setError("Please enter a valid full name and email to continue.");
+        return;
+      }
+    }
     setSaving(true);
     setError("");
     setMessage("");
@@ -81,6 +91,7 @@ export function CustomerPortalClient({ email }: { email: string }) {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          email: profile.email,
           name: profile.name,
           mobile: profile.mobile,
           address: profile.address,
@@ -119,16 +130,16 @@ export function CustomerPortalClient({ email }: { email: string }) {
           <p className="hero__subtext">Signed in as {email}</p>
         </div>
         <div className="user-dashboard__actions">
-          <a href="/store">
+          <Link href="/store">
             <button className="secondary" type="button">
               Continue Shopping
             </button>
-          </a>
-          <a href="/cart">
+          </Link>
+          <Link href="/cart">
             <button className="secondary" type="button">
               My Cart
             </button>
-          </a>
+          </Link>
           <button className="ghost" type="button" onClick={handleLogout} disabled={loggingOut}>
             {loggingOut ? "Logging out..." : "Logout"}
           </button>
@@ -144,11 +155,25 @@ export function CustomerPortalClient({ email }: { email: string }) {
           <section className="admin__panel" style={{ marginTop: "1rem" }}>
             <h2>Profile & Payment Mode</h2>
             <div className="admin__form">
-              <input type="email" value={profile.email} disabled />
+              {profile.requiresProfileCompletion ? (
+                <div className="admin__alert admin__alert--error">
+                  Complete profile required: please update your full name and email now.
+                </div>
+              ) : null}
+              <input
+                type="email"
+                value={profile.email}
+                onChange={(event) =>
+                  setProfile((prev) => (prev ? { ...prev, email: event.target.value } : prev))
+                }
+                placeholder="Email"
+                required={Boolean(profile.requiresProfileCompletion)}
+              />
               <input
                 value={profile.name}
                 onChange={(event) => setProfile((prev) => (prev ? { ...prev, name: event.target.value } : prev))}
                 placeholder="Full name"
+                required={Boolean(profile.requiresProfileCompletion)}
               />
               <input
                 value={profile.mobile}
@@ -175,7 +200,11 @@ export function CustomerPortalClient({ email }: { email: string }) {
                 <option value="COD">Cash on Delivery</option>
               </select>
               <button className="primary" type="button" onClick={updateProfile} disabled={saving}>
-                {saving ? "Saving..." : "Save Profile"}
+                {saving
+                  ? "Saving..."
+                  : profile.requiresProfileCompletion
+                    ? "Complete Profile"
+                    : "Save Profile"}
               </button>
             </div>
           </section>
@@ -205,9 +234,9 @@ export function CustomerPortalClient({ email }: { email: string }) {
                         <td>{order.status}</td>
                         <td>
                           {order.invoiceUrl ? (
-                            <a href={order.invoiceUrl} target="_blank" rel="noreferrer">
+                            <Link href={`/payment?invoice=${encodeURIComponent(order.invoiceUrl)}`}>
                               Pay now
-                            </a>
+                            </Link>
                           ) : (
                             "-"
                           )}

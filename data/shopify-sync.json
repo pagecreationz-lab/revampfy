@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-04-17T07:18:04.313Z",
+  "syncedAt": "2026-04-18T15:01:34.519Z",
   "payload": {
     "categories": [
       {
@@ -53,6 +53,7 @@
         "title": "HP Laptop",
         "handle": "hp-laptop",
         "description": "HP laptop is a portable, battery-powered personal computer designed for mobile use, integrating a screen, keyboard, pointing device (touchpad), and speakers into a single, foldable unit. These compact devices are optimized for travel, work, and personal entertainment, offering similar functionality to desktops while utilizing power-efficient components and rechargeable batteries",
+        "description_html": "HP laptop is a portable, battery-powered personal computer designed for mobile use, integrating a screen, keyboard, pointing device (touchpad), and speakers into a single, foldable unit. These compact devices are optimized for travel, work, and personal entertainment, offering similar functionality to desktops while utilizing power-efficient components and rechargeable batteries",
         "status": "active",
         "tags": "Laptops",
         "vendor": "Revamp",
@@ -71,20 +72,22 @@
         ],
         "variants": [
           {
-            "id": 51953743397095,
-            "title": "Default Title",
+            "id": 51989690220775,
+            "title": "Windows / Silver",
             "price": "18000.00",
             "compare_at_price": null,
             "inventory_quantity": 2,
             "requires_shipping": false
           }
-        ]
+        ],
+        "metafields": []
       },
       {
         "id": 9506618245351,
         "title": "Dell Laptop",
         "handle": "dell-laptop",
         "description": "",
+        "description_html": "",
         "status": "active",
         "tags": "",
         "vendor": "Revamp",
@@ -110,13 +113,15 @@
             "inventory_quantity": 1,
             "requires_shipping": false
           }
-        ]
+        ],
+        "metafields": []
       },
       {
         "id": 9506620178663,
         "title": "Lenovo Laptop",
         "handle": "lenovo-laptop",
         "description": "",
+        "description_html": "",
         "status": "active",
         "tags": "",
         "vendor": "Revamp",
@@ -150,13 +155,15 @@
             "inventory_quantity": 1,
             "requires_shipping": false
           }
-        ]
+        ],
+        "metafields": []
       },
       {
         "id": 9508855447783,
         "title": "Asus Laptop",
         "handle": "asus-laptop",
         "description": "",
+        "description_html": "",
         "status": "active",
         "tags": "",
         "vendor": "Revamp",
@@ -178,13 +185,15 @@
             "inventory_quantity": 1,
             "requires_shipping": false
           }
-        ]
+        ],
+        "metafields": []
       },
       {
         "id": 9508962271463,
         "title": "HP Desktop",
         "handle": "hp-desktop",
         "description": "",
+        "description_html": "",
         "status": "active",
         "tags": "Desktops",
         "vendor": "Revamp",
@@ -206,13 +215,15 @@
             "inventory_quantity": 0,
             "requires_shipping": false
           }
-        ]
+        ],
+        "metafields": []
       },
       {
         "id": 9512258633959,
         "title": "Lenovo Laptop I5 10th",
         "handle": "lenovo-laptop-i5-10th",
         "description": "",
+        "description_html": "",
         "status": "active",
         "tags": "",
         "vendor": "Revamp",
@@ -246,7 +257,8 @@
             "inventory_quantity": 1,
             "requires_shipping": false
           }
-        ]
+        ],
+        "metafields": []
       }
     ]
   }

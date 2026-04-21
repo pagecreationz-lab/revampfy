@@ -15,6 +15,7 @@ export type ShopifyProduct = {
   title: string;
   handle: string;
   description?: string;
+  description_html?: string;
   status?: string;
   tags?: string;
   vendor?: string;
@@ -30,6 +31,12 @@ export type ShopifyProduct = {
     compare_at_price?: string | null;
     inventory_quantity?: number;
     requires_shipping?: boolean;
+  }[];
+  metafields?: {
+    namespace: string;
+    key: string;
+    value: string;
+    type?: string;
   }[];
 };
 
@@ -327,6 +334,7 @@ type GraphqlProductNode = {
   title: string;
   handle: string;
   description?: string;
+  descriptionHtml?: string;
   status: "ACTIVE" | "DRAFT" | "ARCHIVED";
   tags: string[];
   vendor: string;
@@ -352,6 +360,36 @@ type GraphqlProductNode = {
       title?: string | null;
     }>;
   };
+  metafields?: {
+    nodes: Array<{
+      namespace?: string | null;
+      key?: string | null;
+      value?: string | null;
+      type?: string | null;
+      reference?: {
+        __typename?: string | null;
+        id?: string | null;
+        displayName?: string | null;
+        fields?: Array<{
+          key?: string | null;
+          value?: string | null;
+          type?: string | null;
+        }> | null;
+      } | null;
+      references?: {
+        nodes?: Array<{
+          __typename?: string | null;
+          id?: string | null;
+          displayName?: string | null;
+          fields?: Array<{
+            key?: string | null;
+            value?: string | null;
+            type?: string | null;
+          }> | null;
+        }>;
+      } | null;
+    }>;
+  };
 };
 
 function parseGraphqlNumericId(value?: string | null): number | undefined {
@@ -359,6 +397,231 @@ function parseGraphqlNumericId(value?: string | null): number | undefined {
   const part = value.split("/").pop();
   const parsed = Number(part);
   return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function isLikelyGidValue(value: string): boolean {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  if (trimmed.startsWith("gid://")) return true;
+  if (trimmed.startsWith("[") && trimmed.includes("gid://shopify/")) return true;
+  return false;
+}
+
+function getMetaobjectBestValue(
+  item:
+    | {
+        displayName?: string | null;
+        fields?: Array<{ key?: string | null; value?: string | null; type?: string | null }> | null;
+      }
+    | null
+    | undefined
+): string {
+  if (!item) return "";
+  const fields = item.fields || [];
+  const preferredField = fields.find((field) => {
+    const key = (field.key || "").toLowerCase();
+    const value = String(field.value || "").trim();
+    if (!value || isLikelyGidValue(value)) return false;
+    return (
+      key.includes("title") ||
+      key.includes("name") ||
+      key.includes("label") ||
+      key.includes("model") ||
+      key.includes("text") ||
+      key.includes("value")
+    );
+  });
+  if (preferredField?.value) return String(preferredField.value).trim();
+  const firstUseful = fields.find((field) => {
+    const value = String(field.value || "").trim();
+    return Boolean(value) && !isLikelyGidValue(value);
+  });
+  if (firstUseful?.value) return String(firstUseful.value).trim();
+  return String(item.displayName || "").trim();
+}
+
+function resolveMetafieldValue(node: {
+  value?: string | null;
+  type?: string | null;
+  reference?: {
+    displayName?: string | null;
+    fields?: Array<{ key?: string | null; value?: string | null; type?: string | null }> | null;
+  } | null;
+  references?: {
+    nodes?: Array<{
+      displayName?: string | null;
+      fields?: Array<{ key?: string | null; value?: string | null; type?: string | null }> | null;
+    }>;
+  } | null;
+}): string {
+  const fromReferences = (node.references?.nodes || [])
+    .map((item) => getMetaobjectBestValue(item))
+    .filter(Boolean);
+  if (fromReferences.length) {
+    return fromReferences.join(", ");
+  }
+
+  const fromReference = getMetaobjectBestValue(node.reference);
+  if (fromReference) return fromReference;
+
+  const raw = String(node.value || "").trim();
+  if (!raw) return "";
+
+  if (isLikelyGidValue(raw)) {
+    // Hide unresolved Shopify GIDs from the frontend if references were not available.
+    return "";
+  }
+  return raw;
+}
+
+function mapGraphqlProductNode(node: GraphqlProductNode): ShopifyProduct {
+  const mappedVariants = (node.variants?.nodes || [])
+    .map((variant) => {
+      const variantId =
+        parseGraphqlNumericId(variant.id) ||
+        Number(variant.legacyResourceId || 0) ||
+        undefined;
+      if (!variantId) return null;
+      return {
+        id: variantId,
+        title: variant.title || "Default",
+        price: variant.price,
+        compare_at_price: variant.compareAtPrice || null,
+        inventory_quantity: Number(variant.inventoryQuantity || 0),
+        requires_shipping: false,
+      };
+    })
+    .filter((variant) => Boolean(variant)) as NonNullable<ShopifyProduct["variants"]>;
+
+  const galleryImages = (node.images?.nodes || [])
+    .map((image) => image.url)
+    .filter(Boolean)
+    .map((src) => ({ src }));
+
+  return {
+    id: Number(node.legacyResourceId),
+    title: node.title,
+    handle: node.handle,
+    description: node.description || "",
+    description_html: node.descriptionHtml || node.description || "",
+    status: node.status.toLowerCase(),
+    tags: (node.tags || []).join(", "),
+    vendor: node.vendor || "",
+    product_type: node.productType || "",
+    category: node.category?.name || node.category?.fullName || "",
+    collection_handles: (node.collections?.nodes || [])
+      .map((entry) => (entry.handle || "").trim())
+      .filter(Boolean),
+    collection_titles: (node.collections?.nodes || [])
+      .map((entry) => (entry.title || "").trim())
+      .filter(Boolean),
+    images: galleryImages.length
+      ? galleryImages
+      : node.featuredImage?.url
+        ? [{ src: node.featuredImage.url }]
+        : [],
+    variants: mappedVariants,
+    metafields: (node.metafields?.nodes || [])
+      .map((entry) => ({
+        namespace: (entry.namespace || "custom").trim(),
+        key: String(entry.key || "").trim(),
+        value: resolveMetafieldValue(entry),
+        type: entry.type || undefined,
+      }))
+      .filter((entry) => Boolean(entry.key && entry.value))
+      .map((entry) => ({
+        namespace: entry.namespace,
+        key: entry.key,
+        value: entry.value,
+        type: entry.type,
+      })),
+  } satisfies ShopifyProduct;
+}
+
+export async function getProductById(id: number): Promise<ShopifyProduct | null> {
+  if (!Number.isFinite(id) || id <= 0) return null;
+  const query = `
+    query ProductById($id: ID!) {
+      product(id: $id) {
+        legacyResourceId
+        title
+        handle
+        description
+        descriptionHtml
+        status
+        tags
+        vendor
+        productType
+        category {
+          fullName
+          name
+        }
+        featuredImage {
+          url
+        }
+        images(first: 12) {
+          nodes {
+            url
+          }
+        }
+        variants(first: 40) {
+          nodes {
+            id
+            legacyResourceId
+            title
+            price
+            compareAtPrice
+            inventoryQuantity
+          }
+        }
+        collections(first: 20) {
+          nodes {
+            handle
+            title
+          }
+        }
+        metafields(first: 40) {
+          nodes {
+            namespace
+            key
+            value
+            type
+            reference {
+              __typename
+              ... on Metaobject {
+                id
+                displayName
+                fields {
+                  key
+                  value
+                  type
+                }
+              }
+            }
+            references(first: 20) {
+              nodes {
+                __typename
+                ... on Metaobject {
+                  id
+                  displayName
+                  fields {
+                    key
+                    value
+                    type
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const result: { product: GraphqlProductNode | null } = await adminGraphqlFetch(query, {
+    id: `gid://shopify/Product/${id}`,
+  });
+  if (!result.product) return null;
+  return mapGraphqlProductNode(result.product);
 }
 
 export async function getAllProducts(maxPages = 8): Promise<ShopifyProduct[]> {
@@ -378,6 +641,7 @@ export async function getAllProducts(maxPages = 8): Promise<ShopifyProduct[]> {
           title
           handle
           description
+          descriptionHtml
           status
           tags
           vendor
@@ -410,6 +674,14 @@ export async function getAllProducts(maxPages = 8): Promise<ShopifyProduct[]> {
               title
             }
           }
+          metafields(first: 40) {
+            nodes {
+              namespace
+              key
+              value
+              type
+            }
+          }
         }
       }
     }
@@ -423,54 +695,7 @@ export async function getAllProducts(maxPages = 8): Promise<ShopifyProduct[]> {
       };
     } = await adminGraphqlFetch(productQuery, { first: 100, after: cursor });
 
-    const mapped = graphqlResult.products.nodes.map((node) => {
-      const mappedVariants = (node.variants?.nodes || [])
-        .map((variant) => {
-          const variantId =
-            parseGraphqlNumericId(variant.id) ||
-            Number(variant.legacyResourceId || 0) ||
-            undefined;
-          if (!variantId) return null;
-          return {
-            id: variantId,
-            title: variant.title || "Default",
-            price: variant.price,
-            compare_at_price: variant.compareAtPrice || null,
-            inventory_quantity: Number(variant.inventoryQuantity || 0),
-            requires_shipping: false,
-          };
-        })
-        .filter((variant) => Boolean(variant)) as NonNullable<ShopifyProduct["variants"]>;
-
-      const galleryImages = (node.images?.nodes || [])
-        .map((image) => image.url)
-        .filter(Boolean)
-        .map((src) => ({ src }));
-
-      return {
-        id: Number(node.legacyResourceId),
-        title: node.title,
-        handle: node.handle,
-        description: node.description || "",
-        status: node.status.toLowerCase(),
-        tags: (node.tags || []).join(", "),
-        vendor: node.vendor || "",
-        product_type: node.productType || "",
-        category: node.category?.name || node.category?.fullName || "",
-        collection_handles: (node.collections?.nodes || [])
-          .map((entry) => (entry.handle || "").trim())
-          .filter(Boolean),
-        collection_titles: (node.collections?.nodes || [])
-          .map((entry) => (entry.title || "").trim())
-          .filter(Boolean),
-        images: galleryImages.length
-          ? galleryImages
-          : node.featuredImage?.url
-            ? [{ src: node.featuredImage.url }]
-            : [],
-        variants: mappedVariants,
-      } satisfies ShopifyProduct;
-    });
+    const mapped = graphqlResult.products.nodes.map((node) => mapGraphqlProductNode(node));
 
     all.push(...mapped);
 

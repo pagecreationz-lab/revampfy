@@ -10,7 +10,7 @@ export default async function AdminPage() {
   const session = verifySessionToken(token);
 
   if (!session) {
-    redirect("/login?next=%2Fadmin");
+    redirect("/admin-login?next=%2Fadmin");
   }
   if (session.role !== "admin") {
     redirect("/user-dashboard");
@@ -29,4 +29,3 @@ export default async function AdminPage() {
     </div>
   );
 }
-

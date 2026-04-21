@@ -12,6 +12,7 @@ export type CustomerUser = {
   mobile: string;
   address: string;
   paymentMode: PaymentMode;
+  needsProfileCompletion: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -37,6 +38,7 @@ const demoCustomer: CustomerUser = {
   mobile: "8248003564",
   address: "",
   paymentMode: "UPI",
+  needsProfileCompletion: false,
   createdAt: new Date(0).toISOString(),
   updatedAt: new Date(0).toISOString(),
 };
@@ -56,8 +58,20 @@ async function writeJsonFile<T>(filePath: string, payload: T): Promise<void> {
 }
 
 export async function getCustomerUsers(): Promise<CustomerUser[]> {
-  const users = await readJsonFile<CustomerUser[]>(usersPath, []);
-  const normalized = users.filter((user) => user?.email && user?.passwordHash);
+  const users = await readJsonFile<Partial<CustomerUser>[]>(usersPath, []);
+  const normalized = users
+    .filter((user) => user?.email && user?.passwordHash)
+    .map((user) => ({
+      email: String(user.email || "").trim().toLowerCase(),
+      passwordHash: String(user.passwordHash || ""),
+      name: String(user.name || "New User"),
+      mobile: String(user.mobile || ""),
+      address: String(user.address || ""),
+      paymentMode: (user.paymentMode as PaymentMode) || "UPI",
+      needsProfileCompletion: Boolean(user.needsProfileCompletion),
+      createdAt: String(user.createdAt || new Date().toISOString()),
+      updatedAt: String(user.updatedAt || new Date().toISOString()),
+    }));
   if (!normalized.find((u) => u.email.toLowerCase() === demoCustomer.email.toLowerCase())) {
     normalized.unshift(demoCustomer);
     await writeJsonFile(usersPath, normalized);
@@ -91,6 +105,7 @@ export async function registerCustomerUser(input: {
     mobile: (input.mobile || "").trim(),
     address: "",
     paymentMode: "UPI",
+    needsProfileCompletion: false,
     createdAt: now,
     updatedAt: now,
   };
@@ -117,6 +132,7 @@ export async function ensureCustomerUserByEmail(
     mobile: "",
     address: "",
     paymentMode: "UPI",
+    needsProfileCompletion: false,
     createdAt: now,
     updatedAt: now,
   };
@@ -128,7 +144,12 @@ export async function ensureCustomerUserByEmail(
 
 export async function updateCustomerProfile(
   email: string,
-  patch: Partial<Pick<CustomerUser, "name" | "mobile" | "address" | "paymentMode">>
+  patch: Partial<
+    Pick<
+      CustomerUser,
+      "email" | "name" | "mobile" | "address" | "paymentMode" | "needsProfileCompletion"
+    >
+  >
 ): Promise<CustomerUser> {
   const users = await getCustomerUsers();
   const lower = email.trim().toLowerCase();
@@ -138,16 +159,40 @@ export async function updateCustomerProfile(
   }
 
   const current = users[index];
+  const requestedEmail =
+    typeof patch.email === "string" ? patch.email.trim().toLowerCase() : current.email;
+  const nextEmail = requestedEmail || current.email;
+  const conflictIndex = users.findIndex(
+    (user, i) => i !== index && user.email.toLowerCase() === nextEmail.toLowerCase()
+  );
+  if (conflictIndex >= 0) {
+    throw new Error("Email already exists for another user.");
+  }
+
   const next: CustomerUser = {
     ...current,
+    email: nextEmail,
     name: typeof patch.name === "string" ? patch.name.trim() : current.name,
     mobile: typeof patch.mobile === "string" ? patch.mobile.trim() : current.mobile,
     address: typeof patch.address === "string" ? patch.address.trim() : current.address,
     paymentMode: patch.paymentMode || current.paymentMode,
+    needsProfileCompletion:
+      typeof patch.needsProfileCompletion === "boolean"
+        ? patch.needsProfileCompletion
+        : current.needsProfileCompletion,
     updatedAt: new Date().toISOString(),
   };
   users[index] = next;
   await writeJsonFile(usersPath, users);
+
+  if (nextEmail.toLowerCase() !== lower) {
+    const orders = await readJsonFile<CustomerOrder[]>(ordersPath, []);
+    const migrated = orders.map((order) =>
+      order.email.toLowerCase() === lower ? { ...order, email: nextEmail } : order
+    );
+    await writeJsonFile(ordersPath, migrated);
+  }
+
   return next;
 }
 

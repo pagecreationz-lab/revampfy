@@ -1,19 +1,27 @@
 import { NextResponse } from "next/server";
+import { getAuthSettings } from "@/lib/authSettings";
+import { normalizeMobileToE164, sendTwilioOtp } from "@/lib/twilioVerify";
 
 export async function POST(request: Request) {
   try {
+    const authSettings = await getAuthSettings();
+    if (!authSettings.enableMobileOtpLogin) {
+      return NextResponse.json({ error: "Mobile OTP login is disabled." }, { status: 403 });
+    }
+
     const payload = await request.json();
-    const mobile = String(payload?.mobile || "").replace(/\D/g, "");
-    if (mobile.length < 10) {
+    const mobileRaw = String(payload?.mobile || "");
+    const mobileE164 = normalizeMobileToE164(mobileRaw);
+    if (!mobileE164) {
       return NextResponse.json({ error: "Enter a valid mobile number." }, { status: 400 });
     }
+    await sendTwilioOtp(mobileE164);
 
     const response = NextResponse.json({
       ok: true,
       message: "OTP sent successfully.",
-      demoOtp: process.env.NODE_ENV === "production" ? undefined : "123456",
     });
-    response.cookies.set("pcgs_otp_mobile", mobile, {
+    response.cookies.set("pcgs_otp_mobile", mobileE164, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -26,4 +34,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
-

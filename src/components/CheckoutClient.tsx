@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { ShopifyProduct } from "@/lib/shopify";
 import { clearCartInStorage, getCartItemsFromStorage, type CartItem } from "@/lib/cart";
+import { canEmbedInvoiceUrl, isAllowedInvoiceUrl } from "@/lib/payment";
 
 type Variant = NonNullable<ShopifyProduct["variants"]>[number];
 
@@ -27,6 +28,16 @@ export function CheckoutClient() {
   const [placingOrder, setPlacingOrder] = useState(false);
   const [email, setEmail] = useState("");
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [paymentUrl, setPaymentUrl] = useState("");
+  const canEmbedPayment = useMemo(() => canEmbedInvoiceUrl(paymentUrl), [paymentUrl]);
+
+  useEffect(() => {
+    if (!paymentUrl || canEmbedPayment || typeof window === "undefined") return;
+    const timer = window.setTimeout(() => {
+      window.location.href = paymentUrl;
+    }, 450);
+    return () => window.clearTimeout(timer);
+  }, [paymentUrl, canEmbedPayment]);
 
   const productId = Number(params.get("productId") || "");
   const variantId = Number(params.get("variantId") || "");
@@ -111,9 +122,15 @@ export function CheckoutClient() {
         throw new Error(json.error || "Checkout failed");
       }
 
+      const invoiceUrl = String(json?.draftOrder?.invoice_url || "").trim();
+      if (isAllowedInvoiceUrl(invoiceUrl)) {
+        setPaymentUrl(invoiceUrl);
+      }
       setMessage(
-        json?.draftOrder?.invoice_url
-          ? `Order created. Complete payment: ${json.draftOrder.invoice_url}`
+        invoiceUrl
+          ? canEmbedInvoiceUrl(invoiceUrl)
+            ? "Order created. Continue with payment below."
+            : "Order created. Click Continue to Secure Payment."
           : "Order created successfully."
       );
       if (isCartCheckout) {
@@ -175,6 +192,36 @@ export function CheckoutClient() {
                     {placingOrder ? "Processing..." : "Create Payment Link"}
                   </button>
                 </div>
+                {paymentUrl ? (
+                  <div className="checkout__payment">
+                    <p className="hero__subtext">Secure payment</p>
+                    {canEmbedPayment ? (
+                      <iframe
+                        className="payment-page__iframe"
+                        src={paymentUrl}
+                        title="Checkout Payment"
+                      />
+                    ) : (
+                      <div>
+                        <div className="admin__alert admin__alert--info">
+                          Opening secure payment page...
+                        </div>
+                        <div className="payment-page__actions">
+                          <a href={paymentUrl}>
+                            <button className="primary" type="button">
+                              Continue to Secure Payment
+                            </button>
+                          </a>
+                          <a href={paymentUrl} target="_blank" rel="noreferrer">
+                            <button className="secondary" type="button">
+                              Open in New Tab
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : null}
               </div>
             ) : null}
             {message ? <div className="admin__alert admin__alert--success">{message}</div> : null}
