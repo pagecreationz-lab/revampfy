@@ -13,6 +13,16 @@ type AuthDiagnostics = {
   googleConfigured: boolean;
 };
 
+async function readJsonSafe(response: Response): Promise<Record<string, unknown>> {
+  const raw = await response.text();
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw) as Record<string, unknown>;
+  } catch {
+    return { error: raw };
+  }
+}
+
 export default function LoginPage() {
   const [mode, setMode] = useState<LoginMode>("emailCode");
   const [email, setEmail] = useState("");
@@ -122,16 +132,16 @@ export default function LoginPage() {
           authMethod: mode === "emailPassword" ? "password_only" : "password_with_code",
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json.error || "Login failed.");
+        throw new Error(String(json.error || "Login failed."));
       }
-      if (json.requiresVerification && mode === "emailCode") {
+      if (Boolean(json.requiresVerification) && mode === "emailCode") {
         setAwaitingVerification(true);
-        setInfo(json.message || "Verification code sent to your email.");
+        setInfo(String(json.message || "Verification code sent to your email."));
         return;
       }
-      completeLogin(json.role);
+      completeLogin(typeof json.role === "string" ? json.role : undefined);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed.");
     } finally {
@@ -149,11 +159,11 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json.error || "Verification failed.");
+        throw new Error(String(json.error || "Verification failed."));
       }
-      completeLogin(json.role);
+      completeLogin(typeof json.role === "string" ? json.role : undefined);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Verification failed.");
     } finally {
@@ -176,12 +186,12 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json.error || "Unable to send mobile OTP.");
+        throw new Error(String(json.error || "Unable to send mobile OTP."));
       }
       setMobileOtpSent(true);
-      setInfo(json.message || "OTP sent successfully.");
+      setInfo(String(json.message || "OTP sent successfully."));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to send mobile OTP.");
     } finally {
@@ -199,9 +209,9 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ otp: mobileOtp }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json.error || "OTP verification failed.");
+        throw new Error(String(json.error || "OTP verification failed."));
       }
       completeLogin("customer");
     } catch (err) {
