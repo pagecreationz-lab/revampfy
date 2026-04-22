@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import type { HomepageConfig } from "@/lib/homepage";
@@ -10,6 +10,7 @@ import {
   type SiteThemeMode,
   SITE_PAGE_OPTIONS,
 } from "@/lib/siteContentSchema";
+import { readJsonSafe } from "@/lib/httpClient";
 
 type TabKey = "cms" | "sync" | "pages";
 
@@ -184,6 +185,7 @@ export default function AdminClient({
   const [schedulerMode, setSchedulerMode] = useState<SchedulerMode>("manual");
   const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [testingTwilio, setTestingTwilio] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
   const [uploadingHeroImage, setUploadingHeroImage] = useState(false);
   const [uploadingProgramsImage, setUploadingProgramsImage] = useState(false);
@@ -214,8 +216,8 @@ export default function AdminClient({
           fetch("/api/admin/site-content"),
         ]);
 
-        const syncJson = await syncRes.json();
-        const contentJson = await contentRes.json();
+        const syncJson = await readJsonSafe(syncRes);
+        const contentJson = await readJsonSafe(contentRes);
 
         if (syncJson.error) {
           throw new Error(syncJson.error);
@@ -240,11 +242,11 @@ export default function AdminClient({
         ]);
         const enquiryRes = await fetch("/api/admin/enquiry-settings");
 
-        const connectionJson = await connectionRes.json();
-        const schedulerJson = await schedulerRes.json();
-        const authSettingsJson = await authSettingsRes.json();
-        const commerceJson = await commerceRes.json();
-        const enquiryJson = await enquiryRes.json();
+        const connectionJson = await readJsonSafe(connectionRes);
+        const schedulerJson = await readJsonSafe(schedulerRes);
+        const authSettingsJson = await readJsonSafe(authSettingsRes);
+        const commerceJson = await readJsonSafe(commerceRes);
+        const enquiryJson = await readJsonSafe(enquiryRes);
         if (!connectionJson.error) {
           setShopifyConnected(Boolean(connectionJson.connected));
           setShopName(connectionJson.shopName || "");
@@ -453,7 +455,7 @@ export default function AdminClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(config),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to save CMS config");
       }
@@ -473,7 +475,7 @@ export default function AdminClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(siteContent),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to save page content");
       }
@@ -489,7 +491,7 @@ export default function AdminClient({
     setMessage("");
     try {
       const res = await fetch("/api/shopify/sync", { method: "POST" });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Sync failed");
       }
@@ -514,7 +516,7 @@ export default function AdminClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mode: schedulerMode }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to save scheduler mode");
       }
@@ -545,7 +547,7 @@ export default function AdminClient({
           smtpFrom: enquirySettings.smtpFrom,
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to save email integration");
       }
@@ -585,7 +587,7 @@ export default function AdminClient({
           twilioVerifyServiceSid: authSettings.twilioVerifyServiceSid,
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to save auth settings");
       }
@@ -610,6 +612,32 @@ export default function AdminClient({
     }
   };
 
+  const testTwilioCredentials = async () => {
+    setError("");
+    setMessage("");
+    setTestingTwilio(true);
+    try {
+      const res = await fetch("/api/admin/auth-settings/test-twilio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          twilioAccountSid: authSettings.twilioAccountSid,
+          twilioAuthToken: authSettings.twilioAuthToken,
+          twilioVerifyServiceSid: authSettings.twilioVerifyServiceSid,
+        }),
+      });
+      const json = await readJsonSafe(res);
+      if (!res.ok || !Boolean(json?.ok)) {
+        throw new Error(String(json?.error || "Twilio credentials test failed."));
+      }
+      setMessage(String(json?.message || "Twilio credentials are valid."));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Twilio credentials test failed.");
+    } finally {
+      setTestingTwilio(false);
+    }
+  };
+
   const saveCommerceConfig = async () => {
     setError("");
     setMessage("");
@@ -619,7 +647,7 @@ export default function AdminClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(commerceConfig),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to save commerce config");
       }
@@ -672,7 +700,7 @@ export default function AdminClient({
           apiVersion: shopifyApiVersion,
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         setShopifyHint(json.hint || "");
         throw new Error(json.error || "Failed to save Shopify connection");
@@ -721,7 +749,7 @@ export default function AdminClient({
           apiVersion: shopifyApiVersion.trim() || "2024-10",
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Unable to start OAuth install flow.");
       }
@@ -744,7 +772,7 @@ export default function AdminClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: productTitle, tags: productTags, status: productStatus }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to update product");
       }
@@ -770,7 +798,7 @@ export default function AdminClient({
           collection_type: selectedCollection?.collection_type,
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Failed to update collection");
       }
@@ -792,7 +820,7 @@ export default function AdminClient({
         method: "POST",
         body: formData,
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Image upload failed.");
       }
@@ -819,7 +847,7 @@ export default function AdminClient({
         method: "POST",
         body: formData,
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
         throw new Error(json.error || "Image upload failed.");
       }
@@ -1591,6 +1619,9 @@ export default function AdminClient({
             <button className="secondary" onClick={saveAuthSettings}>
               Save Login Methods
             </button>
+            <button className="secondary" onClick={testTwilioCredentials} disabled={testingTwilio}>
+              {testingTwilio ? "Testing Twilio..." : "Test Twilio Credentials"}
+            </button>
             <small>
               Email code login uses the SMTP settings above. Leave redirect URI blank to use
               /api/auth/google/callback on current domain. Mobile OTP uses Twilio Verify service
@@ -1825,10 +1856,10 @@ export default function AdminClient({
                       </strong>
                       <div className="admin__builder-controls">
                         <button type="button" className="ghost" onClick={() => moveBlock(selectedBuilderPage, block.id, -1)}>
-                          ↑
+                          ?
                         </button>
                         <button type="button" className="ghost" onClick={() => moveBlock(selectedBuilderPage, block.id, 1)}>
-                          ↓
+                          ?
                         </button>
                         <button type="button" className="ghost" onClick={() => deleteBlock(selectedBuilderPage, block.id)}>
                           Delete
@@ -1935,3 +1966,4 @@ export default function AdminClient({
     </div>
   );
 }
+

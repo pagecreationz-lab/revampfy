@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Header } from "@/components/Header";
 import { Topbar } from "@/components/Topbar";
+import { readJsonSafe } from "@/lib/httpClient";
 
 type LoginMode = "emailPassword" | "emailCode" | "mobileOtp" | "google";
 type AuthMethods = { emailPassword: boolean; emailCode: boolean; mobileOtp: boolean; google: boolean };
@@ -12,16 +13,6 @@ type AuthDiagnostics = {
   googleEnabled: boolean;
   googleConfigured: boolean;
 };
-
-async function readJsonSafe(response: Response): Promise<Record<string, unknown>> {
-  const raw = await response.text();
-  if (!raw) return {};
-  try {
-    return JSON.parse(raw) as Record<string, unknown>;
-  } catch {
-    return { error: raw };
-  }
-}
 
 export default function LoginPage() {
   const [mode, setMode] = useState<LoginMode>("emailCode");
@@ -68,7 +59,7 @@ export default function LoginPage() {
     const loadMethods = async () => {
       try {
         const res = await fetch("/api/auth/settings");
-        const json = await res.json();
+        const json = await readJsonSafe(res);
         const nextMethods: AuthMethods = {
           emailPassword: Boolean(json?.methods?.emailPassword),
           emailCode: Boolean(json?.methods?.emailCode),

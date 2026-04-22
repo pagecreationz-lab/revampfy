@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Topbar } from "@/components/Topbar";
+import { readJsonSafe } from "@/lib/httpClient";
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
@@ -36,9 +37,9 @@ export default function AdminLoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json.error || "Admin login failed.");
+        throw new Error(String(json.error || "Admin login failed."));
       }
       window.location.href = nextPath;
     } catch (err) {
@@ -85,4 +86,3 @@ export default function AdminLoginPage() {
     </>
   );
 }
-

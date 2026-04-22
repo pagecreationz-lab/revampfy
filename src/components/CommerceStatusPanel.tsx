@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { readJsonSafe } from "@/lib/httpClient";
 
 type Capability = {
   key: string;
@@ -40,7 +41,7 @@ export function CommerceStatusPanel() {
       setLoading(true);
       try {
         const res = await fetch("/api/shopify/commerce-status");
-        const json = (await res.json()) as CommerceStatusResponse;
+        const json = (await readJsonSafe(res)) as CommerceStatusResponse;
         setData(json);
       } finally {
         setLoading(false);

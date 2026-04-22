@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { CartItem } from "@/lib/cart";
 import { getCartItemsFromStorage, setCartItemsToStorage } from "@/lib/cart";
 import type { ShopifyProduct } from "@/lib/shopify";
+import { readJsonSafe } from "@/lib/httpClient";
 
 function formatPrice(value?: string) {
   if (!value) return "";
@@ -32,8 +33,8 @@ export function CartClient({ isAuthenticated }: { isAuthenticated: boolean }) {
           fetch("/api/shopify/sync"),
           fetch("/api/shopify/commerce-status"),
         ]);
-        const syncJson = await syncRes.json();
-        const commerceJson = await commerceRes.json();
+        const syncJson = await readJsonSafe(syncRes);
+        const commerceJson = await readJsonSafe(commerceRes);
         setProducts(syncJson?.payload?.products || []);
         if (commerceJson?.config) {
           setShippingFlatRate(Number(commerceJson.config.shippingFlatRate || 0));

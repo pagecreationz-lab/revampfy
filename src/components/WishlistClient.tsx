@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { ShopifyProduct } from "@/lib/shopify";
+import { readJsonSafe } from "@/lib/httpClient";
 
 const WISHLIST_KEY = "pcgs_wishlist_ids";
 
@@ -35,7 +36,7 @@ export function WishlistClient() {
     setWishlistIds(getWishlistIds());
     const load = async () => {
       const res = await fetch("/api/shopify/sync");
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       setAllProducts(json?.payload?.products || []);
     };
     void load();

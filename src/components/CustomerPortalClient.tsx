@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { readJsonSafe } from "@/lib/httpClient";
 
 type CustomerProfile = {
   email: string;
@@ -50,8 +51,8 @@ export function CustomerPortalClient({ email }: { email: string }) {
         fetch("/api/auth/profile"),
         fetch("/api/auth/orders"),
       ]);
-      const profileJson = await profileRes.json();
-      const ordersJson = await ordersRes.json();
+      const profileJson = await readJsonSafe(profileRes);
+      const ordersJson = await readJsonSafe(ordersRes);
 
       if (!profileRes.ok) {
         throw new Error(profileJson.error || "Unable to load profile");
@@ -98,9 +99,9 @@ export function CustomerPortalClient({ email }: { email: string }) {
           paymentMode: profile.paymentMode,
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json.error || "Unable to save profile.");
+        throw new Error(String(json.error || "Unable to save profile."));
       }
       setProfile(json.profile);
       setMessage("Profile updated successfully.");

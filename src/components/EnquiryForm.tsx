@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { readJsonSafe } from "@/lib/httpClient";
 
 type EnquiryFormMode = "contact" | "bulk";
 
@@ -33,9 +34,9 @@ export function EnquiryForm({ mode }: { mode: EnquiryFormMode }) {
           details,
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json?.error || "Unable to submit enquiry.");
+        throw new Error(String(json?.error || "Unable to submit enquiry."));
       }
       setStatus("Enquiry sent successfully to support@revampfy.in.");
       setBusinessName("");
@@ -94,4 +95,3 @@ export function EnquiryForm({ mode }: { mode: EnquiryFormMode }) {
     </form>
   );
 }
-

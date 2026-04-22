@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import type { ShopifyProduct } from "@/lib/shopify";
 import { clearCartInStorage, getCartItemsFromStorage, type CartItem } from "@/lib/cart";
 import { canEmbedInvoiceUrl, isAllowedInvoiceUrl } from "@/lib/payment";
+import { readJsonSafe } from "@/lib/httpClient";
 
 type Variant = NonNullable<ShopifyProduct["variants"]>[number];
 
@@ -52,11 +53,11 @@ export function CheckoutClient() {
           fetch("/api/auth/session"),
           fetch("/api/shopify/sync"),
         ]);
-        const sessionJson = await sessionRes.json();
+        const sessionJson = await readJsonSafe(sessionRes);
         if (sessionJson?.session?.email) {
           setEmail(sessionJson.session.email);
         }
-        const syncJson = await syncRes.json();
+        const syncJson = await readJsonSafe(syncRes);
         setProducts(syncJson?.payload?.products || []);
         setCartItems(getCartItemsFromStorage());
       } catch {
@@ -117,9 +118,9 @@ export function CheckoutClient() {
           total,
         }),
       });
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       if (!res.ok) {
-        throw new Error(json.error || "Checkout failed");
+        throw new Error(String(json.error || "Checkout failed"));
       }
 
       const invoiceUrl = String(json?.draftOrder?.invoice_url || "").trim();

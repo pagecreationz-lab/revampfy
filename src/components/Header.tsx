@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
+import { readJsonSafe } from "@/lib/httpClient";
 
 type HeaderConfig = {
   categoryCollectionHandles: string[];
@@ -142,9 +143,9 @@ export function Header() {
           fetch("/api/auth/session"),
         ]);
 
-        const configJson = await configRes.json();
-        const syncJson = await syncRes.json();
-        const sessionJson = await sessionRes.json();
+        const configJson = await readJsonSafe(configRes);
+        const syncJson = await readJsonSafe(syncRes);
+        const sessionJson = await readJsonSafe(sessionRes);
         setConfig(configJson?.config || defaultConfig);
         setCollections(syncJson?.payload?.categories || []);
         setProducts(syncJson?.payload?.products || []);

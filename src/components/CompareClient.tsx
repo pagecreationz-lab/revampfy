@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { ShopifyProduct } from "@/lib/shopify";
+import { readJsonSafe } from "@/lib/httpClient";
 
 const COMPARE_KEY = "pcgs_compare_product_ids";
 
@@ -48,7 +49,7 @@ export function CompareClient() {
     saveCompareIds(initialIds);
     const load = async () => {
       const res = await fetch("/api/shopify/sync");
-      const json = await res.json();
+      const json = await readJsonSafe(res);
       setProducts(json?.payload?.products || []);
     };
     void load();
