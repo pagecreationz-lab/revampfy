@@ -25,11 +25,11 @@
     "email": "mobile917708870658@pcgs.local",
     "passwordHash": "35fa634cb72415a9c15fc882c46a6b222c8c7b8146751a5e261f6866d24074a5",
     "name": "Mohan Raj",
-    "mobile": "",
+    "mobile": "+917708870658",
     "address": "",
     "paymentMode": "UPI",
-    "needsProfileCompletion": false,
+    "needsProfileCompletion": true,
     "createdAt": "2026-04-18T12:33:41.320Z",
-    "updatedAt": "2026-04-18T13:25:40.943Z"
+    "updatedAt": "2026-04-22T15:03:28.862Z"
   }
 ]

@@ -17,18 +17,29 @@ export type AuthSettings = {
 
 const settingsPath = path.join(process.cwd(), "data", "auth-settings.json");
 
+function cleanSecret(value: string): string {
+  const trimmed = value.trim();
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+  return trimmed;
+}
+
 function fromEnv(): AuthSettings {
   return {
     enableEmailPasswordLogin: false,
     enableEmailCodeLogin: true,
     enableMobileOtpLogin: false,
     enableGoogleLogin: true,
-    googleClientId: process.env.GOOGLE_CLIENT_ID || "",
-    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    googleRedirectUri: process.env.GOOGLE_REDIRECT_URI || "",
-    twilioAccountSid: process.env.TWILIO_ACCOUNT_SID || "",
-    twilioAuthToken: process.env.TWILIO_AUTH_TOKEN || "",
-    twilioVerifyServiceSid: process.env.TWILIO_VERIFY_SERVICE_SID || "",
+    googleClientId: cleanSecret(process.env.GOOGLE_CLIENT_ID || ""),
+    googleClientSecret: cleanSecret(process.env.GOOGLE_CLIENT_SECRET || ""),
+    googleRedirectUri: cleanSecret(process.env.GOOGLE_REDIRECT_URI || ""),
+    twilioAccountSid: cleanSecret(process.env.TWILIO_ACCOUNT_SID || ""),
+    twilioAuthToken: cleanSecret(process.env.TWILIO_AUTH_TOKEN || ""),
+    twilioVerifyServiceSid: cleanSecret(process.env.TWILIO_VERIFY_SERVICE_SID || ""),
   };
 }
 
@@ -71,7 +82,7 @@ export async function saveAuthSettings(next: Partial<AuthSettings>): Promise<Aut
   const current = await getAuthSettings();
   const keepIfBlank = (incoming: unknown, existing: string) => {
     if (typeof incoming !== "string") return existing;
-    const trimmed = incoming.trim();
+    const trimmed = cleanSecret(incoming);
     if (!trimmed && existing) return existing;
     return trimmed;
   };

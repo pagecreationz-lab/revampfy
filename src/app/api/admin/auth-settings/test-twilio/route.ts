@@ -1,4 +1,4 @@
-import { getAuthSettings } from "@/lib/authSettings";
+import { getAuthSettings, saveAuthSettings } from "@/lib/authSettings";
 
 function toBasicAuth(username: string, password: string) {
   return Buffer.from(`${username}:${password}`).toString("base64");
@@ -64,6 +64,13 @@ export async function POST(request: Request) {
     }
 
     const probe = (await res.json()) as TwilioServiceProbe;
+
+    // Keep test and runtime OTP credentials in sync.
+    await saveAuthSettings({
+      twilioAccountSid: accountSid,
+      twilioAuthToken: authToken,
+      twilioVerifyServiceSid: verifyServiceSid,
+    });
     return Response.json({
       ok: true,
       message: `Twilio verified. Service: ${probe.friendly_name || probe.sid || verifyServiceSid}`,
@@ -79,4 +86,3 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: message }, { status: 500 });
   }
 }
-
