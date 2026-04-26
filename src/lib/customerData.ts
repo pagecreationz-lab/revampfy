@@ -28,8 +28,19 @@ export type CustomerOrder = {
   createdAt: string;
 };
 
-const usersPath = path.join(process.cwd(), "data", "customer-users.json");
-const ordersPath = path.join(process.cwd(), "data", "customer-orders.json");
+const cwd = process.cwd();
+const isReadonlyServerlessCwd = cwd.startsWith("/var/task");
+const runtimeDataDir =
+  process.env.RUNTIME_DATA_DIR?.trim() ||
+  (process.env.VERCEL || isReadonlyServerlessCwd
+    ? path.join("/tmp", "laptop-reseller-data")
+    : path.join(cwd, "data"));
+const seedDataDir = path.join(cwd, "data");
+
+const usersPath = path.join(runtimeDataDir, "customer-users.json");
+const ordersPath = path.join(runtimeDataDir, "customer-orders.json");
+const usersSeedPath = path.join(seedDataDir, "customer-users.json");
+const ordersSeedPath = path.join(seedDataDir, "customer-orders.json");
 
 const demoCustomer: CustomerUser = {
   email: "user@revampfy.in",
@@ -43,11 +54,19 @@ const demoCustomer: CustomerUser = {
   updatedAt: new Date(0).toISOString(),
 };
 
-async function readJsonFile<T>(filePath: string, fallback: T): Promise<T> {
+async function readJsonFile<T>(filePath: string, fallback: T, seedPath?: string): Promise<T> {
   try {
     const raw = await fs.readFile(filePath, "utf8");
     return JSON.parse(raw) as T;
   } catch {
+    if (seedPath) {
+      try {
+        const seedRaw = await fs.readFile(seedPath, "utf8");
+        return JSON.parse(seedRaw) as T;
+      } catch {
+        return fallback;
+      }
+    }
     return fallback;
   }
 }
@@ -58,7 +77,7 @@ async function writeJsonFile<T>(filePath: string, payload: T): Promise<void> {
 }
 
 export async function getCustomerUsers(): Promise<CustomerUser[]> {
-  const users = await readJsonFile<Partial<CustomerUser>[]>(usersPath, []);
+  const users = await readJsonFile<Partial<CustomerUser>[]>(usersPath, [], usersSeedPath);
   const normalized = users
     .filter((user) => user?.email && user?.passwordHash)
     .map((user) => ({
@@ -197,7 +216,7 @@ export async function updateCustomerProfile(
 }
 
 export async function listCustomerOrders(email: string): Promise<CustomerOrder[]> {
-  const all = await readJsonFile<CustomerOrder[]>(ordersPath, []);
+  const all = await readJsonFile<CustomerOrder[]>(ordersPath, [], ordersSeedPath);
   const lower = email.trim().toLowerCase();
   return all
     .filter((order) => order.email.toLowerCase() === lower)
@@ -205,7 +224,7 @@ export async function listCustomerOrders(email: string): Promise<CustomerOrder[]
 }
 
 export async function appendCustomerOrder(order: Omit<CustomerOrder, "id" | "createdAt">) {
-  const all = await readJsonFile<CustomerOrder[]>(ordersPath, []);
+  const all = await readJsonFile<CustomerOrder[]>(ordersPath, [], ordersSeedPath);
   const next: CustomerOrder = {
     ...order,
     id: `ord_${Date.now()}`,
