@@ -2,14 +2,14 @@ import { Header } from "@/components/Header";
 import { Topbar } from "@/components/Topbar";
 import { SitePageBuilderRenderer } from "@/components/SitePageBuilderRenderer";
 import { getSiteContent } from "@/lib/siteContent";
-import { getShopifyCommerceConfig } from "@/lib/shopifyCommerce";
+import { getCatalogCommerceConfig } from "@/lib/catalogCommerce";
 
 export const dynamic = "force-dynamic";
 
 export default async function PoliciesPage() {
   const [content, commerceConfig] = await Promise.all([
     getSiteContent(),
-    getShopifyCommerceConfig(),
+    getCatalogCommerceConfig(),
   ]);
 
   return (
@@ -49,3 +49,4 @@ export default async function PoliciesPage() {
     </>
   );
 }
+

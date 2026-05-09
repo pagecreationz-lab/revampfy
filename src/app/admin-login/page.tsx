@@ -57,7 +57,12 @@ export default function AdminLoginPage() {
         <section className="section">
           <div className="admin container">
             <h1>Admin Login</h1>
-            <p className="hero__subtext">Admin portal access with email and password only.</p>
+            <p className="hero__subtext">
+              Admin portal access with email and password only.
+              {process.env.NODE_ENV !== "production"
+                ? " Default: demo@pcgs.in / Demo@123"
+                : ""}
+            </p>
             <div className="admin__panel">
               <form className="admin__form" onSubmit={handleLogin}>
                 <input

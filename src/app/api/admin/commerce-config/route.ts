@@ -1,18 +1,27 @@
 import { NextResponse } from "next/server";
 import {
-  getShopifyCommerceConfig,
-  saveShopifyCommerceConfig,
-} from "@/lib/shopifyCommerce";
+  getCatalogCommerceConfig,
+  saveCatalogCommerceConfig,
+} from "@/lib/catalogCommerce";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const config = await getShopifyCommerceConfig();
-  return NextResponse.json({ config });
+  const config = await getCatalogCommerceConfig();
+  return NextResponse.json(
+    { config },
+    {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      },
+    }
+  );
 }
 
 export async function POST(request: Request) {
   try {
     const payload = (await request.json()) as Record<string, unknown>;
-    const config = await saveShopifyCommerceConfig({
+    const config = await saveCatalogCommerceConfig({
       enablePayments: Boolean(payload.enablePayments),
       enableCheckout: Boolean(payload.enableCheckout),
       enableCustomerAccounts: Boolean(payload.enableCustomerAccounts),
@@ -29,6 +38,28 @@ export async function POST(request: Request) {
       privacyPolicy: String(payload.privacyPolicy || "").trim(),
       taxRatePct: Number(payload.taxRatePct || 0),
       shippingFlatRate: Number(payload.shippingFlatRate || 0),
+      paymentGateway:
+        payload.paymentGateway === "razorpay" ||
+        payload.paymentGateway === "payu" ||
+        payload.paymentGateway === "cod"
+          ? payload.paymentGateway
+          : "manual",
+      razorpayEnabled: Boolean(payload.razorpayEnabled),
+      enableCod: Boolean(payload.enableCod),
+      requireGpsForCod: Boolean(payload.requireGpsForCod),
+      requireGpsForAllPayments: Boolean(payload.requireGpsForAllPayments),
+      payuEnabled: Boolean(payload.payuEnabled),
+      payuKey: String(payload.payuKey || "").trim(),
+      payuSalt: String(payload.payuSalt || "").trim(),
+      payuAuthHeader: String(payload.payuAuthHeader || "").trim(),
+      payuWebhookSecret: String(payload.payuWebhookSecret || "").trim(),
+      shiprocketEnabled: Boolean(payload.shiprocketEnabled),
+      shiprocketEmail: String(payload.shiprocketEmail || "").trim(),
+      shiprocketPassword: String(payload.shiprocketPassword || "").trim(),
+      shiprocketPickupLocation: String(payload.shiprocketPickupLocation || "").trim(),
+      shiprocketWebhookSecret: String(payload.shiprocketWebhookSecret || "").trim(),
+      razorpayKeyId: String(payload.razorpayKeyId || "").trim(),
+      razorpayKeySecret: String(payload.razorpayKeySecret || "").trim(),
     });
     return NextResponse.json({ ok: true, config });
   } catch (error) {
@@ -36,3 +67,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+

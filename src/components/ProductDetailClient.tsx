@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { ShopifyProduct } from "@/lib/shopify";
+import type { CatalogProduct } from "@/lib/catalog";
 import { addCartItemToStorage } from "@/lib/cart";
 import {
   getProductStockQty,
@@ -35,7 +35,7 @@ function normalizeLabel(raw: string) {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-function resolveDisplayBrand(product: ShopifyProduct): string {
+function resolveDisplayBrand(product: CatalogProduct): string {
   const type = (product.product_type || "").trim();
   const category = (product.category || "").trim().toLowerCase();
   const normalizedType = type.toLowerCase();
@@ -158,14 +158,26 @@ function splitSpecTabs(entries: SpecEntry[]) {
   return { performance, software, moreInfo };
 }
 
+function shouldHideFrontendSpec(label: string): boolean {
+  const key = label.toLowerCase().replace(/\s+/g, "");
+  return (
+    key === "vendorid" ||
+    key === "vendorstate" ||
+    key === "vendorpincode" ||
+    key === "state" ||
+    key === "pincode"
+  );
+}
+
 export function ProductDetailClient({
   product,
   isAuthenticated,
 }: {
-  product: ShopifyProduct | null;
+  product: CatalogProduct | null;
   isAuthenticated: boolean;
 }) {
   const router = useRouter();
+  const currentProductId = product ? String(product.id) : "";
   const [selectedVariantId, setSelectedVariantId] = useState<number | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [wishlisted, setWishlisted] = useState(false);
@@ -215,6 +227,7 @@ export function ProductDetailClient({
     const seen = new Set<string>();
     return ordered.filter((entry) => {
       const key = entry.label.toLowerCase();
+      if (shouldHideFrontendSpec(entry.label)) return false;
       if (seen.has(key)) return false;
       seen.add(key);
       return Boolean(entry.value.trim());
@@ -231,11 +244,13 @@ export function ProductDetailClient({
   useEffect(() => {
     if (!product || typeof window === "undefined") return;
     const raw = localStorage.getItem("pcgs_wishlist_ids");
-    const ids = raw ? (JSON.parse(raw) as number[]) : [];
-    setWishlisted(Array.isArray(ids) ? ids.includes(product.id) : false);
+    const ids = raw ? (JSON.parse(raw) as unknown[]) : [];
+    const safeWishlist = Array.isArray(ids) ? ids.map((id) => String(id)) : [];
+    setWishlisted(safeWishlist.includes(String(product.id)));
     const compareRaw = localStorage.getItem("pcgs_compare_product_ids");
-    const compareIds = compareRaw ? (JSON.parse(compareRaw) as number[]) : [];
-    setCompared(Array.isArray(compareIds) ? compareIds.includes(product.id) : false);
+    const compareIds = compareRaw ? (JSON.parse(compareRaw) as unknown[]) : [];
+    const safeCompare = Array.isArray(compareIds) ? compareIds.map((id) => String(id)) : [];
+    setCompared(safeCompare.includes(String(product.id)));
   }, [product]);
 
   if (!product) {
@@ -284,15 +299,15 @@ export function ProductDetailClient({
   const toggleWishlist = () => {
     if (!product || typeof window === "undefined") return;
     const raw = localStorage.getItem("pcgs_wishlist_ids");
-    const ids = raw ? (JSON.parse(raw) as number[]) : [];
-    const safeIds = Array.isArray(ids) ? ids : [];
-    const next = safeIds.includes(product.id)
-      ? safeIds.filter((id) => id !== product.id)
-      : [...safeIds, product.id];
+    const ids = raw ? (JSON.parse(raw) as unknown[]) : [];
+    const safeIds = Array.isArray(ids) ? ids.map((id) => String(id)) : [];
+    const next = safeIds.includes(currentProductId)
+      ? safeIds.filter((id) => id !== currentProductId)
+      : [...safeIds, currentProductId];
     localStorage.setItem("pcgs_wishlist_ids", JSON.stringify(next));
     window.dispatchEvent(new Event("pcgs-wishlist-updated"));
-    setWishlisted(next.includes(product.id));
-    setInfo(next.includes(product.id) ? "Added to wishlist" : "Removed from wishlist");
+    setWishlisted(next.includes(currentProductId));
+    setInfo(next.includes(currentProductId) ? "Added to wishlist" : "Removed from wishlist");
   };
 
   const shareProduct = async () => {
@@ -313,22 +328,22 @@ export function ProductDetailClient({
   const toggleCompare = () => {
     if (!product || typeof window === "undefined") return;
     const raw = localStorage.getItem("pcgs_compare_product_ids");
-    const ids = raw ? (JSON.parse(raw) as number[]) : [];
-    const safeIds = Array.isArray(ids) ? ids.filter((id) => Number.isFinite(id)) : [];
+    const ids = raw ? (JSON.parse(raw) as unknown[]) : [];
+    const safeIds = Array.isArray(ids) ? ids.map((id) => String(id)).filter(Boolean) : [];
 
-    if (!safeIds.includes(product.id) && safeIds.length >= 3) {
+    if (!safeIds.includes(currentProductId) && safeIds.length >= 3) {
       setError("You can compare up to 3 products only.");
       return;
     }
 
-    const next = safeIds.includes(product.id)
-      ? safeIds.filter((id) => id !== product.id)
-      : [...safeIds, product.id];
+    const next = safeIds.includes(currentProductId)
+      ? safeIds.filter((id) => id !== currentProductId)
+      : [...safeIds, currentProductId];
 
     localStorage.setItem("pcgs_compare_product_ids", JSON.stringify(next));
-    setCompared(next.includes(product.id));
+    setCompared(next.includes(currentProductId));
     setError("");
-    setInfo(next.includes(product.id) ? "Added to compare." : "Removed from compare.");
+    setInfo(next.includes(currentProductId) ? "Added to compare." : "Removed from compare.");
   };
 
   return (
@@ -428,8 +443,8 @@ export function ProductDetailClient({
                   value={String(selectedVariant?.id || "")}
                   onChange={(event) => setSelectedVariantId(Number(event.target.value))}
                 >
-                  {variants.map((variant) => (
-                    <option key={variant.id} value={variant.id}>
+                  {variants.map((variant, index) => (
+                    <option key={`${variant.id}-${index}`} value={variant.id}>
                       {variant.title || "Default"} - {formatPrice(variant.price)}
                     </option>
                   ))}
@@ -471,3 +486,4 @@ export function ProductDetailClient({
     </section>
   );
 }
+

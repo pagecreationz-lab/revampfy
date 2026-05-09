@@ -30,6 +30,18 @@ body {
   overflow-x: hidden;
 }
 
+html.theme-dark,
+html.theme-dark body {
+  background: #090a0d;
+  color: #f6f4ef;
+}
+
+html.theme-light,
+html.theme-light body {
+  background: #f7f9fc;
+  color: #0f172a;
+}
+
 body {
   font-family: var(--font-sora), system-ui, sans-serif;
   font-size: 16px;
@@ -1399,6 +1411,378 @@ body.theme-dark .hero .hero__shop-btn {
   box-shadow: var(--shadow-strong);
 }
 
+.vendor-admin-theme {
+  background: linear-gradient(160deg, #10141d 0%, #0f1219 55%, #111827 100%);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.vendor-admin-theme--dark {
+  color: #f8fafc;
+}
+
+.vendor-admin-theme--light {
+  background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 55%, #f1f5f9 100%);
+  border-color: rgba(15, 23, 42, 0.16);
+  color: #0f172a;
+}
+
+.vendor-admin-theme--light h1,
+.vendor-admin-theme--light h2,
+.vendor-admin-theme--light h3,
+.vendor-admin-theme--light h4,
+.vendor-admin-theme--light h5,
+.vendor-admin-theme--light p,
+.vendor-admin-theme--light span,
+.vendor-admin-theme--light label,
+.vendor-admin-theme--light strong {
+  color: #0f172a !important;
+}
+
+.vendor-admin-theme--light .vendor-admin__content-card,
+.vendor-admin-theme--light .vendor-admin__profile-card,
+.vendor-admin-theme--light .vendor-product-card,
+.vendor-admin-theme--light .vendor-taxonomy-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(15, 23, 42, 0.16);
+}
+
+.vendor-admin-theme--light input,
+.vendor-admin-theme--light select,
+.vendor-admin-theme--light textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
+}
+
+.cms-admin-theme--dark {
+  background: linear-gradient(160deg, #10141d 0%, #0f1219 55%, #111827 100%);
+}
+
+.cms-admin-theme--light {
+  background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 55%, #f1f5f9 100%);
+  border-color: rgba(15, 23, 42, 0.16);
+}
+
+.cms-admin-theme--light h1,
+.cms-admin-theme--light h2,
+.cms-admin-theme--light h3,
+.cms-admin-theme--light h4,
+.cms-admin-theme--light h5,
+.cms-admin-theme--light p,
+.cms-admin-theme--light span,
+.cms-admin-theme--light label,
+.cms-admin-theme--light strong {
+  color: #0f172a !important;
+}
+
+.cms-admin-theme--light input,
+.cms-admin-theme--light select,
+.cms-admin-theme--light textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
+}
+
+.vendor-admin__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.vendor-admin__left-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.vendor-admin__nav-btn {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, #111827 0%, #0f172a 100%);
+  color: #e8eefb !important;
+  min-height: 46px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0.55rem 0.8rem;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+  min-width: 200px;
+}
+
+.vendor-admin__nav-btn.is-active {
+  border-color: rgba(255, 122, 24, 0.55);
+  background: linear-gradient(135deg, rgba(255, 122, 24, 0.3), rgba(255, 122, 24, 0.12));
+  color: #fff5ea !important;
+}
+
+.vendor-admin__right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.theme-toggle-icon {
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: inherit;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.vendor-admin__profile-btn {
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: #111827;
+  color: #ffffff !important;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 0;
+}
+
+.vendor-admin__logout-btn {
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.vendor-csv-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 52px !important;
+  padding: 0.72rem 1.4rem !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.38) !important;
+  background: linear-gradient(135deg, #ff7a18 0%, #c14e00 100%) !important;
+  white-space: nowrap !important;
+}
+
+.vendor-admin__profile-card,
+.vendor-admin__content-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(12, 16, 24, 0.75);
+}
+
+.vendor-products-toolbar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.vendor-product-card {
+  display: grid;
+  gap: 0.55rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 14, 22, 0.9);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.vendor-product-card__meta {
+  font-size: 0.95rem;
+  color: rgba(234, 241, 255, 0.88);
+  margin-bottom: 0.15rem;
+}
+
+.vendor-product-card input,
+.vendor-product-card select,
+.vendor-product-card textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vendor-product-card__variant {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.vendor-product-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.vendor-product-card h4,
+.vendor-product-card h5 {
+  margin-top: 0.35rem;
+}
+
+.vendor-taxonomy-card {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.vendor-taxonomy-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.vendor-products-table-wrap {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.vendor-products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.vendor-products-table th,
+.vendor-products-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.vendor-products-table td {
+  color: #e6edf8;
+}
+
+.vendor-products-table td strong {
+  color: #f8fbff;
+}
+
+.vendor-products-table td small {
+  color: #c6d3ea;
+}
+
+.vendor-products-table th {
+  font-size: 0.85rem;
+  color: #dbe7ff;
+  background: rgba(255, 255, 255, 0.02);
+  font-weight: 800;
+}
+
+.vendor-products-table tr {
+  cursor: pointer;
+}
+
+.vendor-products-table tr.is-selected {
+  background: rgba(255, 122, 24, 0.12);
+}
+
+.vendor-products-table__product {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.vendor-products-table__product img {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.vendor-products-table__product small {
+  display: block;
+}
+
+.cms-admin-theme--dark .vendor-products-table-wrap {
+  background: rgba(8, 12, 20, 0.86);
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+.cms-admin-theme--dark .vendor-products-table th {
+  background: #dbe4f4;
+  color: #0f172a;
+  border-bottom-color: rgba(15, 23, 42, 0.2);
+}
+
+.cms-admin-theme--dark .vendor-products-table td,
+.cms-admin-theme--dark .vendor-products-table td strong,
+.cms-admin-theme--dark .vendor-products-table td small {
+  color: #e7eefb !important;
+}
+
+.vendor-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.12rem 0.62rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.vendor-status-badge.status-active {
+  background: rgba(34, 197, 94, 0.24);
+  color: #7ef0a5;
+}
+
+.vendor-status-badge.status-draft {
+  background: rgba(234, 179, 8, 0.24);
+  color: #ffd36d;
+}
+
+.vendor-status-badge.status-archived {
+  background: rgba(148, 163, 184, 0.26);
+  color: #d2deef;
+}
+
+.vendor-orders-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.vendor-orders-summary-card {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 0.65rem 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  display: grid;
+  gap: 0.2rem;
+}
+
+.vendor-credit-balance-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.22rem 0.72rem;
+  font-size: 0.86rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(34, 197, 94, 0.16);
+  color: #b7f7c8;
+}
+
+body.vendor-portal-light .vendor-credit-balance-icon,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-credit-balance-icon,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-credit-balance-icon {
+  border-color: rgba(15, 23, 42, 0.22) !important;
+  background: rgba(22, 163, 74, 0.12) !important;
+  color: #166534 !important;
+}
+
 .admin__layout {
   display: grid;
   grid-template-columns: 210px minmax(0, 1fr);
@@ -1422,6 +1806,119 @@ body.theme-dark .hero .hero__shop-btn {
   text-align: left;
 }
 
+.admin__quick-links a {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.admin__quick-links {
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 220px;
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.65rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  position: sticky;
+  top: 92px;
+  align-self: start;
+}
+
+.admin__quick-links-title {
+  width: 100%;
+  border-radius: 999px;
+  padding: 0.62rem 0.9rem;
+  background: #0d1a36;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.admin__quick-link {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-on-dark) !important;
+  padding: 0.58rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  text-decoration: none;
+}
+
+.admin__quick-link.is-active {
+  border-color: rgba(255, 122, 24, 0.6);
+  background: rgba(255, 122, 24, 0.16);
+}
+
+.admin__quick-link--logout {
+  cursor: pointer;
+}
+
+.admin__section-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.admin__section-layout--nav-hidden {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.admin__section-content {
+  min-width: 0;
+}
+
+.admin__nav-toggle-row {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 0.8rem;
+}
+
+.admin__nav-toggle-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-on-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .admin__section-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin__quick-links {
+    max-width: 100%;
+    position: static;
+  }
+
+  .admin__quick-links-title {
+    font-size: 1.2rem;
+  }
+
+  .admin__quick-link {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+}
+
 .admin__logout-btn {
   margin-top: 0.35rem;
 }
@@ -1438,6 +1935,87 @@ body.theme-dark .hero .hero__shop-btn {
 
 .admin__grid > * {
   min-width: 0;
+}
+
+.admin__table--sheet-status {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.admin__table-actions-cell {
+  min-width: 180px;
+  position: relative;
+  overflow: visible;
+}
+
+.admin__table-actions-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.admin__table-actions-wrap .ghost,
+.admin__table-actions-wrap .secondary {
+  min-width: 88px;
+  justify-content: center;
+}
+
+.admin__actions-popover-wrap {
+  position: relative;
+  display: inline-flex;
+  z-index: 80;
+}
+
+.admin__edit-icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.admin__actions-popover {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 0.35rem);
+  transform: none;
+  z-index: 120;
+  min-width: 164px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 0.38rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: rgba(2, 6, 23, 0.96);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: 0.32rem;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 1200px) {
+  .admin__actions-popover {
+    left: auto;
+    right: calc(100% + 0.35rem);
+  }
+}
+
+.admin__actions-popover .ghost,
+.admin__actions-popover .secondary {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 0.5rem 0.62rem;
+  font-size: 0.84rem;
+  min-height: 34px;
+}
+
+body.theme-light .admin__actions-popover {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.2);
 }
 
 .admin__list {
@@ -2353,8 +2931,12 @@ body.theme-dark .section:not(.section--alt) .trust-grid article {
   min-width: 46px !important;
   height: 46px;
   padding: 0 !important;
+  border-radius: 999px !important;
   border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.2));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
 }
 
 .header-user-btn__icon {
@@ -2719,6 +3301,31 @@ body.theme-dark .section:not(.section--alt) .trust-grid article {
   gap: 0.6rem;
   flex-wrap: wrap;
   margin-bottom: 0.85rem;
+}
+
+.login-helper-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.login-helper-btn {
+  font-size: 1rem !important;
+  font-weight: 600;
+  min-height: 52px;
+}
+
+@media (max-width: 640px) {
+  .login-helper-actions {
+    gap: 0.55rem;
+  }
+
+  .login-helper-btn {
+    font-size: 0.9rem !important;
+    min-height: 44px;
+    padding: 0.5rem 0.7rem;
+    border-radius: 999px;
+  }
 }
 
 .checkout {
@@ -3748,6 +4355,7 @@ body.mobile-menu-open .footer {
     width: 40px;
     min-width: 40px !important;
     height: 40px;
+    border-radius: 999px !important;
   }
 
   .header-theme-btn {
@@ -3941,6 +4549,56 @@ body.theme-light .mega-menu p,
 body.theme-light .mega-menu h3,
 body.theme-light .mega-menu h4 {
   color: #111827 !important;
+}
+
+body.theme-light .admin__quick-links {
+  background: #eceef2 !important;
+  border-color: rgba(17, 24, 39, 0.16) !important;
+}
+
+body.theme-light .admin__quick-links-title {
+  background: #0d1a36 !important;
+  color: #ffffff !important;
+}
+
+body.theme-light .admin__quick-link {
+  background: #f3f4f6 !important;
+  border-color: rgba(17, 24, 39, 0.22) !important;
+  color: #0d1a36 !important;
+}
+
+body.theme-light .admin__quick-link:hover {
+  background: #e7ebf2 !important;
+  border-color: rgba(13, 26, 54, 0.35) !important;
+}
+
+body.theme-light .admin__quick-link.is-active {
+  background: #dce4f4 !important;
+  border-color: rgba(13, 26, 54, 0.52) !important;
+  color: #0a1731 !important;
+}
+
+body.theme-light .admin__nav-toggle-btn {
+  border-color: rgba(17, 24, 39, 0.22) !important;
+  background: #f3f4f6 !important;
+  color: #0d1a36 !important;
+}
+
+body.theme-dark .admin__nav-toggle-btn {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #e5e7eb !important;
+}
+
+body.theme-dark .admin__quick-link:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.34) !important;
+}
+
+body.theme-dark .admin__quick-link.is-active {
+  background: rgba(255, 122, 24, 0.24) !important;
+  border-color: rgba(255, 122, 24, 0.72) !important;
+  color: #ffe6cf !important;
 }
 
 body.theme-light .category--collection {
@@ -4139,6 +4797,22 @@ body.theme-light .cart-summary__row span {
 }
 
 body.theme-light .store-cart__meta small a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+body.theme-light .user-dashboard__table th,
+body.theme-light .user-dashboard__table td {
+  color: #111827 !important;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.18) !important;
+}
+
+body.theme-light .user-dashboard__table th {
+  color: #1f2937 !important;
+}
+
+body.theme-light .user-dashboard__table a {
+  color: #111827 !important;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -4513,4 +5187,323 @@ body.theme-dark .admin__alert--info {
   border-color: rgba(96, 165, 250, 0.45) !important;
   background: rgba(30, 64, 175, 0.28) !important;
   color: #dbeafe !important;
+}
+
+/* Dropdown readability in vendor/admin forms for both themes */
+body.theme-dark .admin__form select,
+body.theme-dark .admin__filters select,
+body.theme-dark .vendor-product-card select,
+body.theme-dark .vendor-products-toolbar select {
+  background: #0b1220 !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  color-scheme: dark;
+}
+
+body.theme-dark .admin__form select option,
+body.theme-dark .admin__filters select option,
+body.theme-dark .vendor-product-card select option,
+body.theme-dark .vendor-products-toolbar select option {
+  background-color: #0b1220 !important;
+  color: #f8fafc !important;
+}
+
+body.theme-light .admin__form select,
+body.theme-light .admin__filters select,
+body.theme-light .vendor-product-card select,
+body.theme-light .vendor-products-toolbar select {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: rgba(17, 24, 39, 0.26) !important;
+  color-scheme: light;
+}
+
+body.theme-light .admin__form select option,
+body.theme-light .admin__filters select option,
+body.theme-light .vendor-product-card select option,
+body.theme-light .vendor-products-toolbar select option {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+/* Vendor admin independent light mode must override global dark theme rules */
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light {
+  background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 55%, #f1f5f9 100%) !important;
+  border-color: rgba(15, 23, 42, 0.18) !important;
+}
+
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light h1,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light h2,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light h3,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light h4,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light h5,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light p,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light span,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light small,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light label,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light strong,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light h1,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light h2,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light h3,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light h4,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light h5,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light p,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light span,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light small,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light label,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light strong {
+  color: #0f172a !important;
+}
+
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__content-card,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__profile-card,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-product-card,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-taxonomy-card,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__content-card,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__profile-card,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-product-card,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-taxonomy-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(15, 23, 42, 0.16) !important;
+}
+
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light input,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light select,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light textarea,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light input,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light select,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.25) !important;
+}
+
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__nav-btn,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__nav-btn {
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
+}
+
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__nav-btn.is-active,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__nav-btn.is-active {
+  background: linear-gradient(135deg, rgba(255, 122, 24, 0.28), rgba(255, 122, 24, 0.14)) !important;
+  color: #7c2d12 !important;
+  border-color: rgba(194, 65, 12, 0.35) !important;
+}
+
+body.vendor-portal-light .vendor-csv-btn,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-csv-btn,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-csv-btn {
+  color: #ffffff !important;
+  border-color: rgba(124, 45, 18, 0.4) !important;
+  background: linear-gradient(135deg, #ff8f3f 0%, #d76b16 100%) !important;
+}
+
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__logout-btn,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-admin__logout-btn {
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.3) !important;
+  background: #ffffff !important;
+}
+
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .theme-toggle-icon,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .theme-toggle-icon {
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  color: #0f172a !important;
+  background: #ffffff !important;
+}
+
+body.theme-dark .cms-admin-theme.cms-admin-theme--light .theme-toggle-icon,
+body.theme-light .cms-admin-theme.cms-admin-theme--light .theme-toggle-icon {
+  border-color: rgba(15, 23, 42, 0.28) !important;
+  color: #0f172a !important;
+  background: #ffffff !important;
+}
+
+body.theme-light .cms-admin-theme.cms-admin-theme--light .vendor-products-table th {
+  background: #eef2ff !important;
+  color: #1e293b !important;
+  border-bottom-color: rgba(30, 41, 59, 0.18) !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+/* Some admin pages (users/vendors) are not wrapped in cms-admin-theme; force readable headers in light mode */
+body.theme-light .admin__panel .vendor-products-table th,
+body.theme-light .admin .vendor-products-table th {
+  background: #e8eefb !important;
+  color: #0f172a !important;
+  border-bottom-color: rgba(15, 23, 42, 0.18) !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+}
+
+body.theme-light .cms-admin-theme.cms-admin-theme--light .vendor-products-table td,
+body.theme-light .cms-admin-theme.cms-admin-theme--light .vendor-products-table td strong,
+body.theme-light .cms-admin-theme.cms-admin-theme--light .vendor-products-table td small,
+body.theme-light .cms-admin-theme.cms-admin-theme--light .vendor-products-table td small {
+  color: #0f172a !important;
+  border-bottom-color: rgba(30, 41, 59, 0.14) !important;
+}
+
+/* If global theme is dark but stale cms-admin light class remains, keep product table readable */
+body.theme-dark .cms-admin-theme.cms-admin-theme--light .vendor-products-table th {
+  background: #dbe4f4 !important;
+  color: #0f172a !important;
+}
+
+body.theme-dark .cms-admin-theme.cms-admin-theme--light .vendor-products-table td,
+body.theme-dark .cms-admin-theme.cms-admin-theme--light .vendor-products-table td strong,
+body.theme-dark .cms-admin-theme.cms-admin-theme--light .vendor-products-table td small {
+  color: #e7eefb !important;
+  border-bottom-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+/* Force readable text on CMS product tables when global dark mode is active */
+body.theme-dark .cms-admin-theme .vendor-products-table td,
+body.theme-dark .cms-admin-theme .vendor-products-table td strong,
+body.theme-dark .cms-admin-theme .vendor-products-table td small {
+  color: #e7eefb !important;
+}
+
+body.theme-dark .cms-admin-theme .vendor-products-table th {
+  color: #dbe7ff !important;
+}
+
+/* Vendor portal full light surface (outside panel too) */
+body.vendor-portal-light {
+  background: linear-gradient(160deg, #f7f9fc 0%, #eef2ff 52%, #f1f5f9 100%) !important;
+  color: #0f172a !important;
+}
+
+body.vendor-portal-light .vendor-portal-shell h1,
+body.vendor-portal-light .vendor-portal-shell h2,
+body.vendor-portal-light .vendor-portal-shell h3,
+body.vendor-portal-light .vendor-portal-shell h4,
+body.vendor-portal-light .vendor-portal-shell p,
+body.vendor-portal-light .vendor-portal-shell span,
+body.vendor-portal-light .vendor-portal-shell small,
+body.vendor-portal-light .vendor-portal-shell label {
+  color: #0f172a !important;
+}
+
+/* Profile drawer behavior */
+.vendor-profile-drawer-wrap {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 1200;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+
+.vendor-profile-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 !important;
+  appearance: none;
+  background: rgba(2, 6, 23, 0.68);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.vendor-modal {
+  position: relative;
+  width: min(560px, 96vw);
+  max-height: 88vh;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 1rem;
+  overflow: auto;
+  pointer-events: auto;
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.42);
+}
+
+.vendor-profile-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 980px) {
+  .vendor-admin__topbar {
+    gap: 0.55rem;
+  }
+  .vendor-admin__left-nav {
+    width: 100%;
+  }
+  .vendor-admin__nav-btn {
+    min-width: 170px;
+    font-size: 0.94rem;
+  }
+  .vendor-admin__right-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 680px) {
+  .vendor-admin__nav-btn {
+    min-width: 100%;
+  }
+  .vendor-credit-balance-icon {
+    margin-top: 0.2rem;
+  }
+  .vendor-orders-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Better readability for Your Products table in light mode */
+body.vendor-portal-light .vendor-products-table-wrap,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table-wrap,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table-wrap {
+  border-color: rgba(15, 23, 42, 0.2) !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+}
+
+body.vendor-portal-light .vendor-products-table th,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table th,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table th {
+  background: #eef2ff !important;
+  color: #1e293b !important;
+  border-bottom-color: rgba(30, 41, 59, 0.18) !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+body.vendor-portal-light .vendor-products-table td,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table td,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table td {
+  color: #0f172a !important;
+  border-bottom-color: rgba(30, 41, 59, 0.14) !important;
+}
+
+body.vendor-portal-light .vendor-products-table__product small,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table__product small,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table__product small {
+  color: #475569 !important;
+}
+
+body.vendor-portal-light .vendor-products-table tr.is-selected,
+body.theme-light .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table tr.is-selected,
+body.theme-dark .vendor-admin-theme.vendor-admin-theme--light .vendor-products-table tr.is-selected {
+  background: rgba(255, 122, 24, 0.16) !important;
 }

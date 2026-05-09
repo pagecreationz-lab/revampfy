@@ -1,0 +1,54 @@
+{
+  "vendors": [
+    {
+      "id": "vendor_cf0i8v33",
+      "name": "PCGS",
+      "code": "revamp-001",
+      "email": "services@pcgs.co.in",
+      "phone": "8825675328",
+      "contactPerson": "Ganesh",
+      "businessName": "PCGS Enterprises",
+      "address": "Sithalappakam",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600126",
+      "commissionPercent": 5,
+      "states": [
+        "Tamilnandu"
+      ],
+      "isActive": true,
+      "passwordHash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72"
+    },
+    {
+      "id": "vendor_lseufi77",
+      "name": "Support",
+      "code": "support",
+      "email": "support@revampfy.in",
+      "phone": "",
+      "contactPerson": "",
+      "businessName": "",
+      "address": "",
+      "city": "",
+      "state": "",
+      "pincode": "",
+      "passwordHash": "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72",
+      "states": [],
+      "isActive": true,
+      "commissionPercent": 10
+    }
+  ],
+  "stores": [
+    {
+      "id": "store_2x2xuzkk",
+      "vendorId": "vendor_cf0i8v33",
+      "state": "Tamil Nandu",
+      "city": "Chennai",
+      "storeName": "PCGS Enterprises",
+      "address": "sithalapakkam",
+      "phone": "8825675328",
+      "pincode": "600126",
+      "isActive": true
+    }
+  ],
+  "updatedAt": "2026-05-08T09:17:59.085Z"
+}

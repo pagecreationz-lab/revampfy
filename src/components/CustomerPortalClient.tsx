@@ -21,6 +21,13 @@ type CustomerOrder = {
   orderRef: string;
   status: string;
   total: number;
+  paymentId?: string;
+  transactionStatus?: string;
+  paymentMethod?: string;
+  trackingId?: string;
+  trackingStatus?: string;
+  courierPartner?: string;
+  trackingTimeline?: Array<{ at: string; status: string; note?: string }>;
   invoiceUrl?: string;
   lineItems: Array<{ variantId: number; quantity: number }>;
   createdAt: string;
@@ -72,6 +79,21 @@ export function CustomerPortalClient({ email }: { email: string }) {
 
   useEffect(() => {
     void loadData();
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const status = new URLSearchParams(window.location.search).get("paymentStatus")
+      || new URLSearchParams(window.location.search).get("payment");
+    if (!status) return;
+    const normalized = status.toLowerCase();
+    if (normalized === "success") {
+      setMessage("Order placed successfully.");
+      setError("");
+    } else if (normalized === "failed" || normalized === "cancelled") {
+      setError("Payment failed, Try again.");
+      setMessage("");
+    }
   }, []);
 
   const updateProfile = async () => {
@@ -131,6 +153,11 @@ export function CustomerPortalClient({ email }: { email: string }) {
           <p className="hero__subtext">Signed in as {email}</p>
         </div>
         <div className="user-dashboard__actions">
+          <a href="#order-history">
+            <button className="secondary" type="button">
+              Order History
+            </button>
+          </a>
           <Link href="/store">
             <button className="secondary" type="button">
               Continue Shopping
@@ -210,7 +237,7 @@ export function CustomerPortalClient({ email }: { email: string }) {
             </div>
           </section>
 
-          <section className="admin__panel" style={{ marginTop: "1rem" }}>
+          <section id="order-history" className="admin__panel" style={{ marginTop: "1rem" }}>
             <h2>Order History</h2>
             {orders.length ? (
               <div className="user-dashboard__table-wrap">
@@ -223,6 +250,7 @@ export function CustomerPortalClient({ email }: { email: string }) {
                       <th>Total</th>
                       <th>Status</th>
                       <th>Payment</th>
+                      <th>Tracking</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -239,8 +267,13 @@ export function CustomerPortalClient({ email }: { email: string }) {
                               Pay now
                             </Link>
                           ) : (
-                            "-"
+                            order.transactionStatus || order.paymentMethod || "-"
                           )}
+                        </td>
+                        <td>
+                          {order.trackingId
+                            ? `${order.trackingStatus || "In transit"} (${order.trackingId})`
+                            : "-"}
                         </td>
                       </tr>
                     ))}

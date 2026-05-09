@@ -1,4 +1,4 @@
-﻿import "server-only";
+import "server-only";
 import crypto from "crypto";
 
 const SESSION_COOKIE = "pcgs_admin_session";

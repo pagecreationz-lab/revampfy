@@ -47,8 +47,13 @@ const defaultContent: SiteContent = {
 };
 
 const contentPath = path.join(process.cwd(), "data", "site-content.json");
+const CACHE_TTL_MS = 5000;
+let siteContentCache: { value: SiteContent; expiresAt: number } | null = null;
 
 export async function getSiteContent(): Promise<SiteContent> {
+  if (siteContentCache && siteContentCache.expiresAt > Date.now()) {
+    return siteContentCache.value;
+  }
   try {
     const raw = await fs.readFile(contentPath, "utf8");
     const parsed = JSON.parse(raw);
@@ -61,7 +66,7 @@ export async function getSiteContent(): Promise<SiteContent> {
       return acc;
     }, {} as Record<SitePageKey, SitePageBlock[]>);
 
-    return {
+    const value = {
       ...defaultContent,
       ...parsed,
       themeMode: parsed?.themeMode === "light" ? "light" : "dark",
@@ -71,7 +76,10 @@ export async function getSiteContent(): Promise<SiteContent> {
       },
       pageBuilder: mergedBuilder,
     } as SiteContent;
+    siteContentCache = { value, expiresAt: Date.now() + CACHE_TTL_MS };
+    return value;
   } catch {
+    siteContentCache = { value: defaultContent, expiresAt: Date.now() + CACHE_TTL_MS };
     return defaultContent;
   }
 }
@@ -79,4 +87,5 @@ export async function getSiteContent(): Promise<SiteContent> {
 export async function saveSiteContent(content: SiteContent): Promise<void> {
   await fs.mkdir(path.dirname(contentPath), { recursive: true });
   await fs.writeFile(contentPath, JSON.stringify(content, null, 2), "utf8");
+  siteContentCache = { value: content, expiresAt: Date.now() + CACHE_TTL_MS };
 }

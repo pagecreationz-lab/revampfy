@@ -1,0 +1,844 @@
+⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  [90m3 |[0m [36mimport[0m { [33mTopbar[0m } [36mfrom[0m [32m"@/components/Topbar"[0m;
+  [90m4 |[0m [36mimport[0m { [33mStoreClient[0m } [36mfrom[0m [32m"@/components/StoreClient"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getEffectiveCatalogSyncStore } [36mfrom[0m [32m"@/lib/catalogSyncRuntime"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mCatalogCollection[0m, [33mCatalogProduct[0m } [36mfrom[0m [32m"@/lib/catalog"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mStorePage[0m() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/lib/shopifySyncRuntime.ts:3:1
+Module not found: Can't resolve '@/lib/catalogSync'
+  [90m1 |[0m ... [32m"server-only"[0m;
+  [90m2 |[0m ... { getCatalogSyncPayload } [36mfrom[0m [32m"@/lib/catalog"[0m;
+[31m[1m>[0m [90m3 |[0m ... { getCatalogSyncStore, saveCatalogSyncStore, [36mtype[0m [33mCatalogSyncStore[0m } [36mfrom[0m [32m"@/lib/catalo...[0m
+  [90m  |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m ...
+  [90m5 |[0m ... [36masync[0m [36mfunction[0m getEffectiveCatalogSyncStore(options?: {
+  [90m6 |[0m ...eSync?: boolean;
+
+Import map: aliased to relative './src/lib/catalogSync' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/lib/shopifySyncRuntime.ts
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/lib/shopifySyncRuntime.ts:3:1
+Module not found: Can't resolve '@/lib/catalogSync'
+  [90m1 |[0m ... [32m"server-only"[0m;
+  [90m2 |[0m ... { getCatalogSyncPayload } [36mfrom[0m [32m"@/lib/catalog"[0m;
+[31m[1m>[0m [90m3 |[0m ... { getCatalogSyncStore, saveCatalogSyncStore, [36mtype[0m [33mCatalogSyncStore[0m } [36mfrom[0m [32m"@/lib/catalo...[0m
+  [90m  |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m ...
+  [90m5 |[0m ... [36masync[0m [36mfunction[0m getEffectiveCatalogSyncStore(options?: {
+  [90m6 |[0m ...eSync?: boolean;
+
+Import map: aliased to relative './src/lib/catalogSync' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/lib/shopifySyncRuntime.ts
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/lib/shopifySyncRuntime.ts:3:1
+Module not found: Can't resolve '@/lib/catalogSync'
+  [90m1 |[0m ... [32m"server-only"[0m;
+  [90m2 |[0m ... { getCatalogSyncPayload } [36mfrom[0m [32m"@/lib/catalog"[0m;
+[31m[1m>[0m [90m3 |[0m ... { getCatalogSyncStore, saveCatalogSyncStore, [36mtype[0m [33mCatalogSyncStore[0m } [36mfrom[0m [32m"@/lib/catalo...[0m
+  [90m  |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m ...
+  [90m5 |[0m ... [36masync[0m [36mfunction[0m getEffectiveCatalogSyncStore(options?: {
+  [90m6 |[0m ...eSync?: boolean;
+
+Import map: aliased to relative './src/lib/catalogSync' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/lib/shopifySyncRuntime.ts
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  3 | import { Topbar } from "@/components/Topbar";
+  4 | import { StoreClient } from "@/components/StoreClient";
+> 5 | import { getEffectiveCatalogSyncStore } from "@/lib/catalogSyncRuntime";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import type { CatalogCollection, CatalogProduct } from "@/lib/catalog";
+  7 |
+  8 | export default async function StorePage() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/store/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/store/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  3 | import { Topbar } from "@/components/Topbar";
+  4 | import { StoreClient } from "@/components/StoreClient";
+> 5 | import { getEffectiveCatalogSyncStore } from "@/lib/catalogSyncRuntime";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import type { CatalogCollection, CatalogProduct } from "@/lib/catalog";
+  7 |
+  8 | export default async function StorePage() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/store/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/store/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/store/page.tsx:5:1
+Module not found: Can't resolve '@/lib/catalogSyncRuntime'
+  3 | import { Topbar } from "@/components/Topbar";
+  4 | import { StoreClient } from "@/components/StoreClient";
+> 5 | import { getEffectiveCatalogSyncStore } from "@/lib/catalogSyncRuntime";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import type { CatalogCollection, CatalogProduct } from "@/lib/catalog";
+  7 |
+  8 | export default async function StorePage() {
+
+Import map: aliased to relative './src/lib/catalogSyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/store/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/store/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/page.tsx
+Reading source code for parsing failed
+An unexpected error happened while trying to read the source code to parse: failed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 1 bytes from index 16640
+
+
+[browser] Uncaught Error: ./src/app/page.tsx
+Reading source code for parsing failed
+An unexpected error happened while trying to read the source code to parse: failed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 1 bytes from index 16640
+
+
+⨯ ./src/app/page.tsx
+Module not found: Can't resolve '@/lib/shopify'
+Import map: aliased to relative './src/lib/shopify' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx
+Module not found: Can't resolve '@/lib/shopify'
+Import map: aliased to relative './src/lib/shopify' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx
+Module not found: Can't resolve '@/lib/shopify'
+Import map: aliased to relative './src/lib/shopify' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx
+Module not found: Can't resolve '@/lib/shopify'
+Import map: aliased to relative './src/lib/shopify' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx
+Module not found: Can't resolve '@/lib/shopifySyncRuntime'
+Import map: aliased to relative './src/lib/shopifySyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx
+Module not found: Can't resolve '@/lib/shopifySyncRuntime'
+Import map: aliased to relative './src/lib/shopifySyncRuntime' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/app/page.tsx
+Reading source code for parsing failed
+An unexpected error happened while trying to read the source code to parse: failed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 1 bytes from index 16640
+
+
+[browser] Uncaught Error: ./src/app/page.tsx
+Reading source code for parsing failed
+An unexpected error happened while trying to read the source code to parse: failed to convert rope into string
+
+Caused by:
+- invalid utf-8 sequence of 1 bytes from index 16640
+
+

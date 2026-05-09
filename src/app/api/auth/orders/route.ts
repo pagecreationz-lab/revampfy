@@ -1,7 +1,7 @@
 import { readSessionFromRequest, verifySessionToken } from "@/lib/auth";
 import { listCustomerOrders } from "@/lib/customerData";
-import { getOrdersByEmail } from "@/lib/shopify";
-import { getShopifyCommerceConfig } from "@/lib/shopifyCommerce";
+import { getOrdersByEmail } from "@/lib/catalog";
+import { getCatalogCommerceConfig } from "@/lib/catalogCommerce";
 
 export async function GET(request: Request) {
   const token = readSessionFromRequest(request);
@@ -13,8 +13,8 @@ export async function GET(request: Request) {
     return Response.json({ error: "Customer access only" }, { status: 403 });
   }
 
-  const commerceConfig = await getShopifyCommerceConfig();
-  const [localOrders, shopifyOrders] = await Promise.all([
+  const commerceConfig = await getCatalogCommerceConfig();
+  const [localOrders, CatalogOrders] = await Promise.all([
     listCustomerOrders(session.email),
     commerceConfig.enableCustomerAccounts
       ? getOrdersByEmail(session.email, 20).catch(() => [])
@@ -22,8 +22,8 @@ export async function GET(request: Request) {
   ]);
 
   const merged = [
-    ...shopifyOrders.map((order) => ({
-      id: `shopify-${order.id}`,
+    ...CatalogOrders.map((order) => ({
+      id: `Catalog-${order.id}`,
       email: session.email,
       orderRef: order.name || `#${order.id}`,
       status: [order.financialStatus, order.fulfillmentStatus].filter(Boolean).join(" / ") || "Open",
@@ -31,10 +31,11 @@ export async function GET(request: Request) {
       invoiceUrl: order.statusUrl || "",
       lineItems: [] as Array<{ variantId: number; quantity: number }>,
       createdAt: order.createdAt,
-      source: "shopify",
+      source: "cms",
     })),
     ...localOrders.map((order) => ({ ...order, source: "portal" })),
   ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
   return Response.json({ orders: merged });
 }
+

@@ -40,7 +40,7 @@ export function CommerceStatusPanel() {
     const load = async () => {
       setLoading(true);
       try {
-        const res = await fetch("/api/shopify/commerce-status");
+        const res = await fetch("/api/catalog/commerce-status");
         const json = (await readJsonSafe(res)) as CommerceStatusResponse;
         setData(json);
       } finally {
@@ -54,7 +54,7 @@ export function CommerceStatusPanel() {
     <section className="section">
       <div className="container">
         <div className="admin__panel commerce-status-panel">
-          <h2>Shopify Commerce Modules</h2>
+          <h2>Catalog Commerce Modules</h2>
           <p className="hero__subtext">
             Payments, checkout, customers, shipping, taxes, inventory, notifications, policy, and 2-way sync.
           </p>
@@ -111,3 +111,4 @@ export function CommerceStatusPanel() {
     </section>
   );
 }
+

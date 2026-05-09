@@ -1,0 +1,27 @@
+[
+  {
+    "id": 5000,
+    "name": "DRAFT-5000",
+    "status": "completed",
+    "paymentMethod": "cod",
+    "transactionStatus": "cod_pending",
+    "invoice_url": "/payment?draftOrderId=5000",
+    "email": "user@revampfy.in",
+    "mobile": "8248003564",
+    "address": "8/393,medavakkam",
+    "location": {
+      "lat": "12.916083497167856",
+      "lng": "80.17979863253399"
+    },
+    "totalPrice": 25000,
+    "lineItems": [
+      {
+        "variantId": 9512258633960000,
+        "quantity": 1
+      }
+    ],
+    "createdAt": "2026-05-05T11:37:43.726Z",
+    "order_id": 10000,
+    "paymentId": "COD-5000"
+  }
+]

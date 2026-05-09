@@ -1,0 +1,61 @@
+{
+  "syncedAt": "2026-05-04T08:54:45.448Z",
+  "payload": {
+    "categories": [],
+    "products": [
+      {
+        "id": 9512258633960,
+        "title": "HP Laptop - i5 11 th gen 16 Gb / 256 GB SSd",
+        "handle": "hp-laptop-i5-11-th-gen-16-gb-256-gb-ssd",
+        "description": "",
+        "description_html": "",
+        "status": "active",
+        "tags": "hp, vendorState:Tamil Nandu, vendorPincode:600126",
+        "vendor": "PCGS",
+        "product_type": "HP",
+        "category": "Laptop",
+        "collection_handles": [
+          "featured"
+        ],
+        "collection_titles": [],
+        "images": [],
+        "variants": [
+          {
+            "id": 9512258633960000,
+            "title": "Default",
+            "price": "2500",
+            "compare_at_price": null,
+            "inventory_quantity": 15,
+            "requires_shipping": false
+          }
+        ],
+        "metafields": [
+          {
+            "namespace": "vendor",
+            "key": "vendor_id",
+            "value": "vendor_cf0i8v33",
+            "type": "single_line_text_field"
+          },
+          {
+            "namespace": "vendor",
+            "key": "state",
+            "value": "Tamil Nandu",
+            "type": "single_line_text_field"
+          },
+          {
+            "namespace": "vendor",
+            "key": "pincode",
+            "value": "600126",
+            "type": "single_line_text_field"
+          }
+        ]
+      }
+    ],
+    "brands": [
+      "HP"
+    ],
+    "vendors": [
+      "PCGS"
+    ]
+  }
+}

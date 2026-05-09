@@ -13,6 +13,10 @@ export function ThemeModeScript({ defaultMode }: ThemeModeScriptProps) {
     try {
       const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
       const mode = stored === "light" || stored === "dark" ? stored : defaultMode;
+      const html = document.documentElement;
+      html.classList.remove("theme-dark", "theme-light");
+      html.classList.add(mode === "light" ? "theme-light" : "theme-dark");
+      html.setAttribute("data-theme", mode);
       const body = document.body;
       if (!body) return;
       body.classList.remove("theme-dark", "theme-light");
@@ -24,4 +28,3 @@ export function ThemeModeScript({ defaultMode }: ThemeModeScriptProps) {
 
   return null;
 }
-

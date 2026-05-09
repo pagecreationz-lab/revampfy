@@ -1,4 +1,4 @@
-﻿import { readSessionFromRequest, verifySessionToken } from "@/lib/auth";
+import { readSessionFromRequest, verifySessionToken } from "@/lib/auth";
 
 export async function GET(request: Request) {
   const token = readSessionFromRequest(request);

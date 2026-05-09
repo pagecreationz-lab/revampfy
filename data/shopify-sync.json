@@ -1,40 +1,45 @@
 {
-  "syncedAt": "2026-04-26T16:51:02.261Z",
+  "syncedAt": "2026-05-04T05:06:16.719Z",
   "payload": {
     "categories": [
       {
         "id": 464955900135,
-        "handle": "mini-pc",
         "title": "Brand New Laptops",
+        "handle": "mini-pc",
         "body_html": "",
+        "image": null,
         "collection_type": "custom"
       },
       {
         "id": 464955867367,
-        "handle": "desktops",
         "title": "Custom Build Gaming Desktops",
+        "handle": "desktops",
         "body_html": "",
+        "image": null,
         "collection_type": "custom"
       },
       {
         "id": 464921592039,
-        "handle": "frontpage",
         "title": "Featured Laptops",
+        "handle": "frontpage",
         "body_html": "",
+        "image": null,
         "collection_type": "custom"
       },
       {
         "id": 464955932903,
-        "handle": "monitors",
         "title": "Gaming Laptops",
+        "handle": "monitors",
         "body_html": "",
+        "image": null,
         "collection_type": "custom"
       },
       {
         "id": 464955834599,
-        "handle": "trending-laptops",
         "title": "Trending Laptops",
+        "handle": "trending-laptops",
         "body_html": "",
+        "image": null,
         "collection_type": "custom"
       }
     ],

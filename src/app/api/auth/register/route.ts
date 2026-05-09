@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { createSessionToken } from "@/lib/auth";
 import { registerCustomerUser } from "@/lib/customerData";
-import { upsertCustomerByEmail } from "@/lib/shopify";
-import { getShopifyCommerceConfig } from "@/lib/shopifyCommerce";
+import { upsertCustomerByEmail } from "@/lib/catalog";
+import { getCatalogCommerceConfig } from "@/lib/catalogCommerce";
 
 const MAX_AGE = 60 * 60 * 12;
 
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     const user = await registerCustomerUser({ email, password, name, mobile });
     const [firstName, ...rest] = (name || "").trim().split(/\s+/).filter(Boolean);
     const lastName = rest.join(" ");
-    const commerceConfig = await getShopifyCommerceConfig();
+    const commerceConfig = await getCatalogCommerceConfig();
     if (commerceConfig.enableCustomerAccounts && commerceConfig.enableTwoWaySync) {
       void upsertCustomerByEmail({
         email: user.email,
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
         lastName,
         phone: mobile || undefined,
       }).catch(() => {
-        // Do not block portal registration if Shopify customer sync fails.
+        // Do not block portal registration if Catalog customer sync fails.
       });
     }
     const exp = Date.now() + MAX_AGE * 1000;
@@ -68,3 +68,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+

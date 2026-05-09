@@ -50,8 +50,12 @@ const THEME_STORAGE_KEY = "pcgs_theme_mode";
 
 function applyThemeToDocument(mode: "dark" | "light") {
   if (typeof document === "undefined") return;
+  document.documentElement.classList.remove("theme-dark", "theme-light");
+  document.documentElement.classList.add(mode === "light" ? "theme-light" : "theme-dark");
   document.body.classList.remove("theme-dark", "theme-light");
   document.body.classList.add(mode === "light" ? "theme-light" : "theme-dark");
+  document.documentElement.setAttribute("data-theme", mode);
+  document.cookie = `pcgs_theme_mode=${mode}; path=/; max-age=31536000; samesite=lax`;
 }
 
 function ThemeIcon({ mode }: { mode: "dark" | "light" }) {
@@ -137,18 +141,20 @@ export function Header() {
   useEffect(() => {
     const loadHeaderData = async () => {
       try {
-        const [configRes, syncRes, sessionRes] = await Promise.all([
+        const [configRes, productsRes, collectionsRes, sessionRes] = await Promise.all([
           fetch("/api/admin/homepage"),
-          fetch("/api/shopify/sync"),
+          fetch("/api/catalog/products?limit=80"),
+          fetch("/api/catalog/collections"),
           fetch("/api/auth/session"),
         ]);
 
         const configJson = await readJsonSafe(configRes);
-        const syncJson = await readJsonSafe(syncRes);
+        const productsJson = await readJsonSafe(productsRes);
+        const collectionsJson = await readJsonSafe(collectionsRes);
         const sessionJson = await readJsonSafe(sessionRes);
         setConfig(configJson?.config || defaultConfig);
-        setCollections(syncJson?.payload?.categories || []);
-        setProducts(syncJson?.payload?.products || []);
+        setCollections(collectionsJson?.collections || []);
+        setProducts(productsJson?.products || []);
         setAuthenticated(sessionRes.ok);
         setSessionRole(sessionJson?.session?.role || null);
       } catch {
@@ -326,7 +332,7 @@ export function Header() {
           .map((product) => ({
             id: product.id,
             title: product.title,
-            href: `/store/${product.id}`,
+            href: `/store/${encodeURIComponent(product.handle || String(product.id))}`,
           }));
 
         return {
@@ -586,10 +592,10 @@ export function Header() {
             </button>
             {searchOpen && productSuggestions.length ? (
               <div className="header-search__dropdown">
-                {productSuggestions.map((product) => (
+                {productSuggestions.map((product, index) => (
                   <button
                     type="button"
-                    key={product.id}
+                    key={`${product.handle || product.id}-search-${index}`}
                     className="header-search__item"
                     onClick={() => {
                       setSearchTerm(product.title);
@@ -748,7 +754,7 @@ export function Header() {
                     ))
                   ) : (
                     <p className="mega-menu__empty">
-                      No synced categories yet. Run Shopify sync from admin.
+                      No synced categories yet. Run Catalog sync from admin.
                     </p>
                   )}
                 </div>
@@ -859,4 +865,5 @@ export function Header() {
     </header>
   );
 }
+
 

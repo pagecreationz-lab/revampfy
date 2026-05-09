@@ -47,6 +47,18 @@ export async function POST(request: Request) {
 
     if (role === "customer") {
       const authSettings = await getAuthSettings();
+      const mustUseEmailCode = authSettings.enableEmailCodeLogin;
+
+      if (mustUseEmailCode && authMethod === "password_only") {
+        return NextResponse.json(
+          {
+            error:
+              "Email verification is required for customer login. Please use Email Login to receive verification code.",
+          },
+          { status: 403 }
+        );
+      }
+
       if (authMethod === "password_only") {
         if (!authSettings.enableEmailPasswordLogin) {
           return NextResponse.json(

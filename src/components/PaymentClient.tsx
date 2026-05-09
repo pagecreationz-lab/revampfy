@@ -30,6 +30,13 @@ export function PaymentClient() {
           <div className="admin__panel">
             <h1>Payment</h1>
             <p className="hero__subtext">Invalid or missing payment link.</p>
+            <div className="payment-page__actions">
+              <a href="/checkout">
+                <button className="secondary" type="button">
+                  Back to Checkout
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -49,7 +56,7 @@ export function PaymentClient() {
             </a>
           </div>
           <p className="hero__subtext">
-            Payment is shown inside frontend. If blocked by Shopify browser policy, use &quot;Open
+            Payment is shown inside frontend. If blocked by Catalog browser policy, use &quot;Open
             in New Tab&quot;.
           </p>
           {canEmbed && !iframeFailed ? (
@@ -83,3 +90,4 @@ export function PaymentClient() {
     </section>
   );
 }
+

@@ -1,0 +1,81 @@
+
+> laptop-reseller-app@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.26.0.1:3000
+- Environments: .env.local
+✓ Ready in 1620ms
+
+○ Compiling /store ...
+ GET /store 200 in 6.7s (next.js: 5.0s, application-code: 1698ms)
+ GET /api/auth/session 200 in 1495ms (next.js: 1453ms, application-code: 42ms)
+ GET /api/admin/homepage 200 in 1602ms (next.js: 1279ms, application-code: 324ms)
+ GET /api/shopify/sync 200 in 1567ms (next.js: 1373ms, application-code: 194ms)
+ GET / 200 in 3.7s (next.js: 1488ms, application-code: 2.2s)
+ POST /api/auth/admin-login 200 in 699ms (next.js: 661ms, application-code: 38ms)
+ GET /admin 200 in 3.6s (next.js: 2.6s, application-code: 996ms)
+ POST /api/auth/admin-login 500 in 49ms (next.js: 16ms, application-code: 33ms)
+ GET /store 200 in 331ms (next.js: 12ms, application-code: 319ms)
+ GET /api/admin/homepage 200 in 26ms (next.js: 7ms, application-code: 19ms)
+ GET /api/shopify/sync 200 in 31ms (next.js: 8ms, application-code: 23ms)
+ GET /store 200 in 285ms (next.js: 15ms, application-code: 270ms)
+ GET /api/admin/homepage 200 in 31ms (next.js: 8ms, application-code: 23ms)
+ GET /api/shopify/sync 200 in 23ms (next.js: 7ms, application-code: 16ms)
+ GET /store 200 in 247ms (next.js: 9ms, application-code: 238ms)
+ GET /api/admin/homepage 200 in 36ms (next.js: 7ms, application-code: 29ms)
+ GET /api/shopify/sync 200 in 49ms (next.js: 18ms, application-code: 31ms)
+ GET / 200 in 232ms (next.js: 6ms, application-code: 226ms)
+ GET /api/auth/session 200 in 33ms (next.js: 27ms, application-code: 6ms)
+ GET /api/admin/homepage 200 in 45ms (next.js: 7ms, application-code: 38ms)
+ GET /api/shopify/sync 200 in 47ms (next.js: 17ms, application-code: 30ms)
+ GET /admin 200 in 80ms (next.js: 5ms, application-code: 75ms)
+ GET /api/shopify/sync 200 in 14ms (next.js: 5ms, application-code: 9ms)
+ GET /api/admin/site-content 200 in 289ms (next.js: 268ms, application-code: 21ms)
+ GET /api/admin/commerce-config 200 in 421ms (next.js: 354ms, application-code: 67ms)
+ GET /api/admin/shopify-sync-scheduler 200 in 439ms (next.js: 273ms, application-code: 166ms)
+ GET /api/admin/auth-settings 200 in 441ms (next.js: 399ms, application-code: 42ms)
+ GET /api/admin/shopify-connection 200 in 1348ms (next.js: 198ms, application-code: 1151ms)
+ GET /api/admin/enquiry-settings 200 in 129ms (next.js: 120ms, application-code: 10ms)
+ GET /admin 200 in 111ms (next.js: 4ms, application-code: 106ms)
+ GET /api/shopify/sync 200 in 28ms (next.js: 6ms, application-code: 22ms)
+ GET /api/admin/site-content 200 in 31ms (next.js: 17ms, application-code: 14ms)
+ GET /api/admin/commerce-config 200 in 52ms (next.js: 18ms, application-code: 34ms)
+ GET /api/admin/shopify-sync-scheduler 200 in 61ms (next.js: 26ms, application-code: 35ms)
+ GET /api/admin/auth-settings 200 in 62ms (next.js: 38ms, application-code: 24ms)
+ GET /api/admin/shopify-connection 200 in 924ms (next.js: 9ms, application-code: 915ms)
+ GET /api/admin/enquiry-settings 200 in 13ms (next.js: 3ms, application-code: 10ms)
+✓ Compiled in 74ms
+✓ Compiled in 407ms
+ GET /admin 200 in 1513ms (next.js: 309ms, application-code: 1205ms)
+ GET /admin 500 in 1576ms (next.js: 1383ms, application-code: 192ms)
+ GET /api/catalog/sync 500 in 1550ms (next.js: 1364ms, application-code: 186ms)
+ GET /api/admin/site-content 500 in 1584ms (next.js: 1396ms, application-code: 188ms)
+ GET /admin 500 in 24ms (next.js: 9ms, application-code: 15ms)
+ GET /admin 500 in 28ms (next.js: 13ms, application-code: 15ms)
+ GET /admin 500 in 41ms (next.js: 23ms, application-code: 18ms)
+✓ Compiled in 1ms
+ GET /admin 500 in 17ms (next.js: 6ms, application-code: 11ms)
+ GET /admin 500 in 21ms
+ GET /admin 500 in 34ms (next.js: 21ms, application-code: 13ms)
+✓ Compiled in 7ms
+✓ Compiled in 101ms
+ GET /admin 500 in 29ms (next.js: 18ms, application-code: 10ms)
+ GET /admin 500 in 51ms
+✓ Compiled in 1ms
+ GET /admin 500 in 17ms (next.js: 6ms, application-code: 11ms)
+ GET /admin 500 in 7ms
+ GET /admin 500 in 21ms (next.js: 6ms, application-code: 14ms)
+✓ Compiled in 20ms
+✓ Compiled in 1ms
+ GET /admin 500 in 36ms (next.js: 11ms, application-code: 25ms)
+✓ Compiled in 186ms
+ GET /admin 200 in 754ms (next.js: 343ms, application-code: 411ms)
+ GET /api/admin/catalog 200 in 365ms (next.js: 314ms, application-code: 51ms)
+✓ Compiled in 64ms
+ GET /admin 200 in 586ms (next.js: 237ms, application-code: 349ms)
+ GET /admin 200 in 224ms (next.js: 15ms, application-code: 209ms)
+ GET /admin 200 in 125ms (next.js: 15ms, application-code: 110ms)
+  Reload env: .env.local
+ GET /admin 200 in 224ms (next.js: 140ms, application-code: 84ms)

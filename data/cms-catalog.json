@@ -1,0 +1,448 @@
+{
+  "collections": [
+    {
+      "id": 464955900135,
+      "title": "Brand New Laptops",
+      "handle": "mini-pc",
+      "body_html": "",
+      "image": null,
+      "collection_type": "custom"
+    },
+    {
+      "id": 464955867367,
+      "title": "Custom Build Gaming Desktops",
+      "handle": "desktops",
+      "body_html": "",
+      "image": null,
+      "collection_type": "custom"
+    },
+    {
+      "id": 464921592039,
+      "title": "Featured Laptops",
+      "handle": "frontpage",
+      "body_html": "",
+      "image": null,
+      "collection_type": "custom"
+    },
+    {
+      "id": 464955932903,
+      "title": "Gaming Laptops",
+      "handle": "monitors",
+      "body_html": "",
+      "image": null,
+      "collection_type": "custom"
+    },
+    {
+      "id": 464955834599,
+      "title": "Trending Laptops",
+      "handle": "trending-laptops",
+      "body_html": "",
+      "image": null,
+      "collection_type": "custom"
+    }
+  ],
+  "products": [
+    {
+      "id": 9506585280743,
+      "title": "HP Laptop",
+      "handle": "hp-laptop",
+      "description": "HP laptop is a portable, battery-powered personal computer designed for mobile use, integrating a screen, keyboard, pointing device (touchpad), and speakers into a single, foldable unit. These compact devices are optimized for travel, work, and personal entertainment, offering similar functionality to desktops while utilizing power-efficient components and rechargeable batteries",
+      "description_html": "HP laptop is a portable, battery-powered personal computer designed for mobile use, integrating a screen, keyboard, pointing device (touchpad), and speakers into a single, foldable unit. These compact devices are optimized for travel, work, and personal entertainment, offering similar functionality to desktops while utilizing power-efficient components and rechargeable batteries",
+      "status": "active",
+      "tags": "Laptops",
+      "vendor": "Revamp",
+      "product_type": "HP",
+      "category": "Laptops",
+      "collection_handles": [
+        "frontpage"
+      ],
+      "collection_titles": [
+        "Featured Laptops"
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/HPLaptop-1_bda15619-3e87-495a-b5df-182cfb00e6c2.webp?v=1775759022"
+        }
+      ],
+      "variants": [
+        {
+          "id": 51989690220775,
+          "title": "Default",
+          "price": "18000.00",
+          "compare_at_price": null,
+          "inventory_quantity": 2,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": []
+    },
+    {
+      "id": 9506618245351,
+      "title": "Dell Laptop",
+      "handle": "dell-laptop",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "",
+      "vendor": "Revamp",
+      "product_type": "Dell",
+      "category": "Laptops",
+      "collection_handles": [
+        "frontpage"
+      ],
+      "collection_titles": [
+        "Featured Laptops"
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/Delllaptop-1.webp?v=1775758950"
+        }
+      ],
+      "variants": [
+        {
+          "id": 51953837310183,
+          "title": "Default",
+          "price": "20000.00",
+          "compare_at_price": null,
+          "inventory_quantity": 1,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": []
+    },
+    {
+      "id": 9506620178663,
+      "title": "Lenovo Laptop",
+      "handle": "lenovo-laptop",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "",
+      "vendor": "Revamp",
+      "product_type": "Lenovo",
+      "category": "Laptops",
+      "collection_handles": [
+        "frontpage"
+      ],
+      "collection_titles": [
+        "Featured Laptops"
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/Lenovolaptop-1.webp?v=1775758735"
+        }
+      ],
+      "variants": [
+        {
+          "id": 51965308829927,
+          "title": "Default",
+          "price": "21000.00",
+          "compare_at_price": null,
+          "inventory_quantity": 2,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": []
+    },
+    {
+      "id": 9508855447783,
+      "title": "Asus Laptop",
+      "handle": "asus-laptop",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "",
+      "vendor": "Revamp",
+      "product_type": "Asus",
+      "category": "Laptops",
+      "collection_handles": [
+        "trending-laptops"
+      ],
+      "collection_titles": [
+        "Trending Laptops"
+      ],
+      "images": [],
+      "variants": [
+        {
+          "id": 51969679556839,
+          "title": "Default",
+          "price": "50000.00",
+          "compare_at_price": null,
+          "inventory_quantity": 1,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": []
+    },
+    {
+      "id": 9508962271463,
+      "title": "HP Desktop",
+      "handle": "hp-desktop",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "Desktops",
+      "vendor": "Revamp",
+      "product_type": "HP",
+      "category": "Desktop Computers",
+      "collection_handles": [
+        "desktops"
+      ],
+      "collection_titles": [
+        "Custom Build Gaming Desktops"
+      ],
+      "images": [],
+      "variants": [
+        {
+          "id": 51969819738343,
+          "title": "Default",
+          "price": "0.00",
+          "compare_at_price": null,
+          "inventory_quantity": 0,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": []
+    },
+    {
+      "id": 9512258633959,
+      "title": "Lenovo Laptop I5 10th",
+      "handle": "lenovo-laptop-i5-10th",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "",
+      "vendor": "Revamp",
+      "product_type": "Lenovo",
+      "category": "Laptops",
+      "collection_handles": [
+        "frontpage"
+      ],
+      "collection_titles": [
+        "Featured Laptops"
+      ],
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0787/6280/3431/files/Lenovolaptop-1.webp?v=1775758735"
+        }
+      ],
+      "variants": [
+        {
+          "id": 51977430368487,
+          "title": "Default",
+          "price": "21000.00",
+          "compare_at_price": null,
+          "inventory_quantity": 2,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": []
+    },
+    {
+      "id": 9512258633960,
+      "title": "HP Laptop - i5 11 th gen 16 Gb / 256 GB SSd",
+      "handle": "hp-laptop-i5-11-th-gen-16-gb-256-gb-ssd",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "hp, vendorState:Tamil Nandu, vendorPincode:600126",
+      "vendor": "PCGS",
+      "product_type": "HP",
+      "category": "Laptop",
+      "collection_handles": [
+        "frontpage"
+      ],
+      "collection_titles": [
+        "Featured Laptops"
+      ],
+      "images": [
+        {
+          "src": "/uploads/vendor/vendor-1777915275833-0vjhjk.webp"
+        }
+      ],
+      "variants": [
+        {
+          "id": 9512258633960000,
+          "title": "Black",
+          "price": "25000",
+          "compare_at_price": null,
+          "inventory_quantity": 15,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "vendor",
+          "key": "vendor_id",
+          "value": "vendor_cf0i8v33",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "vendor",
+          "key": "state",
+          "value": "Tamil Nandu",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "vendor",
+          "key": "pincode",
+          "value": "600126",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "specs",
+          "key": "performance",
+          "value": "{\"Memory Technology\":\"8 GB\",\"Display Resolution\":\"1080*720\",\"Processor Family\":\"I5 11\",\"Graphics Card Type\":\"Integrated\",\"Storage Types Supported\":\"256 GB Nvme\"}",
+          "type": "json"
+        },
+        {
+          "namespace": "specs",
+          "key": "software",
+          "value": "{\"Cosmetic Condition\":\"Refurbished\"}",
+          "type": "json"
+        },
+        {
+          "namespace": "specs",
+          "key": "moreInfo",
+          "value": "{\"Color Pattern\":\"Black\",\"Operating System\":\"Windows\",\"Connection Type\":\"WIfi, Bluetooth, Camera\",\"Keyboard Type\":\"Integrated\",\"Brand\":\"HP\",\"Model\":\"Probook 440\",\"Category\":\"Laptop\"}",
+          "type": "json"
+        }
+      ]
+    },
+    {
+      "id": 9512258633961,
+      "title": "HP Laptop - i5 10 th gen 16 Gb / 256 GB SSd",
+      "handle": "hp-laptop-i5-10-th-gen-16-gb-256-gb-ssd",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "hp, vendorState:Tamil Nandu, vendorPincode:600126",
+      "vendor": "PCGS",
+      "product_type": "HP",
+      "category": "Laptop",
+      "collection_handles": [
+        "trending-laptops"
+      ],
+      "collection_titles": [
+        "Trending Laptops"
+      ],
+      "images": [
+        {
+          "src": "/uploads/vendor/vendor-1777915275833-0vjhjk.webp"
+        },
+        {
+          "src": "/uploads/vendor/vendor-1777919566781-m2uud1.webp"
+        },
+        {
+          "src": "/uploads/vendor/vendor-1777919566789-ka6s7h.webp"
+        },
+        {
+          "src": "/uploads/vendor/vendor-1777919566798-j7ehch.webp"
+        },
+        {
+          "src": "/uploads/vendor/vendor-1777919566806-h423sa.webp"
+        }
+      ],
+      "variants": [
+        {
+          "id": 9512258633961000,
+          "title": "Black",
+          "price": "25000",
+          "compare_at_price": null,
+          "inventory_quantity": 1,
+          "requires_shipping": false
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "vendor",
+          "key": "vendor_id",
+          "value": "vendor_cf0i8v33",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "vendor",
+          "key": "state",
+          "value": "Tamil Nandu",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "vendor",
+          "key": "pincode",
+          "value": "600126",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "specs",
+          "key": "performance",
+          "value": "{\"Memory Technology\":\"8 GB\",\"Display Resolution\":\"FHD\",\"Processor Family\":\"I5 11 Gen\",\"Graphics Card Type\":\"Intergrated\",\"Storage Types Supported\":\"256 GB Nvme\"}",
+          "type": "json"
+        },
+        {
+          "namespace": "specs",
+          "key": "software",
+          "value": "{\"Cosmetic Condition\":\"Refurbished\"}",
+          "type": "json"
+        },
+        {
+          "namespace": "specs",
+          "key": "moreInfo",
+          "value": "{\"Color Pattern\":\"Black\",\"Operating System\":\"Windows\",\"Connection Type\":\"WIfi, Bluetooth, Camera\",\"Keyboard Type\":\"Integrated\",\"Brand\":\"HP\",\"Model\":\"Probook 440\",\"Category\":\"Laptop\"}",
+          "type": "json"
+        }
+      ]
+    },
+    {
+      "id": 9512258633962,
+      "title": "HP Laptop",
+      "handle": "hf233",
+      "description": "",
+      "description_html": "",
+      "status": "draft",
+      "tags": "vendorState:Chennai",
+      "vendor": "services@pcgs.co.in",
+      "product_type": "Laptops",
+      "category": "Laptops",
+      "collection_handles": [],
+      "collection_titles": [],
+      "images": [],
+      "variants": [
+        {
+          "id": 9512258633962000,
+          "title": "Default",
+          "price": "30000",
+          "compare_at_price": null,
+          "inventory_quantity": 10,
+          "requires_shipping": true
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "vendor",
+          "key": "vendor_id",
+          "value": "vendor_cf0i8v33",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "synced_from_sheet",
+          "value": "true",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "sheet_sku",
+          "value": "hf233`",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "approval_status",
+          "value": "pending_approval",
+          "type": "single_line_text_field"
+        }
+      ]
+    }
+  ],
+  "updatedAt": "2026-05-08T14:32:32.295Z"
+}

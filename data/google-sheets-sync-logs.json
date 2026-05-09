@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sync_k4tqurec",
+    "at": "2026-05-08T09:13:55.764Z",
+    "status": "error",
+    "message": "Spreadsheet ID is required in Integrations settings.",
+    "vendorsProcessed": 0,
+    "productsProcessed": 0
+  },
+  {
+    "id": "sync_jqwa6fx8",
+    "at": "2026-05-08T08:52:05.830Z",
+    "status": "error",
+    "message": "Spreadsheet ID is required in Integrations settings.",
+    "vendorsProcessed": 0,
+    "productsProcessed": 0
+  },
+  {
+    "id": "sync_3ztgy5f9",
+    "at": "2026-05-06T11:48:38.631Z",
+    "status": "error",
+    "message": "Spreadsheet ID is required in Integrations settings.",
+    "vendorsProcessed": 0,
+    "productsProcessed": 0
+  }
+]

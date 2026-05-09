@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { ShopifyProduct } from "@/lib/shopify";
+import type { CatalogProduct } from "@/lib/catalog";
 import { readJsonSafe } from "@/lib/httpClient";
 
 const WISHLIST_KEY = "pcgs_wishlist_ids";
@@ -29,13 +29,13 @@ function getWishlistIds() {
 }
 
 export function WishlistClient() {
-  const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
+  const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [wishlistIds, setWishlistIds] = useState<number[]>([]);
 
   useEffect(() => {
     setWishlistIds(getWishlistIds());
     const load = async () => {
-      const res = await fetch("/api/shopify/sync");
+      const res = await fetch("/api/catalog/sync");
       const json = await readJsonSafe(res);
       setAllProducts(json?.payload?.products || []);
     };
@@ -62,8 +62,8 @@ export function WishlistClient() {
           <p className="hero__subtext">Saved products for later.</p>
           <div className="wishlist-grid">
             {products.length ? (
-              products.map((product) => (
-                <article className="product" key={product.id}>
+              products.map((product, index) => (
+                <article className="product" key={`${product.handle || product.id}-wish-${index}`}>
                   <img
                     src={
                       product.images?.[0]?.src ||
@@ -77,7 +77,7 @@ export function WishlistClient() {
                     <span>{formatPrice(product.variants?.[0]?.price)}</span>
                   </div>
                   <div className="product__actions">
-                    <a href={`/store/${product.id}`}>
+                    <a href={`/store/${encodeURIComponent(product.handle || String(product.id))}`}>
                       <button className="secondary" type="button">Open</button>
                     </a>
                     <button className="ghost" type="button" onClick={() => remove(product.id)}>
@@ -95,3 +95,4 @@ export function WishlistClient() {
     </section>
   );
 }
+

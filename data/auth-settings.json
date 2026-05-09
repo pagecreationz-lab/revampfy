@@ -1,12 +1,21 @@
 {
-  "enableEmailPasswordLogin": false,
+  "enableEmailPasswordLogin": true,
   "enableEmailCodeLogin": false,
   "enableMobileOtpLogin": true,
-  "enableGoogleLogin": false,
-  "googleClientId": "",
-  "googleClientSecret": "",
+  "enableGoogleLogin": true,
+  "defaultSignInMethod": "emailCode",
+  "vendorEnableEmailPasswordLogin": true,
+  "vendorEnableEmailCodeLogin": false,
+  "vendorDefaultSignInMethod": "emailPassword",
+  "googleClientId": "280815033620-4ak4r4c5mordh5ub1bdc0iir44n10ckj.apps.googleusercontent.com",
+  "googleClientSecret": "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",
   "googleRedirectUri": "",
   "twilioAccountSid": "ACa16dc585c9f640b5524092a3d4e1ae9e",
   "twilioAuthToken": "6b0a08f6f0d3a77b033150cb024836de",
-  "twilioVerifyServiceSid": "VA5f3394b87af8ba0c21e0f62305943259"
+  "twilioVerifyServiceSid": "VA5f3394b87af8ba0c21e0f62305943259",
+  "mobileOtpProvider": "twilio",
+  "fast2smsApiKey": "7Hi8o3fGreyMdbPQVzwqEIlvc0RDAga5pJkKNCSUtOjnF2L6X1GxHI5dNDL8fjPt2Qp0u7qiWwTms3rb",
+  "fast2smsSenderId": "Revampfy",
+  "twofactorApiKey": "aa784416-4552-11f1-9800-0200cd936042",
+  "twofactorTemplateName": "Revampfy"
 }

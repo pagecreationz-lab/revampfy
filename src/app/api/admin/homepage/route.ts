@@ -1,8 +1,15 @@
-﻿import { getHomepageConfig, saveHomepageConfig } from "@/lib/homepage";
+import { getHomepageConfig, saveHomepageConfig } from "@/lib/homepage";
 
 export async function GET() {
   const config = await getHomepageConfig();
-  return Response.json({ config });
+  return Response.json(
+    { config },
+    {
+      headers: {
+        "Cache-Control": "public, max-age=300, stale-while-revalidate=900",
+      },
+    }
+  );
 }
 
 export async function POST(request: Request) {

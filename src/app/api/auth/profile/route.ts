@@ -1,7 +1,7 @@
 import { createSessionToken, readSessionFromRequest, verifySessionToken } from "@/lib/auth";
 import { getCustomerByEmail, updateCustomerProfile, type PaymentMode } from "@/lib/customerData";
-import { upsertCustomerByEmail } from "@/lib/shopify";
-import { getShopifyCommerceConfig } from "@/lib/shopifyCommerce";
+import { upsertCustomerByEmail } from "@/lib/catalog";
+import { getCatalogCommerceConfig } from "@/lib/catalogCommerce";
 
 const PAYMENT_MODES: PaymentMode[] = ["UPI", "Card", "NetBanking", "COD"];
 const MAX_AGE = 60 * 60 * 12;
@@ -31,6 +31,11 @@ export async function GET(request: Request) {
       name: user.name,
       mobile: effectiveMobile,
       address: user.address,
+      street: user.street || "",
+      area: user.area || "",
+      city: user.city || "",
+      state: user.state || "",
+      pincode: user.pincode || "",
       paymentMode: user.paymentMode,
       requiresProfileCompletion:
         Boolean(user.needsProfileCompletion) || user.email.endsWith("@pcgs.local"),
@@ -65,13 +70,18 @@ export async function PUT(request: Request) {
       name: requestedName,
       mobile: typeof payload?.mobile === "string" ? payload.mobile : undefined,
       address: typeof payload?.address === "string" ? payload.address : undefined,
+      street: typeof payload?.street === "string" ? payload.street : undefined,
+      area: typeof payload?.area === "string" ? payload.area : undefined,
+      city: typeof payload?.city === "string" ? payload.city : undefined,
+      state: typeof payload?.state === "string" ? payload.state : undefined,
+      pincode: typeof payload?.pincode === "string" ? payload.pincode : undefined,
       paymentMode: safePaymentMode,
       needsProfileCompletion: needsCompletion,
     });
 
     const [firstName, ...rest] = (profile.name || "").trim().split(/\s+/).filter(Boolean);
     const lastName = rest.join(" ");
-    const commerceConfig = await getShopifyCommerceConfig();
+    const commerceConfig = await getCatalogCommerceConfig();
     if (commerceConfig.enableCustomerAccounts && commerceConfig.enableTwoWaySync) {
       void upsertCustomerByEmail({
         email: profile.email,
@@ -80,7 +90,7 @@ export async function PUT(request: Request) {
         phone: profile.mobile || undefined,
         address1: profile.address || undefined,
       }).catch(() => {
-        // Profile updates remain available even if Shopify write scope is missing.
+        // Profile updates remain available even if Catalog write scope is missing.
       });
     }
 
@@ -91,6 +101,11 @@ export async function PUT(request: Request) {
         name: profile.name,
         mobile: profile.mobile,
         address: profile.address,
+        street: profile.street || "",
+        area: profile.area || "",
+        city: profile.city || "",
+        state: profile.state || "",
+        pincode: profile.pincode || "",
         paymentMode: profile.paymentMode,
         requiresProfileCompletion:
           Boolean(profile.needsProfileCompletion) || profile.email.endsWith("@pcgs.local"),
@@ -115,3 +130,4 @@ export async function PUT(request: Request) {
     return Response.json({ error: message }, { status: 500 });
   }
 }
+

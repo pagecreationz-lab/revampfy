@@ -1,0 +1,26 @@
+[
+  {
+    "id": "vsar_4i7fmpb9",
+    "vendorId": "vendor_lseufi77",
+    "vendorEmail": "support@revampfy.in",
+    "requestedGoogleEmail": "mohansmart627@gmail.com",
+    "sheetId": "1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng",
+    "sheetName": "Test1",
+    "sheetUrl": "https://docs.google.com/spreadsheets/d/1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng/edit?usp=drivesdk",
+    "status": "approved",
+    "createdAt": "2026-05-08T11:55:20.886Z",
+    "updatedAt": "2026-05-08T14:37:19.262Z"
+  },
+  {
+    "id": "vsar_lsznz3ql",
+    "vendorId": "vendor_lseufi77",
+    "vendorEmail": "support@revampfy.in",
+    "requestedGoogleEmail": "mohansmart627@gmail.com",
+    "sheetId": "1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng",
+    "sheetName": "Test1",
+    "sheetUrl": "https://docs.google.com/spreadsheets/d/1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng/edit?usp=drivesdk",
+    "status": "rejected",
+    "createdAt": "2026-05-08T09:37:06.398Z",
+    "updatedAt": "2026-05-08T12:26:18.424Z"
+  }
+]

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { CartItem } from "@/lib/cart";
 import { getCartItemsFromStorage, setCartItemsToStorage } from "@/lib/cart";
-import type { ShopifyProduct } from "@/lib/shopify";
+import type { CatalogProduct } from "@/lib/catalog";
 import { readJsonSafe } from "@/lib/httpClient";
 
 function formatPrice(value?: string) {
@@ -21,7 +21,7 @@ function formatPrice(value?: string) {
 export function CartClient({ isAuthenticated }: { isAuthenticated: boolean }) {
   const router = useRouter();
   const [items, setItems] = useState<CartItem[]>([]);
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [products, setProducts] = useState<CatalogProduct[]>([]);
   const [shippingFlatRate, setShippingFlatRate] = useState(199);
   const [taxRatePct, setTaxRatePct] = useState(18);
 
@@ -30,8 +30,8 @@ export function CartClient({ isAuthenticated }: { isAuthenticated: boolean }) {
     const loadProducts = async () => {
       try {
         const [syncRes, commerceRes] = await Promise.all([
-          fetch("/api/shopify/sync"),
-          fetch("/api/shopify/commerce-status"),
+          fetch("/api/catalog/sync"),
+          fetch("/api/catalog/commerce-status"),
         ]);
         const syncJson = await readJsonSafe(syncRes);
         const commerceJson = await readJsonSafe(commerceRes);
@@ -49,7 +49,7 @@ export function CartClient({ isAuthenticated }: { isAuthenticated: boolean }) {
 
   const productById = useMemo(() => {
     return products.reduce(
-      (acc: Record<number, ShopifyProduct>, product) => {
+      (acc: Record<number, CatalogProduct>, product) => {
         acc[product.id] = product;
         return acc;
       },
@@ -177,3 +177,4 @@ export function CartClient({ isAuthenticated }: { isAuthenticated: boolean }) {
     </section>
   );
 }
+

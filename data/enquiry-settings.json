@@ -1,0 +1,14 @@
+{
+  "mailTo": "support@revampfy.in",
+  "smtpHost": "smtp.gmail.com",
+  "smtpPort": 587,
+  "smtpUser": "support@revampfy.in",
+  "smtpPass": "nzvb ovhp dale dxki",
+  "smtpFrom": "no-reply@revampfy.in",
+  "enableAutoReplyContact": true,
+  "enableAutoReplyBulk": true,
+  "autoReplyContactSubject": "We received your contact enquiry - Revampfy",
+  "autoReplyContactBody": "Hi {name},\n\nThanks for contacting Revampfy. We received your enquiry and our team will get back to you shortly.\n\nRegards,\nRevampfy Support",
+  "autoReplyBulkSubject": "We received your bulk order enquiry - Revampfy",
+  "autoReplyBulkBody": "Hi {name},\n\nThanks for your bulk enquiry at Revampfy. We received your request and our team will contact you with pricing and availability soon.\n\nRegards,\nRevampfy Team"
+}

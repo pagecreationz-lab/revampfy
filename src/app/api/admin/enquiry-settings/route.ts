@@ -21,6 +21,12 @@ export async function POST(request: Request) {
     smtpUser?: string;
     smtpPass?: string;
     smtpFrom?: string;
+    enableAutoReplyContact?: boolean;
+    enableAutoReplyBulk?: boolean;
+    autoReplyContactSubject?: string;
+    autoReplyContactBody?: string;
+    autoReplyBulkSubject?: string;
+    autoReplyBulkBody?: string;
   };
 
   const saved = await saveEnquirySettings({
@@ -33,6 +39,26 @@ export async function POST(request: Request) {
         ? payload.smtpPass
         : undefined,
     smtpFrom: (payload.smtpFrom || "").trim(),
+    enableAutoReplyContact:
+      typeof payload.enableAutoReplyContact === "boolean"
+        ? payload.enableAutoReplyContact
+        : undefined,
+    enableAutoReplyBulk:
+      typeof payload.enableAutoReplyBulk === "boolean" ? payload.enableAutoReplyBulk : undefined,
+    autoReplyContactSubject:
+      typeof payload.autoReplyContactSubject === "string"
+        ? payload.autoReplyContactSubject.trim()
+        : undefined,
+    autoReplyContactBody:
+      typeof payload.autoReplyContactBody === "string"
+        ? payload.autoReplyContactBody
+        : undefined,
+    autoReplyBulkSubject:
+      typeof payload.autoReplyBulkSubject === "string"
+        ? payload.autoReplyBulkSubject.trim()
+        : undefined,
+    autoReplyBulkBody:
+      typeof payload.autoReplyBulkBody === "string" ? payload.autoReplyBulkBody : undefined,
   });
 
   return Response.json({

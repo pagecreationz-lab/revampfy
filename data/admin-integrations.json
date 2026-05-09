@@ -1,0 +1,28 @@
+{
+  "n8n": {
+    "enabled": false,
+    "baseUrl": "https://revampfy.n8n.shivahost.in/",
+    "apiKey": "",
+    "webhookUrl": ""
+  },
+  "googleSheets": {
+    "enabled": true,
+    "clientId": "280815033620-laf1bdmbg2s6ssp1u58fpmebmbadrp9p.apps.googleusercontent.com",
+    "clientSecret": "enc:v1:wDdB22VlzMrDUJQw:mEIcq7FsmxRwZz9hjrc-zA:7zNa1lP6bLBh44rDKKdtbzu5GSukEqgusij1-xif-dsV9j8",
+    "redirectUri": "http://localhost:3000/api/admin/integrations/google-sheets/oauth/callback",
+    "sheetUrl": "",
+    "spreadsheetId": "",
+    "sheetName": "Sheet1",
+    "connectedEmail": "support@revampfy.in",
+    "refreshToken": "enc:v1:oG4tprhD54glZSb8:pCLvKKTF52O-SmE_NM8BYg:jfqaCdwQr6knhYucPGzD8YQ-zxq8-WOrES7AHoO445oL-4w5Q5af4gtOePdihNVLOZ9ZfKXcl9SkPSPLNG4ojpxmv0ob3-Z9vDxScPzcsTukZZu0V5Dhrb5QYH0e-v80mw4cbPnAIA",
+    "accessToken": "enc:v1:l6NGVAWX0ZtZJzTm:ZDroSIKFn5ASMZy_v1X36g:8g41b0QmllVL3BZ5eijrdpMNKqm3Zh47O94IgSscc3ZCGuh9DL9arqxVrBfZyUCE7RTff52jXubzYEv8b9mmRv7C1CsIeK5IgAWnn0Dv4f1jwVcwNaA_3gTHBNCULlezmpBbF0hqjjT1mqSlXx8H0xJwWIXmiNegBXkeZF0PUgBWqDDpHaW1qoQf1gR2TQa381xkItTSA60wUINSnm7-aRChn9pgFd8Kzx-ST8XDaogwTBiiFctRG_XdS3qzIrMbcVz7kQWKGvev1JYWDzCHWmHM5Pwc61ePg3IGHQLMsTHw5ey-L5mrShcl2G4UTUuhoEUjvdrS_Pn08_t25HA",
+    "tokenExpiry": 1778316953920,
+    "autoSyncEnabled": false,
+    "syncIntervalMinutes": 5,
+    "webhookSecret": "",
+    "lastSyncAt": "2026-05-08T09:13:55.577Z",
+    "lastSyncStatus": "error",
+    "lastSyncMessage": "Spreadsheet ID is required in Integrations settings."
+  },
+  "updatedAt": "2026-05-09T07:55:54.932Z"
+}

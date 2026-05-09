@@ -1,0 +1,45 @@
+[
+  {
+    "vendorId": "vendor_cf0i8v33",
+    "vendorEmail": "services@pcgs.co.in",
+    "googleLoginEmail": "",
+    "googleUserId": "",
+    "lastGoogleLoginAt": "",
+    "allowedGoogleEmails": [
+      "services@pcgs.co.in"
+    ],
+    "sheetId": "1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng",
+    "sheetUrl": "https://docs.google.com/spreadsheets/d/1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng/edit?usp=drivesdk",
+    "sheetName": "Sheet1",
+    "syncStatus": "active",
+    "enabled": true,
+    "lastSyncedAt": "2026-05-08T14:32:32.318Z",
+    "lastSyncMessage": "Sync complete. 1 product(s) processed.",
+    "accessToken": "enc:v1:LEKBl6EOMc6iiXzf:MgRwQHDrU8LfTYX2TvDS9w:Hr3b0UZEejvaQvx8WxV1qslMx00FFgigYMnANk0V9rfnAfhvrD9qhH5JQOs7cBOFm9j2qfOHt9rwRk4u6Os5luOyzaHbWoN9EJTDo6Rc-h4oSLK2pBh21mY84IiWsJjjKtre6Wj19jByrZrpsSDJePCeqBMtBstxmxnFMgSKj4z4DnHqhHV46obrT41aSAv4Sa2eCsMQVM1YUPJcMZvdGWm4E-wIzjOEFcOGSft9X0yBLQh_SavjFrdGEaH30g7vmyaiXLFajoc1z_V6AreTltLiBrsiVt-nUu_BvnNVv5QwZOSW2v7WXc7Ibo5WgNn4g_ui2iEF3kuYBhbvrg",
+    "refreshToken": "enc:v1:B3iNqeZreAyJeF52:90G9jMjzprnBHTcF2bgS2g:FMW1sGSo_Mh5ms6CdfXEU-fhc4Y4ja5L3HeXHB5NKGNl5SXUUF3jxxVEtu8pHuTju2KFO-X4yM-1ev9r98nerWaLUi-h8Eo3MzRJc-QlryHY3otl0pASMgOpj54ta2N_g5ym56jHcw",
+    "tokenExpiry": 1778229707268,
+    "updatedAt": "2026-05-08T14:32:32.322Z"
+  },
+  {
+    "vendorId": "vendor_lseufi77",
+    "vendorEmail": "support@revampfy.in",
+    "googleLoginEmail": "",
+    "googleUserId": "",
+    "lastGoogleLoginAt": "",
+    "allowedGoogleEmails": [
+      "support@revampfy.in",
+      "mohansmart627@gmail.com"
+    ],
+    "sheetId": "1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng",
+    "sheetUrl": "https://docs.google.com/spreadsheets/d/1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng/edit?usp=drivesdk",
+    "sheetName": "Test1",
+    "syncStatus": "inactive",
+    "enabled": true,
+    "lastSyncedAt": "",
+    "lastSyncMessage": "Google email access approved by admin.",
+    "accessToken": "enc:v1:igN6uQolE-8udWZh:WRwISVKT9M6RfvgaCVkzIQ:M2x59bMYJcauaSOFOkAWXi8TpLefxtwOQh19yQh6XQnr4FJTHhMMIGQRBJ-dslAq37_v3kfu8B7uK-3A3Q88STQql9nNR0kW1jIu-T_AuO92kjSoifu7A2FwatxSt1T1_iL5htDMFQieUu0CtzJ-92c4Qr4NrpFzk2DujSY5HCR9-5Np0Hu7VJkJLRBS_EBeHkAnmEj4cCooONGdJ7ZuA2JzlfKuzBppwmINmZp9qNZy9Bd7QFlZ8QSNIl1nZmaoxRRtjt50oXyCYN-OLifBMvTOLuHVusQQ4Rt4Lo2009Ks8pqAkHNRmcBNhmRsOnc8p_LCOtWSp8rKf0tYEOQ",
+    "refreshToken": "enc:v1:9DsodQLwuhaG7uFe:DOa0eqps5CT5uw0k7bEsMA:ffqBVWJdVRcdujXsFUqVgcE6zMZLozl-kAnDe6vcgXkn3yGM1BMxs9Bv6ysJ9cyVxmF1_sDpOoCdoGtf9h90HTqoiBHI3AvMZdfdgfTsE0bMKz8cwRLSsf_MAlB5s9ghzp1j3aIZ7g",
+    "tokenExpiry": 1778242411874,
+    "updatedAt": "2026-05-08T14:37:19.244Z"
+  }
+]

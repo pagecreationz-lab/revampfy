@@ -1,20 +1,20 @@
 ﻿import { Header } from "@/components/Header";
 import { Topbar } from "@/components/Topbar";
 import { CountUpStat } from "@/components/CountUpStat";
+import Image from "next/image";
 import {
   getCollections,
   getProducts,
   stripHtml,
-  type ShopifyCollection,
-  type ShopifyProduct,
-} from "@/lib/shopify";
+  type CatalogCollection,
+  type CatalogProduct,
+} from "@/lib/catalog";
 import { getHomepageConfig } from "@/lib/homepage";
 import { getSiteContent } from "@/lib/siteContent";
-import { getEffectiveShopifySyncStore } from "@/lib/shopifySyncRuntime";
 
 export const dynamic = "force-dynamic";
 
-const fallbackCollections: ShopifyCollection[] = [
+const fallbackCollections: CatalogCollection[] = [
   {
     id: 1,
     title: "Laptops",
@@ -33,7 +33,7 @@ const fallbackCollections: ShopifyCollection[] = [
   { id: 6, title: "MacBook", handle: "macbook", body_html: "Premium Apple devices" },
 ];
 
-const fallbackProducts: ShopifyProduct[] = [
+const fallbackProducts: CatalogProduct[] = [
   {
     id: 101,
     title: "MacBook Pro 13\" (2019)",
@@ -91,7 +91,7 @@ function formatPrice(value?: string) {
   }).format(numberValue);
 }
 
-function getDiscountLabel(product: ShopifyProduct) {
+function getDiscountLabel(product: CatalogProduct) {
   const variant = product.variants?.[0];
   const price = Number(variant?.price);
   const compare = Number(variant?.compare_at_price);
@@ -103,7 +103,7 @@ function getDiscountLabel(product: ShopifyProduct) {
   return `-${percent}%`;
 }
 
-function getStockStatus(product: ShopifyProduct) {
+function getStockStatus(product: CatalogProduct) {
   const qty =
     product.variants?.reduce(
       (sum, variant) => sum + Number(variant.inventory_quantity || 0),
@@ -114,7 +114,7 @@ function getStockStatus(product: ShopifyProduct) {
   return { label: "In stock", className: "stock-badge stock-badge--in" };
 }
 
-function getCollectionSubtitle(collection: ShopifyCollection) {
+function getCollectionSubtitle(collection: CatalogCollection) {
   const text = stripHtml(collection.body_html).trim();
   if (!text) return "Explore collection";
   if (text.toLowerCase() === "shop now") return "Explore collection";
@@ -129,7 +129,7 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-function getCollectionHref(collection: ShopifyCollection) {
+function getCollectionHref(collection: CatalogCollection) {
   return `/store?collection=${encodeURIComponent(slugify(collection.title))}`;
 }
 
@@ -139,44 +139,20 @@ export default async function Home() {
     getSiteContent(),
   ]);
 
-  let collections: ShopifyCollection[] = [];
-  let products: ShopifyProduct[] = [];
-  let syncedPayload:
-    | {
-        categories: ShopifyCollection[];
-        products: ShopifyProduct[];
-      }
-    | null = null;
+  let collections: CatalogCollection[] = [];
+  let products: CatalogProduct[] = [];
 
   try {
-    const synced = await getEffectiveShopifySyncStore();
-    syncedPayload = {
-      categories: synced.payload.categories,
-      products: synced.payload.products,
-    };
+    collections = await getCollections();
   } catch {
-    syncedPayload = null;
+    collections = fallbackCollections;
   }
 
-  if (syncedPayload?.categories?.length) {
-    collections = syncedPayload.categories;
-  } else {
-    try {
-      collections = await getCollections();
-    } catch {
-      collections = fallbackCollections;
-    }
-  }
-
-  if (syncedPayload?.products?.length) {
-    products = syncedPayload.products;
-  } else {
-    try {
-      const response = await getProducts({ limit: 50 });
-      products = response.products;
-    } catch {
-      products = fallbackProducts;
-    }
+  try {
+    const response = await getProducts({ limit: 50, vendorManagedOnly: true });
+    products = response.products;
+  } catch {
+    products = fallbackProducts;
   }
 
   const selectedCollections = collections.filter((collection) =>
@@ -233,12 +209,16 @@ export default async function Home() {
             </div>
             <div className="hero__visual">
               <div className="hero__card">
-                <img
+                <Image
                   src={
                     siteContent.home.heroImageUrl ||
                     "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=900&auto=format&fit=crop"
                   }
                   alt="Laptop"
+                  width={900}
+                  height={600}
+                  sizes="(max-width: 768px) 90vw, 520px"
+                  priority
                 />
               </div>
               <div className="hero__stat">
@@ -300,11 +280,11 @@ export default async function Home() {
               </a>
             </div>
             <div className="product-grid">
-              {topSelling.map((product) => (
+              {topSelling.map((product, index) => (
                 <a
                   className="product product--link-card"
-                  key={product.id}
-                  href={`/store/${product.id}`}
+                  key={`${product.handle || product.id}-${index}`}
+                  href={`/store/${encodeURIComponent(product.handle || String(product.id))}`}
                 >
                   <span className={getStockStatus(product).className}>
                     {getStockStatus(product).label}
@@ -390,7 +370,7 @@ export default async function Home() {
                   <p>Bulk orders delivered</p>
                 </div>
                 <div>
-                  <CountUpStat target={4.8} decimals={1} suffix="★" />
+                  <CountUpStat target={4.8} decimals={1} suffix="?" />
                   <p>Customer rating</p>
                 </div>
               </div>
@@ -477,10 +457,12 @@ export default async function Home() {
         </div>
         <div className="footer__bottom">
           <div className="container">
-            <span>© 2026 Revampfy. All rights reserved.</span>
+            <span>(c) 2026 Revampfy. All rights reserved.</span>
           </div>
         </div>
       </footer>
     </>
   );
 }
+
+

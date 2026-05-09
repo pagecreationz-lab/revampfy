@@ -1,0 +1,126 @@
+[
+  {
+    "id": "vsap_ubbkmthp",
+    "vendorId": "vendor_cf0i8v33",
+    "vendorEmail": "services@pcgs.co.in",
+    "sheetId": "1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng",
+    "sheetName": "Sheet1",
+    "sheetUrl": "https://docs.google.com/spreadsheets/d/1dh4RX_Map4jFO0fE9p6LNsLrN28lu_b8_j60rSPzHng/edit?usp=drivesdk",
+    "productId": 9512258633962,
+    "productTitle": "HP Laptop",
+    "productHandle": "hf233",
+    "status": "pending_approval",
+    "source": "google_sheet",
+    "createdAt": "2026-05-08T07:13:15.094Z",
+    "updatedAt": "2026-05-08T14:32:32.306Z",
+    "previousProduct": {
+      "id": 9512258633962,
+      "title": "HP Laptop",
+      "handle": "hf233",
+      "description": "",
+      "description_html": "",
+      "status": "active",
+      "tags": "vendorState:Chennai",
+      "vendor": "PCGS",
+      "product_type": "Laptops",
+      "category": "Laptops",
+      "collection_handles": [],
+      "collection_titles": [],
+      "images": [],
+      "variants": [
+        {
+          "id": 9512258633962000,
+          "title": "Default",
+          "price": "30000",
+          "compare_at_price": null,
+          "inventory_quantity": 10,
+          "requires_shipping": true
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "vendor",
+          "key": "vendor_id",
+          "value": "vendor_cf0i8v33",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "synced_from_sheet",
+          "value": "true",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "sheet_sku",
+          "value": "hf233`",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "vendor",
+          "key": "vendor_id",
+          "value": "vendor_cf0i8v33",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "approval_status",
+          "value": "approved",
+          "type": "single_line_text_field"
+        }
+      ]
+    },
+    "syncedProduct": {
+      "id": 9512258633962,
+      "title": "HP Laptop",
+      "handle": "hf233",
+      "description": "",
+      "description_html": "",
+      "status": "draft",
+      "tags": "vendorState:Chennai",
+      "vendor": "services@pcgs.co.in",
+      "product_type": "Laptops",
+      "category": "Laptops",
+      "collection_handles": [],
+      "collection_titles": [],
+      "images": [],
+      "variants": [
+        {
+          "id": 9512258633962000,
+          "title": "Default",
+          "price": "30000",
+          "compare_at_price": null,
+          "inventory_quantity": 10,
+          "requires_shipping": true
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "vendor",
+          "key": "vendor_id",
+          "value": "vendor_cf0i8v33",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "synced_from_sheet",
+          "value": "true",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "sheet_sku",
+          "value": "hf233`",
+          "type": "single_line_text_field"
+        },
+        {
+          "namespace": "integration",
+          "key": "approval_status",
+          "value": "pending_approval",
+          "type": "single_line_text_field"
+        }
+      ]
+    },
+    "lastActionNote": "Pending admin approval"
+  }
+]

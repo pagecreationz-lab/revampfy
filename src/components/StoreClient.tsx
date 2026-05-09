@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import type { ShopifyCollection, ShopifyProduct } from "@/lib/shopify";
+import type { CatalogCollection, CatalogProduct } from "@/lib/catalog";
 import {
   getPrimaryCategory,
   getProductPrices,
@@ -41,7 +42,7 @@ function formatPrice(value?: string) {
   }).format(numberValue);
 }
 
-function getDiscountPercent(product: ShopifyProduct) {
+function getDiscountPercent(product: CatalogProduct) {
   const first = product.variants?.[0];
   const price = Number(first?.price || 0);
   const compare = Number(first?.compare_at_price || 0);
@@ -51,24 +52,25 @@ function getDiscountPercent(product: ShopifyProduct) {
 
 const COMPARE_KEY = "pcgs_compare_product_ids";
 const WISHLIST_KEY = "pcgs_wishlist_ids";
+const productIdKey = (product: CatalogProduct) => String(product.id);
 
-function getProductCategoryLabel(product: ShopifyProduct) {
+function getProductCategoryLabel(product: CatalogProduct) {
   return (product.category || product.product_type || "General").trim();
 }
 
-function getCompareIds(): number[] {
+function getCompareIds(): string[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(COMPARE_KEY);
     if (!raw) return [];
-    const parsed = JSON.parse(raw) as number[];
-    return Array.isArray(parsed) ? parsed.filter((id) => Number.isFinite(id)) : [];
+    const parsed = JSON.parse(raw) as unknown[];
+    return Array.isArray(parsed) ? parsed.map((id) => String(id)).filter(Boolean) : [];
   } catch {
     return [];
   }
 }
 
-function toggleCompareId(productId: number) {
+function toggleCompareId(productId: string) {
   const ids = getCompareIds();
   const next = ids.includes(productId)
     ? ids.filter((id) => id !== productId)
@@ -77,19 +79,19 @@ function toggleCompareId(productId: number) {
   return next;
 }
 
-function getWishlistIds(): number[] {
+function getWishlistIds(): string[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(WISHLIST_KEY);
     if (!raw) return [];
-    const parsed = JSON.parse(raw) as number[];
-    return Array.isArray(parsed) ? parsed.filter((id) => Number.isFinite(id)) : [];
+    const parsed = JSON.parse(raw) as unknown[];
+    return Array.isArray(parsed) ? parsed.map((id) => String(id)).filter(Boolean) : [];
   } catch {
     return [];
   }
 }
 
-function toggleWishlistId(productId: number) {
+function toggleWishlistId(productId: string) {
   const ids = getWishlistIds();
   const next = ids.includes(productId)
     ? ids.filter((id) => id !== productId)
@@ -103,8 +105,8 @@ export function StoreClient({
   products,
   collections,
 }: {
-  products: ShopifyProduct[];
-  collections: ShopifyCollection[];
+  products: CatalogProduct[];
+  collections: CatalogCollection[];
 }) {
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
@@ -115,11 +117,11 @@ export function StoreClient({
   const [selectedCollection, setSelectedCollection] = useState("all");
   const [selectedAvailability, setSelectedAvailability] = useState("all");
   const [sortBy, setSortBy] = useState<SortOption>("featured");
-  const [compareIds, setCompareIds] = useState<number[]>([]);
-  const [wishlistIds, setWishlistIds] = useState<number[]>([]);
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [wishlistIds, setWishlistIds] = useState<string[]>([]);
   const [compareNotice, setCompareNotice] = useState("");
-  const [quickViewProduct, setQuickViewProduct] = useState<ShopifyProduct | null>(null);
-  const [comparePreviewProduct, setComparePreviewProduct] = useState<ShopifyProduct | null>(null);
+  const [quickViewProduct, setQuickViewProduct] = useState<CatalogProduct | null>(null);
+  const [comparePreviewProduct, setComparePreviewProduct] = useState<CatalogProduct | null>(null);
   const [showCompareCategoryWarning, setShowCompareCategoryWarning] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -326,7 +328,7 @@ export function StoreClient({
     collectionOptions,
   ]);
 
-  const getStockStatus = (product: ShopifyProduct) => {
+  const getStockStatus = (product: CatalogProduct) => {
     const qty = getProductStockQty(product);
     if (qty <= 0) return { label: "Out of stock", className: "stock-badge stock-badge--out" };
     if (qty <= 5) return { label: "Low stock", className: "stock-badge stock-badge--low" };
@@ -549,23 +551,32 @@ export function StoreClient({
 
         <div className="product-grid store-products-grid store-products-grid--store">
           {filteredProducts.length ? (
-            filteredProducts.map((product) => {
+            filteredProducts.map((product, index) => {
               const stock = getStockStatus(product);
               const price = getProductPrices(product)[0];
-              const selected = compareIds.includes(product.id);
-              const wishlisted = wishlistIds.includes(product.id);
+              const currentProductId = productIdKey(product);
+              const selected = compareIds.includes(currentProductId);
+              const wishlisted = wishlistIds.includes(currentProductId);
               const discount = getDiscountPercent(product);
               return (
-                <article className="product" key={product.id}>
-                  <a href={`/store/${product.id}`} className="product__link-cover" aria-label={product.title} />
+                <article className="product" key={`${product.handle || product.id}-${index}`}>
+                  <a
+                    href={`/store/${encodeURIComponent(product.handle || String(product.id))}`}
+                    className="product__link-cover"
+                    aria-label={product.title}
+                  />
                   <span className={stock.className}>{stock.label}</span>
                   <span className="badge">{discount ? `${discount}% Off` : "Featured"}</span>
-                  <img
+                  <Image
                     src={
                       product.images?.[0]?.src ||
                       "https://images.unsplash.com/photo-1498049860654-af1a5c566876?q=80&w=800&auto=format&fit=crop"
                     }
                     alt={product.title}
+                    width={800}
+                    height={560}
+                    sizes="(max-width: 768px) 90vw, (max-width: 1200px) 33vw, 280px"
+                    loading="lazy"
                   />
                   <h3 title={product.title}>{product.title}</h3>
                   <p>{product.handle.replace(/-/g, " ")}</p>
@@ -578,8 +589,10 @@ export function StoreClient({
                         type="button"
                         aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
                         title={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                        onClick={() => {
-                          const next = toggleWishlistId(product.id);
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          const next = toggleWishlistId(currentProductId);
                           setWishlistIds(next);
                         }}
                       >
@@ -592,7 +605,11 @@ export function StoreClient({
                     <button
                       className="secondary product-action-btn product-action-btn--quick"
                       type="button"
-                      onClick={() => setQuickViewProduct(product)}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        setQuickViewProduct(product);
+                      }}
                     >
                       Quick View
                     </button>
@@ -601,7 +618,11 @@ export function StoreClient({
                         selected ? "product-action-btn--selected" : "product-action-btn--compare"
                       }`}
                       type="button"
-                      onClick={() => setComparePreviewProduct(product)}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        setComparePreviewProduct(product);
+                      }}
                     >
                       {selected ? "Selected" : "Compare"}
                     </button>
@@ -634,21 +655,38 @@ export function StoreClient({
               >
                 ×
               </button>
-              <img
+              <Image
                 src={
                   quickViewProduct.images?.[0]?.src ||
                   "https://images.unsplash.com/photo-1498049860654-af1a5c566876?q=80&w=800&auto=format&fit=crop"
                 }
                 alt={quickViewProduct.title}
+                width={960}
+                height={640}
+                sizes="(max-width: 768px) 90vw, 480px"
               />
               <div className="quick-view-modal__content">
                 <h3>{quickViewProduct.title}</h3>
+                <p>{quickViewProduct.category || quickViewProduct.product_type || "General"}</p>
                 <p>Variants: {quickViewProduct.variants?.length || 0}</p>
+                {quickViewProduct.variants?.length ? (
+                  <div className="product-specs__grid" style={{ marginBottom: "0.6rem" }}>
+                    {quickViewProduct.variants.slice(0, 3).map((variant, index) => (
+                      <div
+                        className="product-specs__row"
+                        key={`quick-variant-${variant.id || "na"}-${variant.title || "untitled"}-${index}`}
+                      >
+                        <span>{variant.title || "Variant"}</span>
+                        <strong>{formatPrice(String(variant.price || 0))}</strong>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
                 <div className="price">
                   <span>{formatPrice(String(getProductPrices(quickViewProduct)[0] || 0))}</span>
                 </div>
                 <div className="product__actions">
-                  <a href={`/store/${quickViewProduct.id}`}>
+                  <a href={`/store/${encodeURIComponent(quickViewProduct.handle || String(quickViewProduct.id))}`}>
                     <button className="product-action-btn product-action-btn--compare" type="button">
                       Open Full Details
                     </button>
@@ -679,12 +717,15 @@ export function StoreClient({
               >
                 ×
               </button>
-              <img
+              <Image
                 src={
                   comparePreviewProduct.images?.[0]?.src ||
                   "https://images.unsplash.com/photo-1498049860654-af1a5c566876?q=80&w=800&auto=format&fit=crop"
                 }
                 alt={comparePreviewProduct.title}
+                width={960}
+                height={640}
+                sizes="(max-width: 768px) 90vw, 480px"
               />
               <div className="quick-view-modal__content">
                 <h3>{comparePreviewProduct.title}</h3>
@@ -695,16 +736,14 @@ export function StoreClient({
                 <div className="product__actions">
                   <button
                     className={`product-action-btn ${
-                      compareIds.includes(comparePreviewProduct.id)
+                      compareIds.includes(String(comparePreviewProduct.id))
                         ? "product-action-btn--remove"
                         : "product-action-btn--compare"
                     }`}
                     type="button"
                     onClick={() => {
                       const existing = getCompareIds();
-                      const existingProducts = products.filter((entry) =>
-                        existing.includes(entry.id)
-                      );
+                      const existingProducts = products.filter((entry) => existing.includes(String(entry.id)));
                       const baseCategory = existingProducts[0]
                         ? getProductCategoryLabel(existingProducts[0]).toLowerCase()
                         : "";
@@ -712,26 +751,26 @@ export function StoreClient({
                         comparePreviewProduct
                       ).toLowerCase();
                       if (
-                        !existing.includes(comparePreviewProduct.id) &&
+                        !existing.includes(String(comparePreviewProduct.id)) &&
                         existing.length >= 3
                       ) {
                         setCompareNotice("You can compare up to 3 products only.");
                         return;
                       }
                       if (
-                        !existing.includes(comparePreviewProduct.id) &&
+                        !existing.includes(String(comparePreviewProduct.id)) &&
                         baseCategory &&
                         baseCategory !== nextCategory
                       ) {
                         setShowCompareCategoryWarning(true);
                         return;
                       }
-                      const next = toggleCompareId(comparePreviewProduct.id);
+                      const next = toggleCompareId(String(comparePreviewProduct.id));
                       setCompareIds(next);
                       setCompareNotice("");
                     }}
                   >
-                    {compareIds.includes(comparePreviewProduct.id)
+                    {compareIds.includes(String(comparePreviewProduct.id))
                       ? "Remove from Compare"
                       : "Add to Compare"}
                   </button>
@@ -778,3 +817,4 @@ export function StoreClient({
     </div>
   );
 }
+

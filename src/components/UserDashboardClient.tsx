@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import type { ShopifyCustomer } from "@/lib/shopify";
+import type { CatalogCustomer } from "@/lib/catalog";
 
 type UserDashboardClientProps = {
   email: string;
   role: string;
   sessionExpiry: string;
-  customers: ShopifyCustomer[];
+  customers: CatalogCustomer[];
   customersError: string;
   totalProducts: number;
   totalCategories: number;
@@ -71,7 +71,7 @@ export function UserDashboardClient(props: UserDashboardClientProps) {
       </div>
 
       <section className="admin__panel" style={{ marginTop: "1rem" }}>
-        <h2>Shopify Backend Users</h2>
+        <h2>Catalog Backend Users</h2>
         {props.customersError ? (
           <div className="admin__alert admin__alert--error">{props.customersError}</div>
         ) : props.customers.length ? (
@@ -105,9 +105,10 @@ export function UserDashboardClient(props: UserDashboardClientProps) {
             </table>
           </div>
         ) : (
-          <p className="hero__subtext">No Shopify customers found yet.</p>
+          <p className="hero__subtext">No Catalog customers found yet.</p>
         )}
       </section>
     </div>
   );
 }
+

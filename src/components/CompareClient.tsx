@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { ShopifyProduct } from "@/lib/shopify";
+import type { CatalogProduct } from "@/lib/catalog";
 import { readJsonSafe } from "@/lib/httpClient";
 
 const COMPARE_KEY = "pcgs_compare_product_ids";
@@ -17,28 +17,28 @@ function formatPrice(value?: string) {
   }).format(numberValue);
 }
 
-function getCompareIds(): number[] {
+function getCompareIds(): string[] {
   try {
     const raw = localStorage.getItem(COMPARE_KEY);
     if (!raw) return [];
-    const parsed = JSON.parse(raw) as number[];
-    return Array.isArray(parsed) ? parsed.filter((id) => Number.isFinite(id)).slice(0, 3) : [];
+    const parsed = JSON.parse(raw) as unknown[];
+    return Array.isArray(parsed) ? parsed.map((id) => String(id)).filter(Boolean).slice(0, 3) : [];
   } catch {
     return [];
   }
 }
 
-function saveCompareIds(ids: number[]) {
+function saveCompareIds(ids: string[]) {
   localStorage.setItem(COMPARE_KEY, JSON.stringify(ids.slice(0, 3)));
 }
 
-function getCategoryLabel(product: ShopifyProduct) {
+function getCategoryLabel(product: CatalogProduct) {
   return (product.category || product.product_type || "General").trim();
 }
 
 export function CompareClient() {
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
-  const [ids, setIds] = useState<number[]>([]);
+  const [products, setProducts] = useState<CatalogProduct[]>([]);
+  const [ids, setIds] = useState<string[]>([]);
   const [compareError, setCompareError] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showCategoryWarning, setShowCategoryWarning] = useState(false);
@@ -48,15 +48,15 @@ export function CompareClient() {
     setIds(initialIds);
     saveCompareIds(initialIds);
     const load = async () => {
-      const res = await fetch("/api/shopify/sync");
+      const res = await fetch("/api/catalog/products?limit=250");
       const json = await readJsonSafe(res);
-      setProducts(json?.payload?.products || []);
+      setProducts(json?.products || []);
     };
     void load();
   }, []);
 
   const comparedProducts = useMemo(
-    () => products.filter((product) => ids.includes(product.id)),
+    () => products.filter((product) => ids.includes(String(product.id))),
     [products, ids]
   );
 
@@ -88,7 +88,7 @@ export function CompareClient() {
     () =>
       products
         .filter((product) => {
-          if (ids.includes(product.id)) return false;
+          if (ids.includes(String(product.id))) return false;
           const productCategory = getCategoryLabel(product).toLowerCase();
           if (compareCategory) return productCategory === compareCategory;
           if (selectedCategory === "all") return true;
@@ -100,16 +100,16 @@ export function CompareClient() {
 
   const canCompare = comparedProducts.length >= 2;
 
-  const removeFromCompare = (productId: number) => {
+  const removeFromCompare = (productId: string) => {
     const next = ids.filter((id) => id !== productId);
     setIds(next);
     saveCompareIds(next);
     setCompareError("");
   };
 
-  const addToCompare = (productId: number) => {
+  const addToCompare = (productId: string) => {
     if (ids.includes(productId) || ids.length >= 3) return;
-    const product = products.find((item) => item.id === productId);
+    const product = products.find((item) => String(item.id) === productId);
     if (!product) return;
     const nextCategory = getCategoryLabel(product).toLowerCase();
     if (compareCategory && compareCategory !== nextCategory) {
@@ -168,8 +168,8 @@ export function CompareClient() {
 
           <div className="product-grid store-products-grid compare-grid">
             {comparedProducts.length ? (
-              comparedProducts.map((product) => (
-                <article className="product" key={product.id}>
+              comparedProducts.map((product, index) => (
+                <article className="product" key={`${product.handle || product.id}-cmp-${index}`}>
                   <img
                     src={
                       product.images?.[0]?.src ||
@@ -185,7 +185,7 @@ export function CompareClient() {
                     <span>{formatPrice(product.variants?.[0]?.price)}</span>
                   </div>
                   <div className="product__actions">
-                    <a href={`/store/${product.id}`}>
+                    <a href={`/store/${encodeURIComponent(product.handle || String(product.id))}`}>
                       <button className="secondary product-action-btn product-action-btn--quick">
                         Quick View
                       </button>
@@ -193,7 +193,7 @@ export function CompareClient() {
                     <button
                       className="product-action-btn product-action-btn--remove"
                       type="button"
-                      onClick={() => removeFromCompare(product.id)}
+                      onClick={() => removeFromCompare(String(product.id))}
                     >
                       Remove
                     </button>
@@ -209,8 +209,8 @@ export function CompareClient() {
             <h3>Suggested Products to Add</h3>
             <div className="product-grid store-products-grid compare-grid">
               {suggestionProducts.length ? (
-                suggestionProducts.map((product) => (
-                  <article className="product" key={product.id}>
+                suggestionProducts.map((product, index) => (
+                  <article className="product" key={`${product.handle || product.id}-sug-${index}`}>
                     <img
                       src={
                         product.images?.[0]?.src ||
@@ -227,7 +227,7 @@ export function CompareClient() {
                       <button
                         type="button"
                         className="product-action-btn product-action-btn--compare"
-                        onClick={() => addToCompare(product.id)}
+                        onClick={() => addToCompare(String(product.id))}
                         disabled={ids.length >= 3}
                       >
                         Add to Compare
@@ -264,3 +264,4 @@ export function CompareClient() {
     </section>
   );
 }
+

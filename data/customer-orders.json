@@ -1,0 +1,20 @@
+[
+  {
+    "email": "support@revampfy.in",
+    "orderRef": "DRAFT-5000",
+    "status": "paid",
+    "paymentId": "COD-5000",
+    "transactionStatus": "cod_pending",
+    "paymentMethod": "cod",
+    "total": 25000,
+    "invoiceUrl": "/payment?draftOrderId=5000",
+    "lineItems": [
+      {
+        "variantId": 9512258633960000,
+        "quantity": 1
+      }
+    ],
+    "id": "ord_1777981063778",
+    "createdAt": "2026-05-05T11:37:43.778Z"
+  }
+]
